@@ -20,7 +20,7 @@ export const TIMEFRAMES = [
   buildTimeframe({
     id: "later_today",
     format: "h a",
-    enabled: (opts) => opts.canScheduleToday,
+    enabled: (opts) => opts.canScheduleLaterToday,
     when: (time) => time.hour(18).minute(0),
     icon: "far-moon",
   }),
@@ -33,20 +33,20 @@ export const TIMEFRAMES = [
   buildTimeframe({
     id: "later_this_week",
     format: "ddd, h a",
-    enabled: (opts) => !opts.canScheduleToday && opts.day < 4,
+    enabled: (opts) => opts.canScheduleLaterThisWeek,
     when: (time, timeOfDay) => time.add(2, "day").hour(timeOfDay).minute(0),
   }),
   buildTimeframe({
     id: "this_weekend",
     format: "ddd, h a",
-    enabled: (opts) => opts.day < 5 && opts.includeWeekend,
+    enabled: (opts) => opts.canScheduleThisWeekend,
     when: (time, timeOfDay) => time.day(6).hour(timeOfDay).minute(0),
     icon: "bed",
   }),
   buildTimeframe({
     id: "next_week",
     format: "ddd, h a",
-    enabled: (opts) => opts.day !== 0,
+    enabled: (opts) => opts.canScheduleNextWeek,
     when: (time, timeOfDay) =>
       time.add(1, "week").day(1).hour(timeOfDay).minute(0),
     icon: "briefcase",
@@ -60,7 +60,7 @@ export const TIMEFRAMES = [
   buildTimeframe({
     id: "next_month",
     format: "MMM D",
-    enabled: (opts) => opts.now.date() !== moment().endOf("month").date(),
+    enabled: (opts) => opts.canScheduleNextMonth,
     when: (time, timeOfDay) =>
       time.add(1, "month").startOf("month").hour(timeOfDay).minute(0),
     icon: "briefcase",
@@ -143,13 +143,20 @@ export default ComboBoxComponent.extend(DatetimeMixin, {
 
   content: computed("statusType", function () {
     const now = moment();
+    const canScheduleLaterToday = 24 - now.hour() > 6;
+    const canScheduleLaterThisWeek = !canScheduleLaterToday && now.day() < 4;
+    const canScheduleThisWeekend = now.day() < 5 && this.includeWeekend;
+    const canScheduleNextWeek = now.day() !== 0;
+    const canScheduleNextMonth = now.date() !== moment().endOf("month").date();
+
     const opts = {
-      now,
-      day: now.day(),
-      includeWeekend: this.includeWeekend,
       includeFarFuture: this.includeFarFuture,
       includeDateTime: this.includeDateTime,
-      canScheduleToday: 24 - now.hour() > 6,
+      canScheduleLaterToday: canScheduleLaterToday,
+      canScheduleLaterThisWeek: canScheduleLaterThisWeek,
+      canScheduleThisWeekend: canScheduleThisWeekend,
+      canScheduleNextWeek: canScheduleNextWeek,
+      canScheduleNextMonth: canScheduleNextMonth,
     };
 
     return TIMEFRAMES.filter((tf) => tf.enabled(opts)).map((tf) => {
