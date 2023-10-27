@@ -49,7 +49,7 @@ export default class UserCard extends Component {
   allowBackgrounds = this.siteSettings.allow_profile_backgrounds;
   showUserLocalTime = this.siteSettings.display_local_time_in_user_card;
   showBadges = this.siteSettings.enable_badges;
-  moreBadgesLabel = I18n.t("more_badges", { count: this.moreBadgesCount });
+  moreBadgesLabel = I18n.t("more_badges", { count: this.moreBadgesCount }); // ISSUE: Not working properly
   stagedUserLabel = I18n.t("user.staged");
   featuredTopicLabel = I18n.t("user.featured_topic");
   userProfileHiddenLabel = I18n.t("user.profile_hidden");
@@ -119,6 +119,7 @@ export default class UserCard extends Component {
   }
 
   get moreBadgesCount() {
+    console.log(this.user?.badge_count - this.user?.featured_user_badges?.length);
     return this.user?.badge_count - this.user?.featured_user_badges?.length;
   }
 
@@ -219,6 +220,7 @@ export default class UserCard extends Component {
     <div
       {{didInsert this.test}}
       style="background-image:{{this.backgroundImage}}"
+      class="d-user-card"
     >
       <PluginOutlet
         @name="before-user-card-content"
@@ -305,8 +307,7 @@ export default class UserCard extends Component {
                     <h1
                       class={{concatClass
                         "d-user-card__name"
-                        this.user.staff
-                        (eq this.user.trust_level 0)
+                        (if this.user.staff  "staff")
                         (if this.nameFirst "full-name" "username")
                       }}
                       title="@{{this.user.username}}"
@@ -441,7 +442,7 @@ export default class UserCard extends Component {
                         <div class="d-user-card__field read">
                           <span
                             class="d-user-card__custom-field-title"
-                          >{{this.timeReadlabel}}</span>
+                          >{{this.timeReadLabel}}</span>
                           <span
                             class="d-user-card__custom-field-data"
                           >{{formatDuration this.user.time_read}}
