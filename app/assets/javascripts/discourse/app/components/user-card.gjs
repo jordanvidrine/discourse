@@ -40,7 +40,7 @@ export default class UserCard extends Component {
 
   @tracked hasUserFilters = false;
   @tracked themeSettingValid = false;
-  @tracked showFeaturedTopic = false;
+  @tracked showFeaturedTopic = this.siteSettings.allow_featured_topic_on_user_profiles && this.user.featured_topic;
   @tracked showCheckEmail = false;
 
   @tracked loading = true;
@@ -294,7 +294,7 @@ export default class UserCard extends Component {
                     {{boundAvatar this.user "huge"}}
                   </a>
                 {{/if}}
-                <UserAvatarFlair this.user={{this.user}} />
+                <UserAvatarFlair @user={{this.user}} />
                 <div>
                   <PluginOutlet
                     @name="user-card-avatar-flair"
@@ -373,26 +373,7 @@ export default class UserCard extends Component {
                 </div>
               </div>
               <div class="d-user-card__user-content">
-                {{#if this.showFeaturedTopic}}
-                  <div class="d-user-card__featured-topic">
-                    <span class="d-user-card__featured-topic-title">
-                      {{emoji "pushpin"}}
-                    </span>
-                    <LinkTo
-                      @route="topic"
-                      @models={{array
-                        this.user.featured_topic.slug
-                        this.user.featured_topic.id
-                      }}
-                      title={{this.featutedTopicLabel}}
-                      class="d-user-card__link"
-                    >
-                      {{replaceEmoji
-                        (htmlSafe this.user.featured_topic.fancy_title)
-                      }}
-                    </LinkTo>
-                  </div>
-                {{/if}}
+                
                 {{#if this.user.profile_hidden}}
                   <span>{{this.userProfileHiddenLabel}}</span>
                 {{else if this.user.inactive}}
@@ -543,6 +524,28 @@ export default class UserCard extends Component {
                           this.user.created_at
                           leaveAgo="true"
                         }}</span>
+                    </div>
+                  {{/if}}
+                  {{#if this.showFeaturedTopic}}
+                    <div class="d-user-card__featured-topic">
+                      <span class="d-user-card__featured-topic-title">
+                        {{emoji
+                        "pushpin"
+                      }}
+                      </span>
+                      <LinkTo
+                        @route="topic"
+                        @models={{array
+                          this.user.featured_topic.slug
+                          this.user.featured_topic.id
+                        }}
+                        title={{this.featutedTopicLabel}}
+                        class="d-user-card__link"
+                      >
+                        {{replaceEmoji
+                          (htmlSafe this.user.featured_topic.fancy_title)
+                        }}
+                      </LinkTo>
                     </div>
                   {{/if}}
                   <span>
