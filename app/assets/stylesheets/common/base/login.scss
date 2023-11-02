@@ -224,7 +224,9 @@ body.invite-page {
         z-index: 1000; // ensures the active input is always on top of sibling input labels
       }
       input:focus + label.alt-placeholder,
-      input.value-entered + label.alt-placeholder {
+      input.value-entered + label.alt-placeholder,
+      .user-field.text input:focus + label.control-label,
+      .user-field.text input.value-entered + label.control-label {
         top: -8px;
         left: calc(1em - 0.25em);
         background-color: var(--secondary);
