@@ -44,10 +44,9 @@ body.invite-page {
 .invites-show,
 .admin-invite-page {
   .modal-inner-container {
+    width: 100%;
+    max-width: 100%;
     position: relative;
-  }
-  .modal-body {
-    padding: 0;
   }
   .modal-header {
     border-bottom: none;
@@ -56,6 +55,12 @@ body.invite-page {
     top: 0.75em;
     right: 0.75em;
     z-index: z("max");
+  }
+  .modal-body {
+    max-height: 100vh;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
   }
   #modal-alert {
     box-sizing: border-box;
@@ -66,12 +71,22 @@ body.invite-page {
     max-width: 100%;
     margin-bottom: 0;
     min-height: 35px;
+    &:empty {
+      min-height: 0px;
+      padding: 0px;
+      overflow: hidden;
+      display: inline;
+    }
   }
-  #modal-alert:empty {
-    min-height: 0px;
-    padding: 0px;
-    overflow: hidden;
-    display: inline;
+  .create-account-form {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .create-account-content {
+    width: 500px;
+    margin: 0 auto;
   }
   .login-welcome-header {
     display: grid;
@@ -94,6 +109,18 @@ body.invite-page {
       align-self: center;
     }
   }
+  .login-form {
+    max-height: 500px;
+    padding: 10px;
+    overflow-y: scroll;
+  }
+  form {
+    padding-right: 1em;
+  }
+  #login-buttons {
+    max-width: 80%;
+    font-size: var(--font-up-2);
+  }
   #login-buttons {
     .btn {
       background-color: #ffffff;
@@ -104,6 +131,7 @@ body.invite-page {
     }
   }
   .modal-footer {
+    border: none;
     .inline-spinner {
       display: inline-flex;
     }
@@ -122,9 +150,18 @@ body.invite-page {
       padding: 3em 1em 3em 3em;
     }
   }
+  .create-account-login-buttons {
+    width: 30%;
+    background-color: var(--tertiary);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+  }
 }
 
-// Login Form Styles
+// Login Form Styles & Animation
 .login-modal:not(.hidden),
 .create-account,
 .invites-show {
@@ -290,36 +327,6 @@ body.invite-page {
   cursor: pointer;
   text-align: left;
   // the second button can wrap in some locales, and this helps alignment
-}
-
-.create-account {
-  .disclaimer {
-    color: var(--primary-medium);
-    margin-bottom: 0.5em;
-  }
-
-  @media screen and (min-width: 701px) {
-    .modal-body {
-      max-width: 40em;
-    }
-  }
-
-  .user-field {
-    input[type="text"] {
-      margin-bottom: 0;
-      width: 100%;
-    }
-    .select-kit {
-      width: 100%;
-    }
-    .controls {
-      .instructions {
-        margin-top: 0.15em;
-        color: var(--primary-medium);
-        line-height: var(--line-height-medium);
-      }
-    }
-  }
 }
 
 .password-reset {
@@ -512,190 +519,190 @@ button#new-account-link {
   justify-content: space-between;
 }
 
-// Full Page Login SCSS
+// // Full Page Login SCSS
 
-.mobile-view {
-  .modal-body.login-modal-body,
-  .modal-body.has-user-fields {
-    overflow-y: unset;
-  }
-  .d-modal.create-account:not(.hidden).fixed-modal .modal-inner-container,
-  .d-modal.login-modal:not(.hidden).fixed-modal .modal-inner-container {
-    max-height: 100vh;
-    max-width: 100vw;
-    padding: 1.5em;
-    .create-account-form {
-      display: inline;
-      .create-account-content {
-        padding: 0;
-      }
-    }
-    .login-welcome-header {
-      font-size: var(--font-up-2);
-      width: 100%;
-      padding: 0;
-      margin: 0 0 1.5em 0;
-    }
-    .login-form,
-    #login-form,
-    #login-buttons {
-      width: 100%;
-      padding: 0;
-      margin: 0 0 1.5em 0;
-    }
-    .modal-footer {
-      width: 100%;
-      padding: 0;
-      border: none;
-      .btn {
-        font-size: var(--font-up-2);
-      }
-    }
-    .mobile-login-container {
-      margin-top: 1em;
-    }
-  }
-}
+// .mobile-view {
+//   .modal-body.login-modal-body,
+//   .modal-body.has-user-fields {
+//     overflow-y: unset;
+//   }
+//   .d-modal.create-account:not(.hidden).fixed-modal .modal-inner-container,
+//   .d-modal.login-modal:not(.hidden).fixed-modal .modal-inner-container {
+//     max-height: 100vh;
+//     max-width: 100vw;
+//     padding: 1.5em;
+//     .create-account-form {
+//       display: inline;
+//       .create-account-content {
+//         padding: 0;
+//       }
+//     }
+//     .login-welcome-header {
+//       font-size: var(--font-up-2);
+//       width: 100%;
+//       padding: 0;
+//       margin: 0 0 1.5em 0;
+//     }
+//     .login-form,
+//     #login-form,
+//     #login-buttons {
+//       width: 100%;
+//       padding: 0;
+//       margin: 0 0 1.5em 0;
+//     }
+//     .modal-footer {
+//       width: 100%;
+//       padding: 0;
+//       border: none;
+//       .btn {
+//         font-size: var(--font-up-2);
+//       }
+//     }
+//     .mobile-login-container {
+//       margin-top: 1em;
+//     }
+//   }
+// }
 
-.d-modal.login-modal,
-.d-modal.create-account {
-  .modal-inner-container {
-    width: 100%;
-    height: 100%;
-    max-width: unset;
-    margin: 0;
-  }
-  &:not(.hidden) .login-left-side {
-    width: 70%;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-  }
-  .login-welcome-header {
-    font-size: 1.5em;
-    padding: 0;
-    .waving-hand {
-      width: 45px;
-      height: 45px;
-      margin-left: 1em;
-    }
-  }
-  .login-modal-body.has-alt-auth .login-right-side {
-    width: 30%;
-    padding: 0 !important;
-    align-self: stretch;
-  }
-  .login-modal-body.has-alt-auth .login-right-side,
-  .create-account-login-buttons {
-    #login-buttons .btn {
-      font-size: var(--font-up-2);
-    }
-  }
-  .create-account-content .login-welcome-header,
-  .create-account-form .create-account-content .login-form {
-    max-width: 100%;
-    max-height: 500px;
-    padding: 10px;
-    margin-bottom: 1.5em;
-    .input-group {
-      padding: 0;
-    }
-  }
-  #login-form {
-    .input-group {
-      width: 100%;
-    }
-  }
-}
+// .d-modal.login-modal,
+// .d-modal.create-account {
+//   .modal-inner-container {
+//     width: 100%;
+//     height: 100%;
+//     max-width: unset;
+//     margin: 0;
+//   }
+//   &:not(.hidden) .login-left-side {
+//     width: 70%;
+//     padding: 0;
+//     justify-content: center;
+//     align-items: center;
+//   }
+//   .login-welcome-header {
+//     font-size: 1.5em;
+//     padding: 0;
+//     .waving-hand {
+//       width: 45px;
+//       height: 45px;
+//       margin-left: 1em;
+//     }
+//   }
+//   .login-modal-body.has-alt-auth .login-right-side {
+//     width: 30%;
+//     padding: 0 !important;
+//     align-self: stretch;
+//   }
+//   .login-modal-body.has-alt-auth .login-right-side,
+//   .create-account-login-buttons {
+//     #login-buttons .btn {
+//       font-size: var(--font-up-2);
+//     }
+//   }
+//   .create-account-content .login-welcome-header,
+//   .create-account-form .create-account-content .login-form {
+//     max-width: 100%;
+//     max-height: 500px;
+//     padding: 10px;
+//     margin-bottom: 1.5em;
+//     .input-group {
+//       padding: 0;
+//     }
+//   }
+//   #login-form {
+//     .input-group {
+//       width: 100%;
+//     }
+//   }
+// }
 
-.d-modal.create-account .modal-body.has-alt-auth .create-account-form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  @media screen and (max-width: 900px) {
-    flex-direction: column;
-    justify-content: center;
-    .create-account-login-buttons {
-      width: 100%;
-      background-color: var(--secondary);
-      #login-buttons {
-        flex-direction: row;
-        min-height: 50px;
-        gap: 1em;
-        .btn {
-          border: 1px solid var(--primary-300);
-          margin: 0;
-        }
-      }
-    }
-  }
-}
+// .d-modal.create-account .modal-body.has-alt-auth .create-account-form {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   @media screen and (max-width: 900px) {
+//     flex-direction: column;
+//     justify-content: center;
+//     .create-account-login-buttons {
+//       width: 100%;
+//       background-color: var(--secondary);
+//       #login-buttons {
+//         flex-direction: row;
+//         min-height: 50px;
+//         gap: 1em;
+//         .btn {
+//           border: 1px solid var(--primary-300);
+//           margin: 0;
+//         }
+//       }
+//     }
+//   }
+// }
 
-.login-left-side-container,
-.create-account-content {
-  width: auto;
-  margin: 0 auto;
-  padding: 4em;
-}
+// .login-left-side-container,
+// .create-account-content {
+//   width: auto;
+//   margin: 0 auto;
+//   padding: 4em;
+// }
 
-.d-modal.create-account .modal-footer {
-  border: none;
-  padding: 0;
-}
+// .d-modal.create-account .modal-footer {
+//   border: none;
+//   padding: 0;
+// }
 
-.create-account .modal-body.has-alt-auth {
-  background-color: var(--secondary) !important;
-}
+// .create-account .modal-body.has-alt-auth {
+//   background-color: var(--secondary) !important;
+// }
 
-.d-modal.create-account .modal-body.has-alt-auth .create-account-login-buttons {
-  width: 30%;
-  background: var(--tertiary);
-  align-self: stretch;
-  padding: 0;
-}
+// .d-modal.create-account .modal-body.has-alt-auth .create-account-login-buttons {
+//   width: 30%;
+//   background: var(--tertiary);
+//   align-self: stretch;
+//   padding: 0;
+// }
 
-.fixed-modal.login-modal:not(.bookmark-reminder-modal):not(.history-modal):not(
-    .sidebar__edit-navigation-menu__modal
-  )
-  .modal-body.login-modal-body.has-alt-auth:not(.reorder-categories):not(
-    .poll-ui-builder
-  ):not(.poll-breakdown) {
-  height: 100%;
-  max-height: 100% !important;
-  @media screen and (max-width: 900px) {
-    flex-direction: column;
-    justify-content: center;
-    .login-left-side {
-      width: 100%;
-    }
-    .login-right-side {
-      width: 100%;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--secondary);
-      #login-buttons {
-        gap: 1em;
-        flex-direction: row;
-        min-height: 50px;
-        .btn {
-          margin: 0;
-          border: 1px solid var(--primary-300);
-        }
-      }
-    }
-  }
-}
+// .fixed-modal.login-modal:not(.bookmark-reminder-modal):not(.history-modal):not(
+//     .sidebar__edit-navigation-menu__modal
+//   )
+//   .modal-body.login-modal-body.has-alt-auth:not(.reorder-categories):not(
+//     .poll-ui-builder
+//   ):not(.poll-breakdown) {
+//   height: 100%;
+//   max-height: 100% !important;
+//   @media screen and (max-width: 900px) {
+//     flex-direction: column;
+//     justify-content: center;
+//     .login-left-side {
+//       width: 100%;
+//     }
+//     .login-right-side {
+//       width: 100%;
+//       flex-direction: row;
+//       align-items: center;
+//       justify-content: center;
+//       background-color: var(--secondary);
+//       #login-buttons {
+//         gap: 1em;
+//         flex-direction: row;
+//         min-height: 50px;
+//         .btn {
+//           margin: 0;
+//           border: 1px solid var(--primary-300);
+//         }
+//       }
+//     }
+//   }
+// }
 
-.fixed-modal.create-account:not(.bookmark-reminder-modal):not(
-    .history-modal
-  ):not(.sidebar__edit-navigation-menu__modal)
-  .modal-body:not(.reorder-categories):not(.poll-ui-builder):not(
-    .poll-breakdown
-  ) {
-  max-height: 100% !important;
-  height: 100%;
-}
+// .fixed-modal.create-account:not(.bookmark-reminder-modal):not(
+//     .history-modal
+//   ):not(.sidebar__edit-navigation-menu__modal)
+//   .modal-body:not(.reorder-categories):not(.poll-ui-builder):not(
+//     .poll-breakdown
+//   ) {
+//   max-height: 100% !important;
+//   height: 100%;
+// }
 
 .waving-hand {
   animation-name: wave-animation;
