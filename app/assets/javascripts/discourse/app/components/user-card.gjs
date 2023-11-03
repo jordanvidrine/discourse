@@ -270,7 +270,8 @@ export default class UserCard extends Component {
                   {{#if this.showMoreBadges}}
                     <span class="d-user-card__badges-more">
                       <LinkTo @route="user.badges" @model={{this.user}}>
-                        {{this.moreBadgesLabel}}
+                        {{!-- {{this.moreBadgesLabel}} --}}
+                        + 25 more
                       </LinkTo>
                     </span>
                   {{/if}}

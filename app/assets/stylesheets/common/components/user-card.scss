@@ -611,12 +611,19 @@
       color: var(--primary);
     }
     &__featured-topic {
-      margin-bottom: 0.5em;
-      font-size: var(--font-down-1);
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
     &__featured-topic img.emoji {
       height: var(--font-0);
       width: var(--font-0);
+    }
+    &__featured-topic .d-user-card__link {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 150px;
     }
     &__featured-topic-data,
     &__featured-topic-data:visited,
@@ -683,14 +690,14 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      column-gap: 1em;
     }
     &__website {
       color: var(--primary);
       text-decoration: underline;
       display: flex;
+      align-items: center;
       gap: 0.5em;
-      align-content: center;
-      margin-right: 1em;
     }
     &__meta-data span:empty {
       display: none;
