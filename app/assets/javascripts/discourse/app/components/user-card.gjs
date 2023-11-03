@@ -118,8 +118,7 @@ export default class UserCard extends Component {
     return this.user.trust_level > 2 && !this.siteSettings.tl3_links_no_follow;
   }
 
-  get moreBadgesCount() {
-    console.log(this.user?.badge_count - this.user?.featured_user_badges?.length);
+  get moreBadgesCount() { // not working?
     return this.user?.badge_count - this.user?.featured_user_badges?.length;
   }
 

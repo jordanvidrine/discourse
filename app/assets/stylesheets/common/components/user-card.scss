@@ -676,15 +676,13 @@
     &__custom-field-group {
       display: flex;
       flex-wrap: wrap;
+      gap: 6px 10px;
     }
     &__field {
-      padding: 3px 5px;
+      // padding: 3px 5px;
       display: flex;
       border-radius: var(--d-border-radius);
       align-items: center;
-    }
-    &__field:first-of-type {
-      padding: 3px 5px 3px 0;
     }
     &__meta-data {
       display: flex;
