@@ -92,15 +92,17 @@ body.invite-page {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
-    max-width: 33em;
-    word-break: break-word;
+    padding: 10px;
     .login-title {
       margin-bottom: 0;
+      font-size: 3.5em;
     }
     .login-subheader {
       align-self: start;
       grid-row-start: 2;
       margin: 0;
+      font-size: var(--font-up-2);
+      line-height: var(--font-0);
     }
     .waving-hand {
       width: 35px;
@@ -116,6 +118,10 @@ body.invite-page {
   }
   form {
     padding-right: 1em;
+  }
+  .instructions {
+    color: var(--primary-medium);
+    line-height: var(--line-height-medium);
   }
   #login-buttons {
     max-width: 80%;
@@ -175,7 +181,7 @@ body.invite-page {
       margin-bottom: 0.8em;
       input,
       .select-kit-header {
-        padding: 0.75em 0.77em;
+        padding: 0.75em;
         min-width: 250px;
         box-shadow: none;
         margin-bottom: 0.25em;
@@ -204,7 +210,7 @@ body.invite-page {
         position: absolute;
         pointer-events: none;
         left: 1em;
-        top: 12px;
+        top: 13px;
         box-shadow: 0 0 0 0px rgba(var(--tertiary-rgb), 0);
         transition: 0.2s ease all;
       }
@@ -215,7 +221,6 @@ body.invite-page {
         top: -8px;
         left: calc(1em - 0.25em);
         background-color: var(--secondary);
-        padding: 0 0.25em 0 0.25em;
         font-size: 13px;
       }
       .user-field.text:focus-within,
@@ -288,11 +293,11 @@ body.invite-page {
           }
           label.control-label {
             color: var(--primary-medium);
-            font-size: 16px;
+            font-size: 17px;
             position: absolute;
             pointer-events: none;
             left: 1em;
-            top: 12px;
+            top: 13px;
             transition: 0.2s ease all;
             max-width: calc(100% - 2em);
             white-space: nowrap;
