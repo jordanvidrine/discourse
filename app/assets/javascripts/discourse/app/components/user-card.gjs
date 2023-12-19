@@ -230,7 +230,7 @@ export default class UserCard extends Component {
       {{else}}
         <div class="d-user-card__container">
           <div class="d-user-card__header">
-            {{! TODO: Add ability to edit image/color from usercard }}
+            {{! ISSUE: Add ability to edit bg image/color from usercard }}
             {{! <button class="d-user-card__edit-btn">
         <i class="fa-solid fa-pencil"></i>
         <span class="btn-label">Edit</span>
@@ -269,7 +269,7 @@ export default class UserCard extends Component {
                   {{#if this.showMoreBadges}}
                     <span class="d-user-card__badges-more">
                       <LinkTo @route="user.badges" @model={{this.user}}>
-                        {{!-- {{this.moreBadgesLabel}} --}}
+                        {{!-- {{this.moreBadgesLabel}} --}} {{!-- ISSUE: Not working properly --}}
                         + 25 more
                       </LinkTo>
                     </span>
@@ -498,21 +498,7 @@ export default class UserCard extends Component {
                   @outletArgs={{hash user=this.user}}
                 />
                 <div class="d-user-card__meta-data">
-                  {{#if this.user.website_name}}
-                    <div class="d-user-card__website">
-                      {{icon "globe"}}
-                      <a
-                        href={{this.user.website}}
-                        rel="noopener {{unless
-                          this.removeNoFollow
-                          'nofollow ugc'
-                        }}"
-                        target="_blank"
-                        class="d-user-card__link"
-                      >{{this.user.website_name}}</a>
-                    </div>
-                  {{/if}}
-                  {{#if this.user.created_at}}
+                                    {{#if this.user.created_at}}
                     <div class="d-user-card__cakeday">
                       <img
                         height="20"
@@ -524,6 +510,19 @@ export default class UserCard extends Component {
                           this.user.created_at
                           leaveAgo="true"
                         }}</span>
+                    </div>
+                  {{/if}}
+                  {{#if this.user.website_name}}
+                    <div class="d-user-card__website">
+                      <a
+                        href={{this.user.website}}
+                        rel="noopener {{unless
+                          this.removeNoFollow
+                          'nofollow ugc'
+                        }}"
+                        target="_blank"
+                        class="d-user-card__link"
+                      >{{this.user.website_name}}</a>
                     </div>
                   {{/if}}
                   {{#if this.showFeaturedTopic}}
