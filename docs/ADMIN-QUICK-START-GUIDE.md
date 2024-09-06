@@ -38,7 +38,7 @@ It's helpful to collaborate with at least one or two other people early that can
 - **If your community allows people to freely sign up**, send them the link and ask them to join.
 - **If your community is invite only**, go to [your invites page](%{base_url}/my/invited) and look for the <kbd>+ Invite</kbd> button to create invite links you can share or directly email everyone you want to have in your community.
 
-> :bulb: Your community starts off in “bootstrap mode”, which gives early members [a higher level of trust ](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/)than the typical new member so they can help you launch your community. You can adjust how long your community remains in bootstrap mode [here](/admin/site_settings/category/all_results?filter=bootstrap).
+> :bulb: Your community starts off in “bootstrap mode”, which gives early members [a higher level of trust ](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/)than the typical new member so they can help you launch your community. You can adjust how long your community remains in bootstrap mode [here]%{base_url}/admin/site_settings/category/all_results?filter=bootstrap).
 
 ## :thought_balloon: Discuss ideas with your community
 
@@ -64,7 +64,7 @@ To get you started, think about what you want new members to **know about your c
 
 ## :art: Adjust other customizations
 
-To customize the look and feel of your community beyond what you configured in the [setup wizard](%{base_url}/wizard), you can change the following settings in the [admin section](/admin):
+To customize the look and feel of your community beyond what you configured in the [setup wizard](%{base_url}/wizard), you can change the following settings in the [admin section](%{base_url}/admin):
 
 - [Logo images](%{base_url}/admin/site_settings/category/branding)
 - [Color schemes](%{base_url}/admin/customize/colors)
@@ -123,7 +123,7 @@ Here are some additional resources from [the Discourse blog](http://blog.discour
 
 - One CPU and 1GB of memory, with swap, is the minimum for a basic Discourse community. As your community grows you may need more memory or CPU resources.
 - [Our Docker container install](https://github.com/discourse/discourse/blob/main/docs/INSTALL.md) is the only one we officially support. It guarantees easy updates, and all recommended optimizations from the Discourse team.
-- You should get an email notification when new versions of Discourse are released. To update your instance via our easy one click process, visit [/admin/update](/admin/update).
+- You should get an email notification when new versions of Discourse are released. To update your instance via our easy one click process, visit [/admin/update](%{base_url}/admin/update).
 
 ### Optional things you might eventually want to set up
 - [All sysadmin documentation topics](https://meta.discourse.org/c/-/55)
