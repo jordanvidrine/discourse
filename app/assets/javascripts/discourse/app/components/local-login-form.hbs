@@ -6,7 +6,7 @@
         @value={{@loginName}}
         @type="email"
         id="login-account-name"
-        class={{value-entered @loginName}}
+        class="{{value-entered @loginName}} form-kit__control-input"
         autocomplete={{if @canUsePasskeys "username webauthn" "username"}}
         autocorrect="off"
         autocapitalize="off"
@@ -16,7 +16,10 @@
         {{on "input" @loginNameChanged}}
         {{on "keydown" this.loginOnEnter}}
       />
-      <label class="alt-placeholder" for="login-account-name">
+      <label
+        class="alt-placeholder form-kit__container-title"
+        for="login-account-name"
+      >
         {{i18n "login.email_placeholder"}}
       </label>
       {{#if @canLoginLocalWithEmail}}
@@ -45,7 +48,10 @@
         id="login-account-password"
         class={{value-entered @loginPassword}}
       />
-      <label class="alt-placeholder" for="login-account-password">
+      <label
+        class="alt-placeholder alt-placeholder form-kit__container-title"
+        for="login-account-password"
+      >
         {{i18n "login.password"}}
       </label>
       {{#if @loginPassword}}

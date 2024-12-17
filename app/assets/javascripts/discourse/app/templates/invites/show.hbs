@@ -71,11 +71,14 @@
                     @value={{this.email}}
                     id="new-account-email"
                     name="email"
-                    class={{value-entered this.email}}
+                    class="{{value-entered this.email}} form-kit__control-input"
                     autofocus="autofocus"
                     disabled={{this.externalAuthsOnly}}
                   />
-                  <label class="alt-placeholder" for="new-account-email">
+                  <label
+                    class="alt-placeholde form-kit__container-titler"
+                    for="new-account-email"
+                  >
                     {{i18n "user.email.title"}}
                   </label>
                   <InputTip
@@ -94,13 +97,17 @@
                 <Input
                   {{on "focusin" this.scrollInputIntoView}}
                   @value={{this.accountUsername}}
-                  class={{value-entered this.accountUsername}}
+                  class="{{value-entered this.accountUsername}}
+                    form-kit__control-input"
                   id="new-account-username"
                   name="username"
                   maxlength={{this.maxUsernameLength}}
                   autocomplete="off"
                 />
-                <label class="alt-placeholder" for="new-account-username">
+                <label
+                  class="alt-placeholder form-kit__container-title"
+                  for="new-account-username"
+                >
                   {{i18n "user.username.title"}}
                 </label>
                 <InputTip
@@ -131,7 +138,10 @@
                     id="new-account-password"
                     class={{value-entered this.accountPassword}}
                   />
-                  <label class="alt-placeholder" for="new-account-password">
+                  <label
+                    class="alt-placeholder form-kit__container-title"
+                    for="new-account-password"
+                  >
                     {{i18n "invites.password_label"}}
                   </label>
                   <TogglePasswordMask

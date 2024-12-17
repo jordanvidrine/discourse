@@ -66,6 +66,7 @@ body.invite-page {
   position: absolute;
   right: 0;
   padding: 0.75em 0.77em; // alligns with input padding
+  top: calc(var(--font-down-1-rem) + (0.75em / 2));
   .ios-device & {
     // reset form-item-sizing mixin styles
     padding: 0.7em;

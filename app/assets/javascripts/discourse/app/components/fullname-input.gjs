@@ -24,6 +24,12 @@ export default class SidebarEditNavigationMenuTagsModal extends Component {
 
   <template>
     <div ...attributes>
+      <label
+        class="alt-placeholder form-kit__container-title"
+        for="new-account-name"
+      >
+        {{@nameTitle}}
+      </label>
       <TextField
         {{on "focusin" @onFocusIn}}
         @disabled={{@nameDisabled}}
@@ -34,9 +40,6 @@ export default class SidebarEditNavigationMenuTagsModal extends Component {
         class={{valueEntered @accountName}}
         name="name"
       />
-      <label class="alt-placeholder" for="new-account-name">
-        {{@nameTitle}}
-      </label>
 
       {{#if this.showFullnameInstructions}}
         <span class="more-info" id="fullname-validation-more-info">

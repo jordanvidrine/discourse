@@ -35,6 +35,17 @@
             </div>
           {{/if}}
           <div class="input-group create-account-email">
+            <label
+              class="alt-placeholder form-kit__container-title"
+              for="new-account-email"
+            >
+              {{i18n "user.email.title"}}
+            </label>
+            <span class="more-info" id="account-email-validation-more-info">
+              {{#if this.siteSettings.show_signup_form_email_instructions}}
+                {{i18n "user.email.instructions"}}
+              {{/if}}
+            </span>
             <Input
               {{on "focusout" this.checkEmailAvailability}}
               {{on "focusin" this.scrollInputIntoView}}
@@ -46,26 +57,23 @@
               aria-invalid={{this.emailValidation.failed}}
               name="email"
               id="new-account-email"
-              class={{value-entered this.accountEmail}}
+              class="{{value-entered this.accountEmail}}
+                form-kit__control-input"
             />
-            <label class="alt-placeholder" for="new-account-email">
-              {{i18n "user.email.title"}}
-            </label>
-            {{#if this.showEmailValidation}}
-              <InputTip
-                @validation={{this.emailValidation}}
-                id="account-email-validation"
-              />
-            {{else}}
-              <span class="more-info" id="account-email-validation-more-info">
-                {{#if this.siteSettings.show_signup_form_email_instructions}}
-                  {{i18n "user.email.instructions"}}
-                {{/if}}
-              </span>
-            {{/if}}
+            <InputTip
+              @validation={{this.emailValidation}}
+              id="account-email-validation"
+              class={{unless this.showEmailValidation "tip-no-validation"}}
+            />
           </div>
 
           <div class="input-group create-account__username">
+            <label
+              class="alt-placeholder form-kit__container-title"
+              for="new-account-username"
+            >
+              {{i18n "user.username.title"}}
+            </label>
             <Input
               {{on "focusin" this.scrollInputIntoView}}
               @value={{this.accountUsername}}
@@ -76,11 +84,9 @@
               autocomplete="off"
               name="username"
               id="new-account-username"
-              class={{value-entered this.accountUsername}}
+              class="{{value-entered this.accountUsername}}
+                form-kit__control-input"
             />
-            <label class="alt-placeholder" for="new-account-username">
-              {{i18n "user.username.title"}}
-            </label>
 
             {{#if this.showUsernameInstructions}}
               <span class="more-info" id="username-validation-more-info">
@@ -102,7 +108,7 @@
               @accountName={{this.accountName}}
               @nameDisabled={{this.nameDisabled}}
               @onFocusIn={{this.scrollInputIntoView}}
-              class="input-group create-account__fullname required"
+              class="input-group create-account__fullname required form-kit__control-input"
             />
           {{/if}}
 
@@ -119,6 +125,12 @@
 
           <div class="input-group create-account__password">
             {{#if this.passwordRequired}}
+              <label
+                class="alt-placeholder form-kit__container-title"
+                for="new-account-password"
+              >
+                {{i18n "user.password.title"}}
+              </label>
               <PasswordField
                 {{on "focusout" this.togglePasswordValidation}}
                 {{on "focusin" this.scrollInputIntoView}}
@@ -129,11 +141,10 @@
                 aria-describedby="password-validation password-validation-more-info"
                 aria-invalid={{this.passwordValidation.failed}}
                 id="new-account-password"
-                class={{value-entered this.accountPassword}}
+                class="{{value-entered this.accountPassword}}
+                  form-kit__control-input"
               />
-              <label class="alt-placeholder" for="new-account-password">
-                {{i18n "user.password.title"}}
-              </label>
+
               <TogglePasswordMask
                 @maskPassword={{this.maskPassword}}
                 @togglePasswordMask={{this.togglePasswordMask}}
@@ -186,21 +197,27 @@
               <Input
                 @value={{this.accountChallenge}}
                 id="new-account-challenge"
+                class="form-kit__control-input form-kit__control-input"
               />
             </div>
           </div>
 
           {{#if this.requireInviteCode}}
+            <label
+              class="alt-placeholder form-kit__container-title form-kit__container-title"
+              for="invite-code"
+            >
+              {{i18n "user.invite_code.title"}}
+            </label>
             <div class="input-group create-account__invite-code">
               <Input
                 {{on "focusin" this.scrollInputIntoView}}
                 @value={{this.inviteCode}}
                 id="inviteCode"
-                class={{value-entered this.inviteCode}}
+                class="{{value-entered this.inviteCode}}
+                  form-kit__control-input"
               />
-              <label class="alt-placeholder" for="invite-code">
-                {{i18n "user.invite_code.title"}}
-              </label>
+
               <span class="more-info">
                 {{i18n "user.invite_code.instructions"}}
               </span>

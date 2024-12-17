@@ -93,13 +93,11 @@ body.signup-page {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
 
     input,
     .select-kit-header {
       padding: 0.75em 0.77em;
       min-width: 250px;
-      margin-bottom: 0.25em;
       width: 100%;
     }
 
@@ -118,66 +116,24 @@ body.signup-page {
       overflow-wrap: anywhere;
     }
 
-    label.alt-placeholder,
-    .user-field.text label.control-label,
-    .user-field.dropdown label.control-label,
-    .user-field.multiselect label.control-label {
-      color: var(--primary-medium);
-      font-weight: normal;
-      position: absolute;
-      pointer-events: none;
-      left: 1em;
-      top: 13px;
-      box-shadow: 0 0 0 0px rgba(var(--tertiary-rgb), 0);
-      transition: 0.25s ease all;
-    }
-
-    .user-field.text label.control-label,
-    .user-field.dropdown label.control-label,
-    .user-field.multiselect label.control-label {
-      z-index: 999;
-      top: -8px;
-      left: calc(1em - 0.25em);
-      background-color: var(--secondary);
-      padding: 0 0.25em 0 0.25em;
-      font-size: $font-down-1;
-    }
-    .user-field.text label.control-label {
-      top: 13px;
-    }
-    .user-field.text:focus-within,
-    .user-field.dropdown:focus-within,
-    .user-field.multiselect:focus-within {
-      z-index: 1000; // ensures the active input is always on top of sibling input labels
-    }
-
-    input:focus + label.alt-placeholder,
-    input.value-entered + label.alt-placeholder {
-      top: -8px;
-      left: calc(1em - 0.25em);
-      background-color: var(--secondary);
-      padding: 0 0.25em 0 0.25em;
-      font-size: var(--font-down-1);
-    }
-
     .more-info {
-      opacity: 0;
-      max-height: 0;
+      // opacity: 0;
+      // max-height: 0;
       transition: opacity 0.25s, max-height 0.25s;
     }
 
-    input:focus + label + span.more-info {
-      opacity: 1;
-      max-height: 50px;
+    input:focus + span.more-info {
+      // opacity: 1;
+      // max-height: 50px;
     }
 
     .instructions {
-      opacity: 0;
-      max-height: 0;
+      // opacity: 0;
+      // max-height: 0;
       transition: opacity 0.25s, max-height 0.25s;
     }
 
-    input:focus + label + .tip + .instructions {
+    input:focus + .tip + .instructions {
       opacity: 1;
       max-height: 50px;
     }
@@ -195,12 +151,12 @@ body.signup-page {
 
     #email-login-link {
       transition: opacity 0.25s, max-height 0.25s;
-      max-height: 50px; // arbitrary number, but allows for smooth transition
+      // max-height: 50px; // arbitrary number, but allows for smooth transition
 
       &.no-login-filled {
-        opacity: 0;
-        visibility: hidden;
-        max-height: 0;
+        // opacity: 0;
+        // visibility: hidden;
+        // max-height: 0;
       }
     }
 
@@ -212,7 +168,7 @@ body.signup-page {
     }
 
     .tip:not(:empty) + label.more-info {
-      display: none;
+      // display: none;
     }
   }
 
@@ -259,6 +215,10 @@ body.signup-page {
     &.has-tip {
       max-height: 50px;
       opacity: 1;
+    }
+    &.has-tip.tip-no-validation {
+      opacity: 0;
+      max-height: 0;
     }
   }
 
@@ -351,32 +311,6 @@ body.signup-page {
 
   .user-fields .input-group {
     .user-field {
-      &.text {
-        &.value-entered label.alt-placeholder.control-label,
-        input:focus + label.alt-placeholder.control-label {
-          top: -8px;
-          left: calc(1em - 0.25em);
-          background-color: var(--secondary);
-          padding: 0 0.25em 0 0.25em;
-          font-size: 14px;
-          color: var(--primary-medium);
-        }
-
-        label.alt-placeholder.control-label {
-          color: var(--primary-medium);
-          font-size: 16px;
-          position: absolute;
-          pointer-events: none;
-          top: 12px;
-          transition: 0.2s ease all;
-          max-width: calc(100% - 2em);
-          white-space: nowrap;
-          display: inline-block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-
       details:not(.has-selection) span.name,
       details:not(.has-selection) span.formatted-selection {
         color: var(--primary-medium);
@@ -404,12 +338,3 @@ body.signup-page {
     }
   }
 }
-
-// .invite-error {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   .error-image {
-//     margin-bottom: 1em;
-//   }
-// }

@@ -52,7 +52,10 @@
               id="new-account-email"
               class={{value-entered this.model.accountEmail}}
             />
-            <label class="alt-placeholder" for="new-account-email">
+            <label
+              class="alt-placeholder form-kit__container-title"
+              for="new-account-email"
+            >
               {{i18n "user.email.title"}}
             </label>
             {{#if this.showEmailValidation}}
@@ -82,7 +85,10 @@
               id="new-account-username"
               class={{value-entered this.model.accountUsername}}
             />
-            <label class="alt-placeholder" for="new-account-username">
+            <label
+              class="alt-placeholder form-kit__container-title"
+              for="new-account-username"
+            >
               {{i18n "user.username.title"}}
             </label>
 
@@ -135,7 +141,10 @@
                 id="new-account-password"
                 class={{value-entered this.accountPassword}}
               />
-              <label class="alt-placeholder" for="new-account-password">
+              <label
+                class="alt-placeholder form-kit__container-title"
+                for="new-account-password"
+              >
                 {{i18n "user.password.title"}}
               </label>
               <TogglePasswordMask
@@ -202,7 +211,10 @@
                 id="inviteCode"
                 class={{value-entered this.inviteCode}}
               />
-              <label class="alt-placeholder" for="invite-code">
+              <label
+                class="alt-placeholder form-kit__container-title"
+                for="invite-code"
+              >
                 {{i18n "user.invite_code.title"}}
               </label>
               <span class="more-info">
