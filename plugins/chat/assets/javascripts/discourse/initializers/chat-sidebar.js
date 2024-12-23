@@ -333,7 +333,7 @@ export default {
               const classes = [];
 
               if (this.channel.currentUserMembership.muted) {
-                classes.push("sidebar-section-link--muted");
+                classes.push("sidebar-section-link --muted");
               }
 
               if (
@@ -341,7 +341,7 @@ export default {
                 (this.chatStateManager.isDrawerExpanded ||
                   this.chatStateManager.isFullPageActive)
               ) {
-                classes.push("sidebar-section-link--active");
+                classes.push("sidebar-section-link --active");
               }
 
               classes.push(`channel-${this.channel.id}`);
