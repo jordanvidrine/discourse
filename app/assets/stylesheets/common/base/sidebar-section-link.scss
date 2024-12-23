@@ -40,7 +40,7 @@
       }
     }
 
-    &--active {
+    &.--active {
       background: var(--d-selected);
       font-weight: bold;
 
@@ -54,7 +54,7 @@
       }
     }
 
-    &--muted {
+    &.--muted {
       opacity: 0.5;
       .sidebar-section-link-prefix.icon .d-icon {
         color: var(--primary-medium);
