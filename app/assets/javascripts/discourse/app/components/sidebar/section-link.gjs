@@ -70,7 +70,7 @@ export default class SectionLink extends Component {
       typeof this.args.currentWhen === "boolean" &&
       this.args.currentWhen
     ) {
-      classNames.push("active");
+      classNames.push(" --active");
     }
 
     return classNames.join(" ");
@@ -171,6 +171,7 @@ export default class SectionLink extends Component {
             title={{@title}}
             data-link-name={{@linkName}}
             class={{this.linkClass}}
+            @activeClass=" --active"
           >
             <SectionLinkPrefix
               @prefixType={{@prefixType}}

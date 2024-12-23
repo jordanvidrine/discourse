@@ -138,15 +138,7 @@ export default {
                 const classes = [];
 
                 if (this.channel.currentUserMembership.muted) {
-                  classes.push("sidebar-section-link--muted");
-                }
-
-                if (
-                  this.channel.id === this.chatService.activeChannel?.id &&
-                  (this.chatStateManager.isDrawerExpanded ||
-                    this.chatStateManager.isFullPageActive)
-                ) {
-                  classes.push("sidebar-section-link--active");
+                  classes.push("sidebar-section-link --muted");
                 }
 
                 classes.push(`channel-${this.channel.id}`);
@@ -417,7 +409,7 @@ export default {
                 !!activeUsers?.findBy("id", user?.id) ||
                 !!activeUsers?.findBy("username", user?.username)
               ) {
-                return "active";
+                return " --active";
               }
               return "";
             }
