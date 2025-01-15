@@ -313,11 +313,25 @@
   }
 }
 
-.sidebar__panel-switch-button {
-  margin: 1em 1.3em 0 1.3em;
-  &:last-of-type {
-    margin-bottom: 1em;
-  }
+.sidebar__panel-switch-container {
+  padding: 1rem 1rem;
+}
+
+.sidebar__panel-button-wrapper {
+  background-color: var(--primary-200);
+  padding: 0.5em;
+  border-radius: var(--d-border-radius);
+  display: flex;
+  height: 2em;
+}
+
+.sidebar__panel-button-wrapper .btn {
+  width: 50%;
+}
+
+.sidebar__panel-button-wrapper .btn[disabled] {
+  opacity: 1;
+  background-color: var(--secondary);
 }
 
 .sidebar-filter {

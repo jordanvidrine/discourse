@@ -5001,8 +5001,8 @@ en:
         global_section: "Global section, visible to everyone"
       panels:
         forum:
-          label: Forum
-      back_to_forum: "Back to Forum"
+          label: Topics
+      back_to_forum: "Back to Topics"
       collapse_all_sections: "Collapse all sections"
       expand_all_sections: "Expand all sections"
       filter: "Filter..."

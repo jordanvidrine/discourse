@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import { eq } from "truth-helpers";
 import DButton from "discourse/components/d-button";
 
 export default class SwitchPanelButtons extends Component {
@@ -35,14 +36,31 @@ export default class SwitchPanelButtons extends Component {
 
   <template>
     {{#each @buttons as |button|}}
-      <DButton
-        @action={{fn this.switchPanel button}}
-        @icon={{button.switchButtonIcon}}
-        @disabled={{this.isSwitching}}
-        @translatedLabel={{button.switchButtonLabel}}
-        data-key={{button.key}}
-        class="btn-default sidebar__panel-switch-button"
-      />
+      <div class="sidebar__panel-switch-container">
+        <div class="sidebar__panel-button-wrapper">
+          {{#if (eq button.key "chat")}}
+            <DButton
+              class="btn-default"
+              @translatedLabel="Topics"
+              @disabled="true"
+            />
+          {{/if}}
+          <DButton
+            @action={{fn this.switchPanel button}}
+            @disabled={{this.isSwitching}}
+            @translatedLabel={{button.switchButtonLabel}}
+            data-key={{button.key}}
+            class="btn-transparent sidebar__panel-switch-button"
+          />
+          {{#if (eq button.key "main")}}
+            <DButton
+              class="btn-default"
+              @translatedLabel="Chat"
+              @disabled="true"
+            />
+          {{/if}}
+        </div>
+      </div>
     {{/each}}
   </template>
 }
