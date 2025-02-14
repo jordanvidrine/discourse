@@ -65,7 +65,10 @@ export default class DiscoveryFilterNavigation extends Component {
 
     if (data.categories?.length) {
       const categoryNames = data.categories
-        .map((category) => category.name)
+        .map((category) => {
+          // need to account for category names with spaces
+          return category.name.replace(/ /g, "-");
+        })
         .join(",");
       queryParts.push(`categories:${categoryNames}`);
     }
@@ -138,10 +141,11 @@ export default class DiscoveryFilterNavigation extends Component {
             @data={{this.formData}}
             as |form data|
           >
+            <h3 class="topic-query-filter__title">Filter</h3>
             <form.Field
               @name="categories"
-              @title="categories"
-              @showTitle={{false}}
+              @title="Categories"
+              @showTitle={{true}}
               as |field|
             >
               <field.Custom>
@@ -154,8 +158,8 @@ export default class DiscoveryFilterNavigation extends Component {
 
             <form.Field
               @name="tags"
-              @title="tags"
-              @showTitle={{false}}
+              @title="Tags"
+              @showTitle={{true}}
               as |field|
             >
               <field.Custom>
@@ -174,8 +178,8 @@ export default class DiscoveryFilterNavigation extends Component {
 
             <form.Field
               @name="created_by"
-              @title="created_by"
-              @showTitle={{false}}
+              @title="Author:"
+              @showTitle={{true}}
               as |field|
             >
               <field.Custom>
@@ -189,8 +193,8 @@ export default class DiscoveryFilterNavigation extends Component {
 
             <form.Field
               @name="created_after"
-              @title="created_after"
-              @showTitle={{false}}
+              @title="Created After"
+              @showTitle={{true}}
               as |field|
             >
               <field.Custom>
@@ -204,8 +208,8 @@ export default class DiscoveryFilterNavigation extends Component {
 
             <form.Field
               @name="created_before"
-              @title="created_before"
-              @showTitle={{false}}
+              @title="Created Before"
+              @showTitle={{true}}
               as |field|
             >
               <field.Custom>
@@ -219,8 +223,8 @@ export default class DiscoveryFilterNavigation extends Component {
 
             <form.Field
               @name="order"
-              @title="order"
-              @showTitle={{false}}
+              @title="Sort By"
+              @showTitle={{true}}
               as |field|
             >
               <field.Select as |select|>
@@ -232,31 +236,50 @@ export default class DiscoveryFilterNavigation extends Component {
               </field.Select>
             </form.Field>
 
-            <DMenu @identifier="advanced-filters" @icon="sliders">
+            {{!-- <DMenu @identifier="advanced-filters" @icon="sliders">
               <:content>
                 <form.Field
                   @name="foo"
                   @title="foo"
-                  @showTitle={{false}}
+                  @showTitle={{true}}
                   as |field|
                 >
                   <field.Input />
                 </form.Field>
               </:content>
-            </DMenu>
+            </DMenu> --}}
+            <div class="topic-query-filter__submit">
+              <form.Submit @label="form_templates.filter" />
+              {{#if this.newQueryString}}
+                <div class="topic-query-filter__controls">
+                  <DButton
+                    @icon="xmark"
+                    @action={{this.clearInput}}
+                    @disabled={{unless this.newQueryString "true"}}
+                  />
 
-            <form.Submit />
+                  {{!-- {{#if this.discoveryFilter.q}} --}}
+                  <DButton
+                    @icon={{this.copyIcon}}
+                    @action={{this.copyQueryString}}
+                    @disabled={{unless this.newQueryString "true"}}
+                    class={{this.copyClass}}
+                  />
+                  {{!-- {{/if}} --}}
+                </div>
+              {{/if}}
+            </div>
           </Form>
 
           {{!-- {{icon "filter" class="topic-query-filter__icon"}} --}}
-          <Input
+          {{!-- <Input
             class="topic-query-filter__filter-term"
             @value={{this.newQueryString}}
             @enter={{action @updateTopicsListQueryParams this.newQueryString}}
             @type="text"
             id="queryStringInput"
             autocomplete="off"
-          />
+          /> --}}
           {{! EXPERIMENTAL OUTLET - don't use because it will be removed soon  }}
           <PluginOutlet
             @name="below-filter-input"
@@ -266,24 +289,6 @@ export default class DiscoveryFilterNavigation extends Component {
             }}
           />
         </div>
-        {{#if this.newQueryString}}
-          <div class="topic-query-filter__controls">
-            <DButton
-              @icon="xmark"
-              @action={{this.clearInput}}
-              @disabled={{unless this.newQueryString "true"}}
-            />
-
-            {{!-- {{#if this.discoveryFilter.q}} --}}
-            <DButton
-              @icon={{this.copyIcon}}
-              @action={{this.copyQueryString}}
-              @disabled={{unless this.newQueryString "true"}}
-              class={{this.copyClass}}
-            />
-            {{!-- {{/if}} --}}
-          </div>
-        {{/if}}
       </div>
     </section>
   </template>
