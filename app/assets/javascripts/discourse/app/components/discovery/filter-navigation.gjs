@@ -26,7 +26,6 @@ export default class DiscoveryFilterNavigation extends Component {
   @tracked copyIcon = "link";
   @tracked copyClass = "btn-default";
   @tracked filterExpanded = false;
-  @tracked queryString = "";
   @resettableTracked newQueryString = this.args.queryString;
 
   availableSorts = [
