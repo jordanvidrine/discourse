@@ -1,6 +1,6 @@
 .admin-config-area-card {
   padding: 20px 5px 20px 20px;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   border-radius: 2px;
   background-color: var(--secondary);
   margin-bottom: 1em;
@@ -116,7 +116,7 @@
 .admin-config-area-empty-list,
 .admin-empty-list {
   padding: 1em;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 
   &__cta-button {
     display: flex;
@@ -130,7 +130,7 @@
   gap: var(--space-4);
   flex-direction: column;
   width: calc(100% - 1em);
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   padding: 0.5em;
 
   @media (max-width: $mobile-breakpoint) {
@@ -166,7 +166,7 @@
     .form-kit__container {
       padding-left: 1em;
       width: calc(100% - 1em) !important;
-      border-left: 1px solid var(--primary-low);
+      border-left: 1px solid var(--primary-100);
     }
   }
 

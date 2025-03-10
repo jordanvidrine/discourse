@@ -8,7 +8,7 @@
   }
 
   .je-object__container {
-    border-bottom: 1px dashed var(--primary-low);
+    border-bottom: 1px dashed var(--primary-100);
     padding-bottom: 1em;
     margin-bottom: 1em;
     position: relative;
@@ -103,7 +103,7 @@
 
     > .card-title {
       width: 100%;
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
 
       > .json-editor-btn-collapse {
         float: right;

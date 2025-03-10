@@ -298,7 +298,7 @@ a.toggle-preview {
       }
 
       .reply-to {
-        border-bottom: 1px solid var(--primary-low);
+        border-bottom: 1px solid var(--primary-100);
         margin-bottom: 0;
         padding-bottom: 8px;
       }
@@ -308,7 +308,7 @@ a.toggle-preview {
       }
 
       &.show-preview .d-editor-textarea-wrapper {
-        border-right: 1px solid var(--primary-low);
+        border-right: 1px solid var(--primary-100);
       }
 
       #draft-status,

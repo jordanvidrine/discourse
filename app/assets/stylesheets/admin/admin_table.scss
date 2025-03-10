@@ -21,7 +21,7 @@
     @include breakpoint("tablet") {
       display: block;
       margin-bottom: var(--space-3);
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
     }
   }
 
@@ -30,7 +30,7 @@
 
     @include breakpoint("tablet") {
       display: block;
-      border-top: 1px solid var(--primary-low);
+      border-top: 1px solid var(--primary-100);
     }
 
     &:first-child {
@@ -74,7 +74,7 @@
     display: flex;
     flex-wrap: nowrap;
     width: fit-content;
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
     padding: var(--space-0) var(--space-2);
     border-radius: var(--d-border-radius);
 
@@ -96,7 +96,7 @@
   }
 
   &__badge {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
     border-radius: var(--d-border-radius);
     font-size: var(--font-down-1);
     margin-left: var(--space-1);
@@ -131,7 +131,7 @@
 
   // Inactive badge
   .status-label.--inactive {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
 
     .status-label-indicator {
       background-color: var(--primary-high);

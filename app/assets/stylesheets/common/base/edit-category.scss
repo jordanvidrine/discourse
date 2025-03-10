@@ -214,12 +214,12 @@ div.edit-category {
   margin-bottom: 2em;
 
   .permission-row {
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
     display: flex;
 
     &.row-header {
       font-weight: bold;
-      border-bottom: 2px solid var(--primary-low);
+      border-bottom: 2px solid var(--primary-100);
     }
 
     .group-name,

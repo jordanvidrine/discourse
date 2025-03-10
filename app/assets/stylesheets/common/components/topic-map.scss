@@ -1,6 +1,6 @@
 .topic-map.--op {
   // topic map under OP
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   border-bottom: none;
   padding-left: calc(
     var(--topic-body-width-padding) + var(--topic-avatar-width)
@@ -33,7 +33,7 @@ body:not(.archetype-private_message) {
   --chart-line-color: var(--tertiary);
   --chart-point-color: var(--tertiary-medium);
   --chart-prediction-color: var(--primary-low-mid);
-  border-bottom: 1px solid var(--primary-low);
+  border-bottom: 1px solid var(--primary-100);
   box-sizing: border-box;
   max-width: calc(
     var(--topic-avatar-width) + var(--topic-body-width) +
@@ -172,7 +172,7 @@ body:not(.archetype-private_message) {
 
     .user {
       @include ellipsis;
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
       border-radius: 0.25em;
       padding: 0;
       margin: 0.125em 0.25em 0.125em 0;
@@ -296,7 +296,7 @@ body:not(.archetype-private_message) {
       padding-inline: 1rem;
       padding-bottom: 0.5em;
       font-size: var(--font-up-1);
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
     }
 
     .loading-container {
@@ -332,7 +332,7 @@ body:not(.archetype-private_message) {
 
     li:not(:last-of-type) {
       a {
-        border-bottom: 1px solid var(--primary-low);
+        border-bottom: 1px solid var(--primary-100);
       }
     }
 
@@ -383,7 +383,7 @@ body:not(.archetype-private_message) {
       gap: 0.25em;
 
       &:not(:last-of-type) {
-        border-bottom: 1px solid var(--primary-low);
+        border-bottom: 1px solid var(--primary-100);
       }
 
       .discourse-no-touch & {

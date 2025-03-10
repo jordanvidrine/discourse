@@ -18,7 +18,7 @@
     align-items: center;
     padding-bottom: 0.5em;
     overflow: auto;
-    border-bottom: 3px solid var(--primary-low);
+    border-bottom: 3px solid var(--primary-100);
 
     @include breakpoint(tablet) {
       padding-bottom: 0;

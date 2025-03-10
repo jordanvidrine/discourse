@@ -13,20 +13,20 @@
   --d-sidebar-footer-fade: rgba(var(--secondary-rgb), 1);
   --d-sidebar-header-color: var(--primary-medium);
   --d-sidebar-header-icon-color: var(--primary-medium);
-  --d-sidebar-border-color: var(--primary-low);
+  --d-sidebar-border-color: var(--primary-100);
   --d-sidebar-link-color: var(--primary-high);
   --d-sidebar-link-icon-color: var(--primary-500);
   --d-sidebar-link-badge-color: var(--primary-700); // example: new count
 
   // example: chat participant count
-  --d-sidebar-prefix-background: var(--primary-low);
+  --d-sidebar-prefix-background: var(--primary-100);
   --d-sidebar-prefix-color: var(--d-sidebar-link-color);
 
   // example: unread dot
   --d-sidebar-suffix-color: var(--tertiary-med-or-tertiary);
 
   // highlight applies to both hover and focus states
-  --d-sidebar-highlight-background: var(--primary-low);
+  --d-sidebar-highlight-background: var(--primary-100);
   --d-sidebar-highlight-color: var(--primary-high);
   --d-sidebar-highlight-prefix-background: var(--primary-300);
   --d-sidebar-highlight-prefix-color: var(--d-sidebar-highlight-color);
@@ -78,7 +78,7 @@
     box-sizing: border-box;
     width: 100%;
     padding: 0;
-    border-right: 1px solid var(--primary-low);
+    border-right: 1px solid var(--primary-100);
     overflow-x: hidden;
 
     // allows sidebar to scroll to the bottom when the composer is open
@@ -100,7 +100,7 @@
 
     // custom scrollbar styling
     --scrollbarBg: transparent;
-    --scrollbarThumbBg: var(--primary-low);
+    --scrollbarThumbBg: var(--primary-100);
     --scrollbarWidth: 0.5em;
     scrollbar-color: transparent var(--scrollbarBg);
     transition: scrollbar-color 0.25s ease-in-out;

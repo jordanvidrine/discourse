@@ -475,7 +475,7 @@ html.composer-open {
   max-width: 370px;
   min-width: 300px;
   background-color: var(--secondary);
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   box-shadow: var(--shadow-dropdown);
   border-radius: 8px;
 
@@ -593,7 +593,7 @@ div.ac-wrap div.item a.remove,
   padding: 1px 3.5px;
   border-radius: 12px;
   box-sizing: border-box;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 
   &:hover {
     background-color: var(--danger-low);

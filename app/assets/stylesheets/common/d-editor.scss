@@ -127,7 +127,7 @@
   }
 
   .d-editor-textarea-wrapper {
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
   }
 
   .d-editor-preview-wrapper {
@@ -151,7 +151,7 @@
 .user-preferences .bio-composer,
 .group-form-bio {
   padding: 10px;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 }
 
 .d-editor-preview img {
@@ -308,7 +308,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(2.35em, 1fr));
   align-items: center;
-  border-bottom: 1px solid var(--primary-low);
+  border-bottom: 1px solid var(--primary-100);
   width: 100%;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -337,7 +337,7 @@
 
     .discourse-no-touch & {
       &:hover {
-        color: var(--primary-low);
+        color: var(--primary-100);
       }
     }
   }

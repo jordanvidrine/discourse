@@ -17,7 +17,7 @@
 
   .table {
     margin: 0;
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     table-layout: fixed;
 
     tbody {
@@ -41,7 +41,7 @@
 
       .sort-btn:hover {
         color: var(--primary-medium);
-        background: var(--primary-low);
+        background: var(--primary-100);
       }
     }
 
@@ -50,7 +50,7 @@
 
       &:hover {
         color: var(--primary-medium);
-        background: var(--primary-low);
+        background: var(--primary-100);
 
         .d-icon {
           color: var(--primary-medium);
@@ -197,7 +197,7 @@
 
   .table .admin-report-table-header {
     font-weight: 500;
-    border-right: 1px solid var(--primary-low);
+    border-right: 1px solid var(--primary-100);
     padding: auto;
 
     .title {

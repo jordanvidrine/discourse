@@ -133,7 +133,7 @@ $mobile-breakpoint: 700px;
   }
 
   tr.selected {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
   }
 
   .filters input {
@@ -281,7 +281,7 @@ $mobile-breakpoint: 700px;
 
   .site-text {
     cursor: pointer;
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
     margin-bottom: 0.5em;
 
     &.overridden {
@@ -368,7 +368,7 @@ $mobile-breakpoint: 700px;
     }
 
     .outdated {
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
       box-sizing: border-box;
       color: var(--primary);
       margin-bottom: 1em;
@@ -394,7 +394,7 @@ $mobile-breakpoint: 700px;
     font-size: var(--font-down-1);
     float: right;
     margin-right: 10px;
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
     padding: 2px 5px;
     border-radius: 5px;
     color: var(--primary);
@@ -649,14 +649,14 @@ $mobile-breakpoint: 700px;
 .admin-controls {
   display: flex;
   align-items: center;
-  background: var(--primary-low);
+  background: var(--primary-100);
 
   .admin-actions {
     margin-left: auto;
   }
 
   nav {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
     width: 100%;
     display: inline-flex;
     position: relative;
@@ -725,7 +725,7 @@ $mobile-breakpoint: 700px;
   }
 
   .controls {
-    background: var(--primary-low);
+    background: var(--primary-100);
     width: 100%;
     padding: 10px;
     display: flex;
@@ -812,7 +812,7 @@ $mobile-breakpoint: 700px;
   .horizontal-overflow-nav__scroll-right,
   .horizontal-overflow-nav__scroll-left {
     --fade-color: var(--primary-low-rgb);
-    background: var(--primary-low);
+    background: var(--primary-100);
   }
 }
 
@@ -859,7 +859,7 @@ $mobile-breakpoint: 700px;
 .admin-detail {
   background-color: var(--secondary);
   margin-left: 0;
-  border-left: solid 1px var(--primary-low);
+  border-left: solid 1px var(--primary-100);
   padding: 30px 0 30px 30px;
   width: 82%;
   box-sizing: border-box;
@@ -896,7 +896,7 @@ section.details {
     color: var(--primary);
     padding: 5px 10px;
     margin: 30px 0 5px 0;
-    border-bottom: 5px solid var(--primary-low);
+    border-bottom: 5px solid var(--primary-100);
   }
 }
 
@@ -1037,7 +1037,7 @@ table#user-badges {
 
 @mixin value-btn {
   width: 29px;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   outline: none;
   padding: 0;
 
@@ -1060,7 +1060,7 @@ table#user-badges {
     .value-input {
       box-sizing: border-box;
       flex: 1 0 0px;
-      border-color: var(--primary-low);
+      border-color: var(--primary-100);
       cursor: pointer;
       margin: 0;
 
@@ -1104,7 +1104,7 @@ table#user-badges {
     align-items: center;
     min-height: 30px;
     color: var(--primary);
-    border-color: var(--primary-low);
+    border-color: var(--primary-100);
     padding-left: 10px;
     padding-right: 10px;
 
@@ -1125,7 +1125,7 @@ table#user-badges {
 
 .value .add-emoji-button {
   display: block;
-  background-color: var(--primary-low);
+  background-color: var(--primary-100);
   border: none;
 }
 

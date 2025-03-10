@@ -73,7 +73,7 @@ hr {
   height: 1px;
   margin: 1em 0;
   border: 0;
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   padding: 0;
 }
 
@@ -143,12 +143,12 @@ table {
 }
 
 tbody {
-  border-top: 3px solid var(--primary-low);
+  border-top: 3px solid var(--primary-100);
 }
 
 .topic-list-item,
 tr {
-  border-bottom: 1px solid var(--primary-low);
+  border-bottom: 1px solid var(--primary-100);
 
   @media (prefers-reduced-motion: no-preference) {
     &.highlighted {

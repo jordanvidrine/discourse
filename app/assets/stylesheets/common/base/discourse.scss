@@ -8,7 +8,7 @@
   --d-input-border: 1px solid var(--primary-400);
   --d-input-bg-color--disabled: var(--primary-very-low);
   --d-input-text-color--disabled: var(--primary-medium);
-  --d-input-border--disabled: 1px solid var(--primary-low);
+  --d-input-border--disabled: 1px solid var(--primary-100);
   --d-nav-color: var(--primary);
   --d-nav-bg-color: transparent;
   --d-nav-color--hover: var(--primary);
@@ -63,7 +63,7 @@
     background: linear-gradient(
       to right,
       var(--primary-very-low) 10%,
-      var(--primary-low) 18%,
+      var(--primary-100) 18%,
       var(--primary-very-low) 33%
     );
   }
@@ -287,7 +287,7 @@ textarea {
 }
 
 select {
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 }
 
 table {
@@ -329,7 +329,7 @@ textarea {
   .discourse-no-touch & {
     &:hover,
     &:focus {
-      background-color: var(--primary-low);
+      background-color: var(--primary-100);
     }
   }
 
@@ -577,10 +577,10 @@ textarea {
     margin: 0;
 
     li {
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
 
       &:first-of-type {
-        border-top: 1px solid var(--primary-low);
+        border-top: 1px solid var(--primary-100);
       }
 
       a {
@@ -589,7 +589,7 @@ textarea {
         color: var(--primary);
 
         &:hover {
-          background-color: var(--primary-low);
+          background-color: var(--primary-100);
           color: var(--primary);
         }
 
@@ -750,7 +750,7 @@ textarea {
   }
 
   .row {
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
     padding: 0.25em 0;
     display: grid;
     grid-template-areas:

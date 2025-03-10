@@ -29,7 +29,7 @@
     background: linear-gradient(
       to right,
       var(--primary-very-low) 10%,
-      var(--primary-low) 18%,
+      var(--primary-100) 18%,
       var(--primary-very-low) 33%
     );
     height: var(--avatar-width);
@@ -297,7 +297,7 @@
     .user-badge {
       @include ellipsis;
       background: var(--primary-very-low);
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
       color: var(--primary);
     }
 

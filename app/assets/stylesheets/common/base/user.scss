@@ -15,7 +15,7 @@
     grid-row-end: 2;
 
     .horizontal-overflow-nav {
-      border-block: 1px solid var(--primary-low);
+      border-block: 1px solid var(--primary-100);
     }
 
     .group-dropdown {
@@ -34,7 +34,7 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
     font-size: var(--font-down-1);
   }
 
@@ -118,7 +118,7 @@
   .user-notifications-filter {
     display: block;
     width: 100%;
-    border-bottom: 0.5px solid var(--primary-low);
+    border-bottom: 0.5px solid var(--primary-100);
   }
 }
 
@@ -144,7 +144,7 @@
     .secondary {
       display: inline-block;
       width: 100%;
-      border-top: 1px solid var(--primary-low);
+      border-top: 1px solid var(--primary-100);
 
       .btn {
         padding: 4px 12px;
@@ -196,7 +196,7 @@
 
     .details {
       background: rgba(var(--secondary-rgb), 0.8);
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
 
       .groups {
         display: inline;
@@ -524,7 +524,7 @@
   }
 
   li {
-    border-left: var(--primary-low) solid 2px;
+    border-left: var(--primary-100) solid 2px;
     padding: 5px 8px;
     margin: 10px 0;
   }
@@ -801,12 +801,12 @@
   .pref-passkeys,
   .pref-auth-tokens {
     .row {
-      border-top: 1px solid var(--primary-low);
+      border-top: 1px solid var(--primary-100);
       padding: 0.5em 0;
       margin: 0.5em 0;
 
       &:last-child {
-        border-bottom: 1px solid var(--primary-low);
+        border-bottom: 1px solid var(--primary-100);
       }
     }
   }
@@ -860,7 +860,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid var(--primary-low);
+    border-top: 1px solid var(--primary-100);
     margin: 0.25em 0;
     padding: 0.25em 0;
     align-items: center;
@@ -893,7 +893,7 @@
 
   .wrapper {
     display: flex;
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     width: 100%;
   }
 
@@ -911,7 +911,7 @@
 
     &:focus {
       box-shadow: none;
-      border-color: var(--primary-low);
+      border-color: var(--primary-100);
     }
   }
 

@@ -7,11 +7,11 @@
 
 @mixin btn(
   $text-color: var(--primary),
-  $bg-color: var(--primary-low),
+  $bg-color: var(--primary-100),
   $icon-color: var(--primary-high),
   $hover-text-color: var(--secondary),
   $hover-bg-color: var(--primary-medium),
-  $hover-icon-color: var(--primary-low)
+  $hover-icon-color: var(--primary-100)
 ) {
   display: inline-flex;
   align-items: center;
@@ -326,7 +326,7 @@
     }
 
     &:focus-visible {
-      background: var(--primary-low);
+      background: var(--primary-100);
     }
   }
 
@@ -390,7 +390,7 @@
 
   &:focus-visible {
     outline: none;
-    background: var(--primary-low);
+    background: var(--primary-100);
 
     .d-icon {
       color: var(--primary);

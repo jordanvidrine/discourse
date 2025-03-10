@@ -69,10 +69,10 @@
 .nav-stacked {
   @extend %nav;
   padding: 0;
-  background: var(--primary-low);
+  background: var(--primary-100);
 
   li {
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
 
     &:last-of-type {
       border-bottom: 0;

@@ -80,7 +80,7 @@ body.wizard {
   box-shadow: 0 4px 19px 6px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   margin: 1em auto;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   border-radius: 8px;
   padding: 2em;
 
@@ -392,7 +392,7 @@ body.wizard {
 
   &__button:hover,
   &__button:focus {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
   }
 
   &__button:active {

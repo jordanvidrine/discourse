@@ -275,7 +275,7 @@
   .themes-list-header {
     width: 100%;
     display: flex;
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
 
     .tab {
       border: none;
@@ -383,9 +383,9 @@
   .themes-list-search {
     color: var(--primary);
     display: flex;
-    border-right: 1px solid var(--primary-low);
-    border-bottom: 1px solid var(--primary-low);
-    border-left: 1px solid var(--primary-low);
+    border-right: 1px solid var(--primary-100);
+    border-bottom: 1px solid var(--primary-100);
+    border-left: 1px solid var(--primary-100);
   }
 
   .themes-list-container {
@@ -393,9 +393,9 @@
     max-height: 60vh;
     border-bottom-right-radius: var(--d-border-radius);
     border-bottom-left-radius: var(--d-border-radius);
-    border-right: 1px solid var(--primary-low);
-    border-bottom: 1px solid var(--primary-low);
-    border-left: 1px solid var(--primary-low);
+    border-right: 1px solid var(--primary-100);
+    border-bottom: 1px solid var(--primary-100);
+    border-left: 1px solid var(--primary-100);
     width: 100%;
 
     @media screen and (max-height: 1000px) {
@@ -412,7 +412,7 @@
 
     &__item {
       color: var(--primary);
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
       display: flex;
 
       .select-inactive-mode-label {
@@ -917,7 +917,7 @@
 .admin-flag-item {
   &__delete.btn,
   &__delete.btn:hover {
-    border-top: 1px solid var(--primary-low);
+    border-top: 1px solid var(--primary-100);
   }
 }
 
@@ -1024,7 +1024,7 @@
   .user-field {
     padding-block: 0.5em;
     margin-bottom: 1em;
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
 
     .form-display {
       width: 25%;
@@ -1161,7 +1161,7 @@
 
     .btn {
       &:not(:last-of-type) {
-        border-right: 1px solid var(--primary-low);
+        border-right: 1px solid var(--primary-100);
       }
     }
   }

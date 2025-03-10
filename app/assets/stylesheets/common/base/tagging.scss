@@ -10,7 +10,7 @@
 .tags-list {
   margin-top: 2em;
   padding-bottom: 1em;
-  border-bottom: 1px solid var(--primary-low);
+  border-bottom: 1px solid var(--primary-100);
 }
 
 #list-area .tags-list h3 {
@@ -79,7 +79,7 @@
   }
 
   &.box {
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
     color: var(--primary-high);
     padding: 2px 8px;
 
@@ -342,7 +342,7 @@ section.tag-info {
   gap: 1em;
   margin: 1em 0;
   padding: 2em;
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 
   .edit-tag-wrapper {
     display: flex;

@@ -169,7 +169,7 @@
 
     .discourse-no-touch &:hover,
     .discourse-no-touch &:focus {
-      background-color: var(--primary-low);
+      background-color: var(--primary-100);
       border-top: 1px solid transparent;
       border-left: 1px solid transparent;
       border-right: 1px solid transparent;
@@ -181,7 +181,7 @@
 
     &:active {
       color: var(--primary);
-      background-color: var(--primary-low);
+      background-color: var(--primary-100);
     }
   }
 
@@ -191,9 +191,9 @@
       position: relative;
       background-color: var(--secondary);
       cursor: default;
-      border-top: 1px solid var(--primary-low);
-      border-left: 1px solid var(--primary-low);
-      border-right: 1px solid var(--primary-low);
+      border-top: 1px solid var(--primary-100);
+      border-left: 1px solid var(--primary-100);
+      border-right: 1px solid var(--primary-100);
 
       > .d-icon {
         color: var(--primary-medium);
@@ -276,7 +276,7 @@
     &:focus,
     .discourse-no-touch & {
       &:hover {
-        background-color: var(--primary-low);
+        background-color: var(--primary-100);
       }
     }
 
@@ -449,7 +449,7 @@ $mobile-avatar-height: 1.532em;
 
   .trigger-group-card {
     padding: 0 5px;
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     border-radius: 0.25em;
     min-width: 3em;
 

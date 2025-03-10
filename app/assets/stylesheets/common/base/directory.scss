@@ -73,7 +73,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px 0;
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
 
       .column-name {
         display: flex;
@@ -166,7 +166,7 @@
   &__cell--empty,
   &__cell--user-field {
     display: flex;
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -314,12 +314,12 @@
     &__row {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
-      border-bottom: 1px solid var(--primary-low);
+      border-bottom: 1px solid var(--primary-100);
       padding: 0.85em 0.5em 1em;
       gap: 0 10%;
 
       &:first-child {
-        border-top: 1px solid var(--primary-low);
+        border-top: 1px solid var(--primary-100);
       }
     }
 

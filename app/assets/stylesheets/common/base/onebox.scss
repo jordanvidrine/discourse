@@ -99,7 +99,7 @@ a.loading-onebox {
 }
 
 aside.onebox {
-  border: 5px solid var(--primary-low);
+  border: 5px solid var(--primary-100);
   margin: 1em 0;
   padding: 1em;
   font-size: var(--font-0);
@@ -705,7 +705,7 @@ aside.onebox.twitterstatus .onebox-body {
     padding: 1em 0;
 
     .quoted {
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
       padding: 0.5em 1em;
       margin-top: 1em;
       white-space: normal;
@@ -854,7 +854,7 @@ aside.onebox.xkcd .onebox-body img {
   }
 
   &.category-onebox {
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     padding-left: calc(1em - 5px);
     margin-left: 5px;
   }
@@ -1106,7 +1106,7 @@ iframe.loom-onebox {
   position: relative;
   width: 100%;
   padding: 0 0 48.25% 0;
-  background-color: var(--primary-low);
+  background-color: var(--primary-100);
 
   .placeholder-icon {
     position: absolute;
@@ -1195,7 +1195,7 @@ aside.onebox.preview-error .site-icon {
     padding: 1em 0;
 
     .quoted {
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
       padding: 0.5em 1em;
       margin-top: 1em;
       white-space: normal;

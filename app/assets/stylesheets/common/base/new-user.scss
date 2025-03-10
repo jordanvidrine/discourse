@@ -60,7 +60,7 @@
 .new-user-wrapper {
   .user-navigation {
     --user-navigation__border-width: 4px;
-    border-bottom: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-100);
 
     .nav-pills {
       @include bordered-nav-pills;

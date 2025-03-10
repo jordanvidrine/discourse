@@ -162,11 +162,11 @@
 
   > p {
     padding-bottom: 10px;
-    border-bottom: var(--primary-low) 1px solid;
+    border-bottom: var(--primary-100) 1px solid;
   }
 
   .filters {
-    border-bottom: var(--primary-low) 1px solid;
+    border-bottom: var(--primary-100) 1px solid;
 
     .filter {
       margin-bottom: 1em;
@@ -202,7 +202,7 @@
 .web-hook-events {
   .heading-container {
     width: 100%;
-    background-color: var(--primary-low);
+    background-color: var(--primary-100);
   }
 
   li {

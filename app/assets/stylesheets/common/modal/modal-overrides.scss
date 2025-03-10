@@ -30,7 +30,7 @@
 
         > .search-link {
           padding: 6px;
-          border-bottom: 1px solid var(--primary-low);
+          border-bottom: 1px solid var(--primary-100);
           cursor: pointer;
           display: block;
 
@@ -417,7 +417,7 @@
     .date-time-control {
       position: relative;
       display: flex;
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
 
       &.is-filled,
       &.is-selected {

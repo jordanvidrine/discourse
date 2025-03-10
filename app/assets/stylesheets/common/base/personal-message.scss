@@ -13,7 +13,7 @@
   .regular.contents {
     border-radius: 0 var(--pm-border-radius) var(--pm-border-radius)
       var(--pm-border-radius);
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     padding-left: var(--pm-padding);
 
     .desktop-view & {
@@ -56,7 +56,7 @@
     );
 
     &.old {
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--primary-100);
     }
   }
 
@@ -103,7 +103,7 @@
 
       .user {
         border: none;
-        background: var(--primary-low);
+        background: var(--primary-100);
         padding: 2px 4px;
         border-radius: var(--pm-border-radius);
       }
@@ -139,7 +139,7 @@
 
     &.top {
       .cooked {
-        border: 1px solid var(--primary-low);
+        border: 1px solid var(--primary-100);
         border-radius: var(--pm-border-radius);
         margin-left: calc(var(--pm-padding) * -1);
         padding-left: 2.15em;
@@ -194,7 +194,7 @@
   .whisper {
     .topic-body .regular.contents {
       background: transparent;
-      border: 2px dashed var(--primary-low);
+      border: 2px dashed var(--primary-100);
     }
 
     &.current-user-post .topic-body .regular.contents {

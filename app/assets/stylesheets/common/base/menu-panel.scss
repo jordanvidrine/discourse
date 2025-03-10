@@ -36,7 +36,7 @@
 }
 
 .menu-panel {
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
   box-shadow: var(--shadow-menu-panel);
   background-color: var(--secondary);
   z-index: z("header");
@@ -220,7 +220,7 @@
 
       &:hover,
       &:focus-visible {
-        background: var(--primary-low);
+        background: var(--primary-100);
         color: var(--primary);
       }
     }
@@ -252,7 +252,7 @@
   .menu-tabs-container {
     display: flex;
     flex-direction: column;
-    border-left: 1px solid var(--primary-low);
+    border-left: 1px solid var(--primary-100);
     padding: 0.75em 0 0;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -303,7 +303,7 @@
   }
 
   .bottom-tabs {
-    border-top: 1px solid var(--primary-low);
+    border-top: 1px solid var(--primary-100);
   }
 
   .panel-body-contents {
@@ -387,7 +387,7 @@
     }
 
     hr {
-      border-top: 1px solid var(--primary-low);
+      border-top: 1px solid var(--primary-100);
       width: 100%;
     }
   }
@@ -414,7 +414,7 @@
   flex-direction: column;
   min-height: 0;
   max-height: 100%;
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   padding-top: 0.75em;
   margin-top: -1px;
 
@@ -608,7 +608,7 @@
 
     &:hover {
       color: var(--primary);
-      background: var(--primary-low);
+      background: var(--primary-100);
     }
   }
 }

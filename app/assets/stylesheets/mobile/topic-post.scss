@@ -16,7 +16,7 @@
 }
 
 .topic-post > article {
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   padding: 15px 0 8px 0;
 }
 
@@ -85,7 +85,7 @@ nav.post-controls {
     }
 
     &[aria-expanded="true"] {
-      background: var(--primary-low);
+      background: var(--primary-100);
       color: var(--primary-high);
       box-shadow: 0 0 0 1px var(--primary-300);
       z-index: 1;
@@ -215,7 +215,7 @@ nav.post-controls button.reply .d-icon {
     position: relative;
     padding: 6px;
     color: var(--primary-high);
-    background: var(--primary-low);
+    background: var(--primary-100);
     z-index: 1;
     transform: translate(25%, -30%);
     box-shadow: 0 0 0 1px var(--primary-300);

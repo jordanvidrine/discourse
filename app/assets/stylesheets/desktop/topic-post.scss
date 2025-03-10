@@ -15,7 +15,7 @@
   float: left;
   min-width: 0; // prevents some elements, like <pre>, from blowing out the width
   position: relative;
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   padding: 0.8em 0 0 0;
 
   .topic-meta-data {
@@ -117,7 +117,7 @@ nav.post-controls {
     }
 
     &[aria-expanded="true"] {
-      background: var(--primary-low);
+      background: var(--primary-100);
       color: var(--primary-high);
       box-shadow: 0 0 0 1px var(--primary-300);
       z-index: 1;
@@ -157,7 +157,7 @@ pre.codeblock-buttons:hover {
 }
 
 .embedded-posts {
-  border: 1px solid var(--primary-low);
+  border: 1px solid var(--primary-100);
 
   h1,
   h2,
@@ -189,7 +189,7 @@ pre.codeblock-buttons:hover {
     position: absolute;
     color: var(--primary-medium);
     background: var(--secondary);
-    border: 1px solid var(--primary-low);
+    border: 1px solid var(--primary-100);
     padding: 6px 9px 8px;
     z-index: 99; // Needs to be higher than topic-avatar
 
@@ -199,7 +199,7 @@ pre.codeblock-buttons:hover {
 
     .discourse-no-touch & {
       &:hover {
-        background: var(--primary-low);
+        background: var(--primary-100);
         color: var(--primary-high);
 
         .d-icon {
@@ -302,7 +302,7 @@ pre.codeblock-buttons:hover {
 
     .collapse-up {
       transform: translate(-50%, -164%);
-      background: var(--primary-low);
+      background: var(--primary-100);
       color: var(--primary-high);
       border: 1px solid var(--primary-300);
       padding: 6px;
@@ -508,7 +508,7 @@ blockquote {
     .onebox,
     .onebox-result {
       background: var(--primary-very-low);
-      border-left: 5px solid var(--primary-low);
+      border-left: 5px solid var(--primary-100);
     }
 
     aside.quote > blockquote,
@@ -528,7 +528,7 @@ blockquote {
 }
 
 .topic-avatar {
-  border-top: 1px solid var(--primary-low);
+  border-top: 1px solid var(--primary-100);
   padding-top: 15px;
   width: $topic-avatar-width;
   float: left;
