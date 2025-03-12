@@ -10,7 +10,19 @@
 
 .chat-message-actions {
   border-radius: var(--d-border-radius);
+  padding: 0.25em;
+  border: 1px solid var(--primary-100);
   display: flex;
+  gap: 0.25em;
+  height: 2em;
+
+  .chat-message-reaction[type="button"] {
+    border: none;
+    border-radius: var(--d-border-radius);
+    margin-right: 0;
+    padding: 0.25em 0;
+    width: 2.25em;
+  }
 
   .link-to-message-btn {
     .d-icon {
@@ -25,11 +37,12 @@
     }
   }
 
-  .react-btn,
-  .reply-btn,
-  .chat-message-thread-btn,
-  .bookmark-btn {
-    margin-right: -1px;
+  .react-btn[type="button"],
+  .reply-btn[type="button"],
+  .chat-message-thread-btn[type="button"],
+  .bookmark-btn[type="button"] {
+    border: 0;
+    border-radius: var(--d-border-radius);
     padding: 0.5em 0;
     width: 2.5em;
 
@@ -43,11 +56,6 @@
       }
     }
 
-    &:first-child:not(:hover) {
-      border-color: var(--primary-300);
-      border-right-color: transparent;
-    }
-
     .d-icon {
       color: var(--primary-medium);
 
@@ -57,30 +65,14 @@
     }
   }
 
-  &.has-no-secondary-actions {
-    .reply-btn {
-      border-right: 1px solid var(--primary-300);
-      border-top: 1px solid var(--primary-300);
-      border-bottom: 1px solid var(--primary-300);
-    }
-  }
-
   .more-buttons.dropdown-select-box {
     .select-kit-header {
       background: none;
-      border: 1px solid var(--primary-300);
-      border-left-color: transparent;
       padding: 0.5em 0;
       width: 2.5em;
       transition: var(--d-button-transition);
-      border-radius: var(--d-border-radius);
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
 
       &:focus {
-        border-color: var(--primary-300);
-        border-left-color: transparent;
-
         .select-kit-header-wrapper .d-icon {
           color: var(--primary);
         }
@@ -97,7 +89,6 @@
 
       &:hover {
         background: var(--primary-low);
-        border-color: var(--primary-low-mid);
 
         .select-kit-header-wrapper {
           .d-icon {
@@ -110,7 +101,6 @@
     .select-kit-body {
       padding: 0.5rem;
       box-shadow: var(--shadow-card);
-      border: 1px solid var(--primary-300);
     }
 
     .select-kit-row {
@@ -130,9 +120,6 @@
     @include chat-reaction;
     align-items: center;
     border-radius: 0;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    box-sizing: border-box;
     font-size: var(--font-0);
     justify-content: center;
     margin: 0;
@@ -145,14 +132,7 @@
       outline: none;
     }
 
-    &:first-child {
-      border-left-color: var(--primary-300);
-      border-top-left-radius: var(--d-border-radius);
-      border-bottom-left-radius: var(--d-border-radius);
-    }
-
     &.reacted {
-      border-left-color: var(--tertiary-medium);
       z-index: 1;
 
       &:focus {
