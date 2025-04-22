@@ -100,7 +100,10 @@
       color: var(--primary-medium);
       height: 100%;
       position: absolute;
-      left: 0;
+      // left: 0;
+      left: calc(
+        1rem - 0.65em
+      ); //to align with result panel, minus padding of search icon btn
 
       .rtl & {
         right: 0;
@@ -119,11 +122,11 @@
       }
 
       + .search-menu-container .search-input {
-        padding-left: 1.75em;
+        padding-left: 2em;
 
         .rtl & {
           padding-left: unset;
-          padding-right: 1.75em;
+          padding-right: 2em;
         }
       }
 
@@ -140,12 +143,9 @@
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       position: absolute;
       z-index: 9;
-      margin-left: auto;
-      margin-right: auto;
       left: 0;
       top: 2.75em;
       right: 0;
-      padding: 0.5em;
 
       @include breakpoint(mobile-extra-large) {
         width: 100%;
