@@ -11,14 +11,14 @@
 
 $search-pad-vertical: 0.25em;
 $search-pad-horizontal: 0.5em;
-$search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tight and .5 too loose
+$search-result-element-padding: 0.35em 1rem; // hate myself but .25em is too tight and .5 too loose
 
 .search-menu.glimmer-search-menu {
   .search-input-wrapper {
     @include breakpoint("mobile-extra-large") {
       position: fixed;
       left: 1rem;
-      right: 0.35rem; //to compensate for cancel button padding
+      right: 0.35rem; // to compensate for cancel button padding
       top: 0.5em;
       padding-bottom: 0.5em;
       background-color: var(--secondary);
@@ -39,7 +39,7 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     justify-content: space-between;
 
     .search-menu-panel & {
-      @breakpoint ("mobile-extra-large", $rule:min-width) {
+      @include breakpoint("mobile-extra-large", $rule: min-width) {
         padding: $search-result-element-padding;
       }
     }
@@ -82,13 +82,14 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
   .menu-panel {
     border: 0;
     box-shadow: var(--shadow-dropdown);
-    padding: 0; //overrule generic menu panels to achieve full width hover effect
+    padding: 0; // overrule generic menu panels to achieve full width hover effect
 
     @include breakpoint("mobile-extra-large", $rule: min-width) {
-      //alignment adjustment for search menu panel (within topic) on desktop to align with results
+      // alignment adjustment for search menu panel (within topic) on desktop to align with results
       .search-input {
         padding-right: calc(1rem - 0.65em);
       }
+
       .search-term__input {
         padding-left: 1rem;
       }
@@ -115,6 +116,7 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
       margin-left: 1rem;
       margin-right: 0;
     }
+
     @include breakpoint("mobile-extra-large") {
       position: fixed;
       top: calc(var(--header-offset) + 0.75em);
@@ -132,18 +134,19 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     flex-direction: column;
     border-radius: var(--d-border-radius);
 
-    //something mobile only?
+    // something mobile only?
     // &.with-search-term {
     //   padding-top: $search-pad-vertical;
     // }
 
-    //padding needs to be conditional on "in this topic" element presence
+    // padding needs to be conditional on "in this topic" element presence
     @include breakpoint("mobile-extra-large") {
       &,
       &.with-search-term {
         padding-top: calc(var(--header-offset) + 2.25em);
       }
     }
+
     .heading {
       padding: 0.5em 0 0 1rem;
       display: flex;
@@ -201,9 +204,10 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
       gap: 0.25em;
     }
 
-    //overrules for legacy css
+    // overrules for legacy css
     .topic-statuses {
       float: none;
+
       .topic-status .d-icon {
         height: 1em;
         width: 1em;
@@ -230,7 +234,6 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     .search-link {
       display: flex;
       align-items: center;
-
       gap: 0.5em;
     }
   }
@@ -242,10 +245,12 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     + .search-result-group {
       @include separator;
     }
+
     .search-menu-recent {
       @include separator;
     }
-    //specific spacing tweaks for the search instruction "sentence"
+
+    // specific spacing tweaks for the search instruction "sentence"
     .search-menu-assistant-item {
       .search-link {
         gap: 0.25em;
@@ -260,6 +265,7 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
   .search-result-category {
     .badge-category__wrapper {
       font-size: var(--font-0);
+
       .badge-category {
         gap: 0.5em;
       }
@@ -401,7 +407,6 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     img.avatar {
       width: 20px;
       height: 20px;
-      // margin-right: 0.5em;
     }
   }
 
@@ -409,7 +414,7 @@ $search-result-element-padding: 0.35em 1rem; //hate myself but .25em is too tigh
     color: var(--primary-medium);
   }
 
-  //what is search-item-tag?
+  // what is search-item-tag?
   .badge-category__wrapper + .search-item-tag {
     display: flex;
     align-items: baseline;
