@@ -96,6 +96,9 @@ export default class Sidebar extends Component {
 
       {{#if this.sidebarState.showMainPanel}}
         <Sections
+          @showSidebar={{@showSidebar}}
+          @sidebarEnabled={{@sidebarEnabled}}
+          @toggleSidebar={{@toggleSidebar}}
           @currentUser={{this.currentUser}}
           @collapsableSections={{true}}
           @panel={{this.sidebarState.currentPanel}}
