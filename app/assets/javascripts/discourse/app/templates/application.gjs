@@ -53,20 +53,6 @@ export default RouteTemplate(
         }}
       />
 
-      {{#if @controller.showSiteHeader}}
-        <GlimmerSiteHeader
-          @canSignUp={{@controller.canSignUp}}
-          @showCreateAccount={{routeAction "showCreateAccount"}}
-          @showLogin={{routeAction "showLogin"}}
-          @showKeyboard={{routeAction "showKeyboardShortcutsHelp"}}
-          @toggleMobileView={{routeAction "toggleMobileView"}}
-          @logout={{routeAction "logout"}}
-          @sidebarEnabled={{@controller.sidebarEnabled}}
-          @showSidebar={{@controller.showSidebar}}
-          @toggleSidebar={{@controller.toggleSidebar}}
-        />
-      {{/if}}
-
       <SoftwareUpdatePrompt />
 
       {{#if @controller.siteSettings.enable_offline_indicator}}
@@ -82,10 +68,27 @@ export default RouteTemplate(
       />
 
       <div id="main-outlet-wrapper" class="wrap" role="main">
+        {{#if @controller.showSiteHeader}}
+          <GlimmerSiteHeader
+            @canSignUp={{@controller.canSignUp}}
+            @showCreateAccount={{routeAction "showCreateAccount"}}
+            @showLogin={{routeAction "showLogin"}}
+            @showKeyboard={{routeAction "showKeyboardShortcutsHelp"}}
+            @toggleMobileView={{routeAction "toggleMobileView"}}
+            @logout={{routeAction "logout"}}
+            @sidebarEnabled={{@controller.sidebarEnabled}}
+            @showSidebar={{@controller.showSidebar}}
+            @toggleSidebar={{@controller.toggleSidebar}}
+          />
+        {{/if}}
         <div class="sidebar-wrapper">
           {{! empty div allows for animation }}
           {{#if (and @controller.sidebarEnabled @controller.showSidebar)}}
-            <Sidebar @toggleSidebar={{@controller.toggleSidebar}} />
+            <Sidebar
+              @toggleSidebar={{@controller.toggleSidebar}}
+              @sidebarEnabled={{@controller.sidebarEnabled}}
+              @showSidebar={{@controller.showSidebar}}
+            />
           {{/if}}
         </div>
 

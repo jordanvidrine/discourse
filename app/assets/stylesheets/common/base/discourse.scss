@@ -511,7 +511,6 @@ textarea {
   max-width: var(--d-max-width);
   margin-right: auto;
   margin-left: auto;
-  padding: 0 var(--d-wrap-padding-h);
 
   @include viewport.until(sm) {
     min-width: 0;
@@ -781,9 +780,10 @@ form {
   width: 100%;
   display: grid;
   grid-template-areas:
+    "sidebar header"
     "sidebar content"
     "sidebar below-content";
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 4em auto;
   grid-template-columns: 0 minmax(0, 1fr); // 0 column width needs to be set for CSS transitions
   gap: 0;
 
@@ -793,8 +793,7 @@ form {
 }
 
 #main-outlet {
-  padding: var(--main-outlet-padding-top) var(--main-outlet-padding-v)
-    var(--main-outlet-padding-bottom);
+  padding: var(--space-4);
 
   .mobile-view & {
     padding-top: var(--space-5); // notch avoidance
@@ -1041,7 +1040,6 @@ body.has-sidebar-page {
 
   #main-outlet-wrapper {
     grid-template-columns: var(--d-sidebar-width) minmax(0, 1fr);
-    gap: 0 var(--d-main-content-gap);
     padding-left: 0;
 
     @include viewport.until(lg) {

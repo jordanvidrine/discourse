@@ -1,9 +1,73 @@
 @use "lib/viewport";
 
+#site-logo {
+  height: var(--d-logo-height);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.home-logo-wrapper-outlet {
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary);
+  z-index: z("header");
+  padding: var(--d-sidebar-row-horizontal-padding);
+}
+
+#site-text-logo {
+  margin: 0;
+  font-size: var(--font-up-1);
+  font-weight: bold;
+
+  @include ellipsis;
+
+  @include viewport.from(sm) {
+    font-size: var(--font-up-3);
+  }
+}
+
+.d-icon-house {
+  font-size: var(--font-up-6);
+}
+
 .d-header-wrap {
   position: sticky;
   top: 0;
   z-index: z("header");
+}
+
+.title {
+  --d-logo-height: 2.4em;
+
+  // min-width acts as a placeholder if the small logo takes a while to load
+  // it prevents topic title from shifting after the small logo loads
+  // it's set to match the #site-logo height so square small logos don't resize when titles dock
+  min-width: var(--d-logo-height);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  animation: fadein 0.5s;
+
+  @include viewport.from(sm) {
+    --d-logo-height: 2.667em;
+  }
+
+  @media (prefers-reduced-motion) {
+    animation-duration: 0s;
+  }
+
+  a,
+  a:visited {
+    min-width: 0;
+    color: var(--header_primary);
+  }
+
+  &:not(.title--minimized) {
+    // allows large logos to be hidden if there are too many other header elements
+    // this prioritizes nav elements, especially in cases of high zoom levels
+    overflow: hidden;
+  }
 }
 
 .d-header {
@@ -49,66 +113,6 @@
         }
       }
     }
-  }
-
-  .title {
-    --d-logo-height: 2.4em;
-
-    // min-width acts as a placeholder if the small logo takes a while to load
-    // it prevents topic title from shifting after the small logo loads
-    // it's set to match the #site-logo height so square small logos don't resize when titles dock
-    min-width: var(--d-logo-height);
-    display: flex;
-    align-items: center;
-    height: 100%;
-    animation: fadein 0.5s;
-
-    @include viewport.from(sm) {
-      --d-logo-height: 2.667em;
-    }
-
-    @media (prefers-reduced-motion) {
-      animation-duration: 0s;
-    }
-
-    a,
-    a:visited {
-      min-width: 0;
-      color: var(--header_primary);
-    }
-
-    &:not(.title--minimized) {
-      // allows large logos to be hidden if there are too many other header elements
-      // this prioritizes nav elements, especially in cases of high zoom levels
-      overflow: hidden;
-    }
-  }
-
-  #site-logo {
-    height: var(--d-logo-height);
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .home-logo-wrapper-outlet {
-    overflow: hidden;
-  }
-
-  #site-text-logo {
-    margin: 0;
-    font-size: var(--font-up-1);
-    font-weight: bold;
-
-    @include ellipsis;
-
-    @include viewport.from(sm) {
-      font-size: var(--font-up-3);
-    }
-  }
-
-  .d-icon-house {
-    font-size: var(--font-up-6);
   }
 
   .panel {

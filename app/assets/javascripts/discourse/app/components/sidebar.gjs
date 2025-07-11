@@ -7,6 +7,7 @@ import Sections from "discourse/components/sidebar/sections";
 import SwitchPanelButtons from "discourse/components/sidebar/switch-panel-buttons";
 import bodyClass from "discourse/helpers/body-class";
 import { bind } from "discourse/lib/decorators";
+import { applyValueTransformer } from "discourse/lib/transformer";
 
 export default class Sidebar extends Component {
   @service appEvents;
@@ -14,6 +15,7 @@ export default class Sidebar extends Component {
   @service siteSettings;
   @service currentUser;
   @service sidebarState;
+  @service header;
 
   constructor() {
     super(...arguments);
@@ -69,10 +71,23 @@ export default class Sidebar extends Component {
     }
   }
 
+  get minimized() {
+    return applyValueTransformer(
+      "home-logo-minimized",
+      this.header.topicInfoVisible,
+      {
+        topicInfo: this.header.topicInfo,
+        sidebarEnabled: this.args.sidebarEnabled,
+        showSidebar: this.args.showSidebar,
+      }
+    );
+  }
+
   <template>
     {{bodyClass "has-sidebar-page"}}
 
     <section id="d-sidebar" class="sidebar-container">
+
       {{#if this.showSwitchPanelButtonsOnTop}}
         <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
       {{/if}}
