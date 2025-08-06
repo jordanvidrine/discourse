@@ -1,8 +1,8 @@
 @use "lib/viewport";
 
 :root {
-  --category-header-logo-size: 3rem;
-  --category-description-width: 760px;
+  --category-header-logo-size: 6rem;
+  --category-description-width: 75ch;
   --category-header-border: 1px solid var(--content-border-color);
 }
 
@@ -65,7 +65,7 @@
   &__logo.category-logo.aspect-image {
     height: var(--category-header-logo-size);
     width: var(--category-header-logo-size);
-    margin-top: calc(1rem - 1cap);
+    margin-top: var(--space-2);
     flex-shrink: 0;
   }
 
