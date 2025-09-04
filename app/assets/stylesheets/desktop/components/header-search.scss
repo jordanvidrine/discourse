@@ -94,6 +94,7 @@
             height: 100%;
             position: absolute;
             z-index: 2;
+            box-shadow: none;
           }
 
           .search-menu-panel {
@@ -114,6 +115,7 @@
               margin: 0;
               padding: 0.5em;
               border-radius: var(--d-input-border-radius);
+              box-shadow: none;
 
               &:focus {
                 outline: none;

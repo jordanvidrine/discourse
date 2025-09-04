@@ -79,6 +79,7 @@
       left: calc(
         1rem - 0.65em
       ); // to align with result panel, minus padding of search icon btn
+      box-shadow: none;
 
       .rtl & {
         right: 0;
