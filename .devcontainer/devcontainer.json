@@ -20,7 +20,8 @@
   "mounts": [
     "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
     "source=${localWorkspaceFolderBasename}-pg,target=/shared/postgres_data,type=volume",
-    "source=${localWorkspaceFolderBasename}-redis,target=/shared/redis,type=volume"
+    "source=${localWorkspaceFolderBasename}-redis,target=/shared/redis,type=volume",
+    "source=${localEnv:HOME}/.ssh,target=/home/discourse/.ssh,type=bind,consistency=cached"
   ],
   "customizations": {
     "vscode": {
