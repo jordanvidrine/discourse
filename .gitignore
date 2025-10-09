@@ -122,3 +122,4 @@ openapi/*
 
 # direnv.net
 .direnv
+/discourse-customer-setup-cli
