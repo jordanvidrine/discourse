@@ -205,7 +205,7 @@ export default class ChatSelectionManager extends Component {
           @label="chat.selection.cancel"
           @action={{@pane.cancelSelecting}}
           id="chat-cancel-selection-btn"
-          class="btn-secondary cancel-btn"
+          class="btn-default cancel-btn"
         />
       </div>
     </div>

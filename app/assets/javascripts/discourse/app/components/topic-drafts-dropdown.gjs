@@ -119,7 +119,7 @@ export default class TopicDraftsDropdown extends Component {
                   draft.title
                   (i18n "drafts.dropdown.untitled")
                 }}
-                class="btn-secondary"
+                class="btn-default"
               />
             </dropdown.item>
           {{/each}}

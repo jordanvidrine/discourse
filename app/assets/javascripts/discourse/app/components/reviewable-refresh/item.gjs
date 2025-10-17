@@ -713,12 +713,12 @@ export default class ReviewableItem extends Component {
             <DButton
               @label="review.copy_link"
               @icon="link"
-              class="btn-secondary"
+              class="btn-default"
             />
             <DButton
               @label="review.view_source"
               @icon="code"
-              class="btn-secondary"
+              class="btn-default"
             />
           </div>
 
