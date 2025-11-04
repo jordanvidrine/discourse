@@ -121,7 +121,7 @@ class Theme < ActiveRecord::Base
             :user,
             :locale_fields,
             :theme_translation_overrides,
-            color_scheme: %i[theme color_scheme_colors base_scheme],
+            color_scheme: [:theme, :color_scheme_colors, { base_scheme: :color_scheme_colors }],
             parent_themes: %i[color_scheme locale_fields theme_translation_overrides],
           )
         end
