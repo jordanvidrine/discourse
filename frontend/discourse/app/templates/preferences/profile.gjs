@@ -439,7 +439,7 @@ export default class Profile extends Component {
       />
 
       <div class="controls save-button">
-        <form.Submit class="save-changes" @disabled={{form.isDirty}} />
+        <form.Submit class="save-changes" />
         {{#if @controller.saved}}
           <span class="saved">{{i18n "saved"}}</span>
         {{/if}}
