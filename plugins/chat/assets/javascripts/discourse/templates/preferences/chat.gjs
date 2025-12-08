@@ -137,19 +137,17 @@ export default <template>
 
     <form.Field
       @name="chat_send_shortcut"
-      @title=" "
-      @showTitle={{false}}
+      @title={{i18n "chat.send_shortcut.title"}}
       class="control-group chat-setting"
       data-setting-name="user_chat_send_shortcut"
       as |field|
     >
-      <field.RadioGroup as |radioGroup|>
+      <field.RadioGroup as |RadioGroup|>
         {{#each @controller.chatSendShortcutOptions as |option|}}
-          <radioGroup.Radio @value={{option.value}}>
-            <radioGroup.Radio.Title>{{option.label}}</radioGroup.Radio.Title>
-            <radioGroup.Radio.Description
-            >{{option.description}}</radioGroup.Radio.Description>
-          </radioGroup.Radio>
+          <RadioGroup.Radio @value={{option.value}} as |radio|>
+            <radio.Title>{{option.label}}</radio.Title>
+            <radio.Description>{{option.description}}</radio.Description>
+          </RadioGroup.Radio>
         {{/each}}
       </field.RadioGroup>
     </form.Field>
