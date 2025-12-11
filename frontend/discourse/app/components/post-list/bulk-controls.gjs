@@ -64,7 +64,7 @@ export default class PostListBulkControls extends Component {
               @autofocus={{true}}
               @identifier="post-list-bulk-actions-dropdown"
               @onRegisterApi={{this.onRegisterApi}}
-              class="bulk-actions-dropdown"
+              class="bulk-actions-dropdown btn-default"
             >
               <:content>
                 <DropdownMenu as |dropdown|>
