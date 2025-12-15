@@ -3,7 +3,6 @@ import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import PluginOutlet from "discourse/components/plugin-outlet";
-import TopicBulkSelectDropdown from "discourse/components/topic-list/topic-bulk-select-dropdown";
 import concatClass from "discourse/helpers/concat-class";
 import icon from "discourse/helpers/d-icon";
 import lazyHash from "discourse/helpers/lazy-hash";
@@ -93,41 +92,20 @@ export default class SortableColumn extends Component {
           </button>
         {{/if}}
 
-        {{#if @bulkSelectEnabled}}
-          <span class="bulk-select-topics">
-            {{#if @canDoBulkActions}}
-              <TopicBulkSelectDropdown
-                @bulkSelectHelper={{@bulkSelectHelper}}
-                @afterBulkActionComplete={{this.afterBulkActionComplete}}
-              />
-            {{/if}}
-
-            <button
-              {{on "click" this.bulkSelectAll}}
-              class="btn btn-default bulk-select-all"
-            >{{i18n "topics.bulk.select_all"}}</button>
-            <button
-              {{on "click" this.bulkClearAll}}
-              class="btn btn-default bulk-clear-all"
-            >{{i18n "topics.bulk.clear_all"}}</button>
-          </span>
-        {{/if}}
       {{/if}}
 
-      {{#unless @bulkSelectEnabled}}
-        {{#if @sortable}}
-          <button aria-pressed={{this.isSorting}}>
-            {{this.localizedName}}
-            {{#if this.isSorting}}
-              {{icon (if @ascending "chevron-up" "chevron-down")}}
-            {{/if}}
-          </button>
-        {{else}}
-          <span class={{if @screenreaderOnly "sr-only"}}>
-            {{this.localizedName}}
-          </span>
-        {{/if}}
-      {{/unless}}
+      {{#if @sortable}}
+        <button aria-pressed={{this.isSorting}}>
+          {{this.localizedName}}
+          {{#if this.isSorting}}
+            {{icon (if @ascending "chevron-up" "chevron-down")}}
+          {{/if}}
+        </button>
+      {{else}}
+        <span class={{if @screenreaderOnly "sr-only"}}>
+          {{this.localizedName}}
+        </span>
+      {{/if}}
 
       <PluginOutlet
         @name="topic-list-heading-bottom"

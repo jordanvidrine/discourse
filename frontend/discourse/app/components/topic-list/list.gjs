@@ -1,7 +1,11 @@
 import Component from "@glimmer/component";
 import { cached } from "@glimmer/tracking";
 import { service } from "@ember/service";
+import BulkTopicActions from "discourse/components/modal/bulk-topic-actions";
+import DismissNew from "discourse/components/modal/dismiss-new";
+import DismissReadModal from "discourse/components/modal/dismiss-read";
 import PluginOutlet from "discourse/components/plugin-outlet";
+import PostListBulkControls from "discourse/components/post-list/bulk-controls";
 import Header from "discourse/components/topic-list/header";
 import Item from "discourse/components/topic-list/item";
 import concatClass from "discourse/helpers/concat-class";
@@ -32,6 +36,9 @@ import ItemViewsCell from "./item/views-cell";
 
 export default class TopicList extends Component {
   @service currentUser;
+  @service router;
+  @service modal;
+  @service siteSettings;
   // eslint-disable-next-line discourse/no-unused-services
   @service topicTrackingState; // accessed via `self` variable
 
@@ -119,6 +126,29 @@ export default class TopicList extends Component {
     );
   }
 
+  @cached
+  get adaptedBulkSelectHelper() {
+    const helper = this.args.bulkSelectHelper;
+    if (!helper) {
+      return null;
+    }
+
+    // Adapt the helper to work with PostListBulkControls
+    // PostListBulkControls expects selectedCount and hasSelection
+    // Use Proxy to add these properties reactively
+    return new Proxy(helper, {
+      get(target, prop) {
+        if (prop === "selectedCount") {
+          return target.selected?.length || 0;
+        }
+        if (prop === "hasSelection") {
+          return (target.selected?.length || 0) > 0;
+        }
+        return target[prop];
+      },
+    });
+  }
+
   get canDoBulkActions() {
     return this.currentUser?.canManageTopic && this.selected?.length;
   }
@@ -181,8 +211,318 @@ export default class TopicList extends Component {
     });
   }
 
+  @cached
+  get topicBulkActions() {
+    // If bulkActions are provided via args, use those
+    if (this.args.bulkActions) {
+      return this.args.bulkActions;
+    }
+
+    // Otherwise, generate topic bulk actions from BulkSelectTopicsDropdown logic
+    const helper = this.args.bulkSelectHelper;
+    if (!helper || !this.selected?.length) {
+      return [];
+    }
+
+    const selectedTopics = this.selected;
+    const actions = [];
+
+    // Dismiss actions
+    if (this.router.currentRouteName === "discovery.unread") {
+      actions.push({
+        label: "topic_bulk_actions.dismiss.name",
+        icon: "check",
+        action: () => {
+          this.modal.show(DismissReadModal, {
+            model: {
+              title: "topics.bulk.dismiss_read_with_selected",
+              count: selectedTopics.length,
+              dismissRead: (dismissTopics) =>
+                helper.dismissRead(dismissTopics ? "topics" : "posts"),
+            },
+          });
+        },
+      });
+    }
+
+    if (this.router.currentRouteName === "discovery.new") {
+      actions.push({
+        label: "topic_bulk_actions.dismiss.name",
+        icon: "check",
+        action: () => {
+          this.modal.show(DismissNew, {
+            model: {
+              selectedTopics,
+              dismissCallback: (dismissTopics) =>
+                helper.dismissRead(dismissTopics ? "topics" : "posts"),
+            },
+          });
+        },
+      });
+    }
+
+    // Category update
+    if (!selectedTopics.some((t) => t.isPrivateMessage)) {
+      actions.push({
+        label: "topic_bulk_actions.update_category.name",
+        icon: "pencil",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "update-category",
+              title: i18n("topics.bulk.change_category"),
+              description: i18n(
+                "topic_bulk_actions.update_category.description"
+              ),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+              allowSilent: true,
+            },
+          });
+        },
+      });
+    }
+
+    // Notification level
+    actions.push({
+      label: "topic_bulk_actions.update_notifications.name",
+      icon: "d-regular",
+      action: () => {
+        this.modal.show("bulk-topic-actions", {
+          model: {
+            action: "update-notifications",
+            title: i18n("topics.bulk.notification_level"),
+            description: i18n(
+              "topic_bulk_actions.update_notifications.description"
+            ),
+            bulkSelectHelper: helper,
+            refreshClosure: () => this.args.afterBulkActionComplete?.(),
+          },
+        });
+      },
+    });
+
+    // Close topics
+    actions.push({
+      label: "topic_bulk_actions.close_topics.name",
+      icon: "topic.closed",
+      action: () => {
+        this.modal.show("bulk-topic-actions", {
+          model: {
+            action: "close",
+            title: i18n("topics.bulk.close_topics"),
+            bulkSelectHelper: helper,
+            refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            allowSilent: true,
+          },
+        });
+      },
+    });
+
+    // Archive topics/messages
+    if (!selectedTopics.some((t) => t.isPrivateMessage)) {
+      actions.push({
+        label: "topic_bulk_actions.archive_topics.name",
+        icon: "folder",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "archive",
+              title: i18n("topics.bulk.archive_topics"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    } else {
+      actions.push({
+        label: "topic_bulk_actions.archive_messages.name",
+        icon: "box-archive",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "archive_messages",
+              title: i18n("topics.bulk.archive_messages"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+
+      actions.push({
+        label: "topic_bulk_actions.move_messages_to_inbox.name",
+        icon: "envelope",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "move_messages_to_inbox",
+              title: i18n("topics.bulk.move_messages_to_inbox"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    // Unlist/Relist
+    if (
+      selectedTopics.some((t) => t.visible) &&
+      !selectedTopics.some((t) => t.isPrivateMessage)
+    ) {
+      actions.push({
+        label: "topic_bulk_actions.unlist_topics.name",
+        icon: "far-eye-slash",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "unlist",
+              title: i18n("topics.bulk.unlist_topics"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    if (
+      selectedTopics.some((t) => !t.visible) &&
+      !selectedTopics.some((t) => t.isPrivateMessage)
+    ) {
+      actions.push({
+        label: "topic_bulk_actions.relist_topics.name",
+        icon: "far-eye",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "relist",
+              title: i18n("topics.bulk.relist_topics"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    // Tags
+    if (this.siteSettings.tagging_enabled && this.currentUser?.canManageTopic) {
+      actions.push({
+        label: "topic_bulk_actions.append_tags.name",
+        icon: "tag",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "append-tags",
+              title: i18n("topics.bulk.choose_append_tags"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+
+      actions.push({
+        label: "topic_bulk_actions.replace_tags.name",
+        icon: "tag",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "replace-tags",
+              title: i18n("topics.bulk.change_tags"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+
+      actions.push({
+        label: "topic_bulk_actions.remove_tags.name",
+        icon: "tag",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "remove-tags",
+              title: i18n("topics.bulk.remove_tags"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    // Delete (staff only)
+    if (this.currentUser?.staff) {
+      actions.push({
+        label: "topic_bulk_actions.delete_topics.name",
+        icon: "trash-can",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "delete",
+              title: i18n("topics.bulk.delete"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    // Reset bump dates
+    actions.push({
+      label: "topic_bulk_actions.reset_bump_dates.name",
+      icon: "anchor",
+      action: () => {
+        this.modal.show("bulk-topic-actions", {
+          model: {
+            action: "reset-bump-dates",
+            title: i18n("topics.bulk.reset_bump_dates"),
+            description: i18n(
+              "topic_bulk_actions.reset_bump_dates.description"
+            ),
+            bulkSelectHelper: helper,
+            refreshClosure: () => this.args.afterBulkActionComplete?.(),
+          },
+        });
+      },
+    });
+
+    // Defer
+    if (this.currentUser?.user_option?.enable_defer) {
+      actions.push({
+        label: "topic_bulk_actions.defer.name",
+        icon: "circle",
+        action: () => {
+          this.modal.show(BulkTopicActions, {
+            model: {
+              action: "defer",
+              title: i18n("topics.bulk.defer"),
+              description: i18n("topic_bulk_actions.defer.description"),
+              bulkSelectHelper: helper,
+              refreshClosure: () => this.args.afterBulkActionComplete?.(),
+            },
+          });
+        },
+      });
+    }
+
+    return actions;
+  }
+
   <template>
     {{! template-lint-disable table-groups }}
+    {{#if this.bulkSelectEnabled}}
+      <PostListBulkControls
+        @bulkSelectHelper={{this.adaptedBulkSelectHelper}}
+        @bulkActions={{this.topicBulkActions}}
+      />
+    {{/if}}
     <table
       class={{concatClass
         "topic-list"
