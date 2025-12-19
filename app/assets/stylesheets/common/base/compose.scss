@@ -14,10 +14,7 @@ html.composer-open:not(.has-full-page-chat) {
 
 .grippie {
   cursor: row-resize;
-  padding: 0.25em 0;
-  background: var(--tertiary);
-  border-top-left-radius: var(--d-border-radius-large);
-  border-top-right-radius: var(--d-border-radius-large);
+  padding: var(--space-2) 0;
 
   @media (pointer: coarse) {
     padding: 0.35em 0;
@@ -25,10 +22,16 @@ html.composer-open:not(.has-full-page-chat) {
 
   &::before {
     content: "";
+    height: var(--space-1);
+    border-radius: var(--d-border-radius);
     display: block;
-    width: 1.5em;
+    width: var(--space-12);
     margin: auto;
-    border-top: 3px double var(--tertiary-medium);
+    background-color: var(--primary-low);
+  }
+
+  &:hover::before {
+    background-color: var(--primary-medium);
   }
 }
 
@@ -130,10 +133,13 @@ html.composer-open:not(.has-full-page-chat) {
   &.saving {
     height: 45px !important;
     align-items: center;
-    background: var(--tertiary);
-    color: var(--secondary);
+    background: var(--secondary);
+    color: var(--primary);
     flex-direction: row;
     justify-content: space-between;
+    border: 1px solid var(--primary-low-mid);
+    bottom: var(--space-4);
+    border-radius: var(--d-border-radius-large);
 
     .composer-controls {
       display: flex;
@@ -145,7 +151,7 @@ html.composer-open:not(.has-full-page-chat) {
       }
 
       .d-icon {
-        color: var(--secondary);
+        color: var(--primary);
       }
     }
   }
