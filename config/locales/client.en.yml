@@ -5476,7 +5476,7 @@ en:
           configure_defaults: "Configure defaults"
         community:
           edit_section:
-            sidebar: "Customize this section"
+            sidebar: "Customize dropdown"
             header_dropdown: "Customize"
           links:
             about:

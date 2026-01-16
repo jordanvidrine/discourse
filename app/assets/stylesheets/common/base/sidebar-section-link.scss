@@ -18,6 +18,10 @@
     font-size: var(--font-down-1-rem);
   }
 
+  .dropdown-menu {
+    padding: var(--space-2);
+  }
+
   &.--hovering .sidebar-section-link {
     background: var(--d-sidebar-highlight-background);
     color: var(--d-sidebar-highlight-color);
@@ -155,9 +159,8 @@
     }
   }
 
-  &.dropdown-menu__item .sidebar-section-link,
-  .dropdown-menu__item .sidebar-section-link {
-    border-radius: 0;
+  .dropdown-menu__divider {
+    margin-block: var(--space-1);
   }
 
   .--link-button {

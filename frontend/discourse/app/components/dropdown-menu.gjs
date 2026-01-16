@@ -5,7 +5,7 @@ const DropdownItem = <template>
 </template>;
 
 const DropdownDivider = <template>
-  <li ...attributes><hr class="dropdown-menu__divider" /></li>
+  <li class="dropdown-menu__item dropdown-menu__divider" ...attributes></li>
 </template>;
 
 const DropdownMenu = <template>
