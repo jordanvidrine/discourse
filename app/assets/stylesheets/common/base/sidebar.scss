@@ -90,6 +90,13 @@
 
   @include unselectable;
 
+  #site-logo {
+    height: var(--d-logo-height);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
   .sidebar-container {
     display: flex;
     flex-direction: column;

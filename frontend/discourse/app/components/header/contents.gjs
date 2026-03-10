@@ -6,8 +6,8 @@ import lazyHash from "discourse/helpers/lazy-hash";
 import { applyValueTransformer } from "discourse/lib/transformer";
 import PluginOutlet from "../plugin-outlet";
 import HeaderSearch from "./header-search";
-import HomeLogo from "./home-logo";
-import SidebarToggle from "./sidebar-toggle";
+// import HomeLogo from "./home-logo";
+// import SidebarToggle from "./sidebar-toggle";
 import TopicInfo from "./topic/info";
 
 export default class Contents extends Component {
@@ -81,7 +81,7 @@ export default class Contents extends Component {
           )
         }}
       />
-      {{#if this.site.desktopView}}
+      {{!-- {{#if this.site.desktopView}}
         {{#if @sidebarEnabled}}
           <SidebarToggle
             @toggleNavigationMenu={{@toggleNavigationMenu}}
@@ -95,7 +95,7 @@ export default class Contents extends Component {
         <PluginOutlet @name="home-logo-wrapper">
           <HomeLogo @minimized={{this.minimized}} />
         </PluginOutlet>
-      </div>
+      </div> --}}
 
       {{#if @topicInfoVisible}}
         <TopicInfo @topicInfo={{@topicInfo}} />

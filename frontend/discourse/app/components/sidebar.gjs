@@ -1,5 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
+import HomeLogo from "discourse/components/header/home-logo";
+import SidebarToggle from "discourse/components/header/sidebar-toggle";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import ApiPanels from "discourse/components/sidebar/api-panels";
 import Footer from "discourse/components/sidebar/footer";
@@ -7,6 +9,7 @@ import Sections from "discourse/components/sidebar/sections";
 import SwitchPanelButtons from "discourse/components/sidebar/switch-panel-buttons";
 import bodyClass from "discourse/helpers/body-class";
 import { bind } from "discourse/lib/decorators";
+import { applyValueTransformer } from "discourse/lib/transformer";
 
 export default class Sidebar extends Component {
   @service site;
@@ -68,10 +71,39 @@ export default class Sidebar extends Component {
     }
   }
 
+  get minimized() {
+    return applyValueTransformer(
+      "home-logo-minimized",
+      this.args.topicInfoVisible,
+      {
+        topicInfo: this.args.topicInfo,
+        sidebarEnabled: this.args.sidebarEnabled,
+        showSidebar: this.args.showSidebar,
+      }
+    );
+  }
+
   <template>
     {{bodyClass "has-sidebar-page"}}
 
     <section id="d-sidebar" class="sidebar-container">
+      <div class="d-sidebar-header">
+        {{#if this.site.desktopView}}
+          {{#if @sidebarEnabled}}
+            <SidebarToggle
+              @toggleNavigationMenu={{@toggleNavigationMenu}}
+              @showSidebar={{@showSidebar}}
+              @icon={{this.sidebarIcon}}
+            />
+          {{/if}}
+        {{/if}}
+
+        <div class="home-logo-wrapper-outlet">
+          <PluginOutlet @name="home-logo-wrapper">
+            <HomeLogo @minimized={{this.minimized}} />
+          </PluginOutlet>
+        </div>
+      </div>
       {{#if this.showSwitchPanelButtonsOnTop}}
         <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
       {{/if}}

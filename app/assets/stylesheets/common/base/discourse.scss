@@ -5,7 +5,7 @@
 // BEWARE: changing these styles implies they take effect anywhere they are seen
 // throughout the Discourse application
 :root {
-  --d-max-width: 1110px;
+  --d-max-width: 100%;
   --d-input-bg-color: var(--secondary);
   --d-input-text-color: var(--primary);
   --d-input-border: 1px solid var(--input-border-color);
