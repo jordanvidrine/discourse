@@ -29,7 +29,7 @@ export default class SidebarToggle extends Component {
       <button
         title={{i18n "sidebar.title"}}
         class={{concatClass
-          "btn btn-flat btn-sidebar-toggle no-text btn-icon"
+          "btn btn-transparent btn-sidebar-toggle no-text btn-icon"
           (if this.site.narrowDesktopView "narrow-desktop")
         }}
         aria-expanded={{if @showSidebar "true" "false"}}

@@ -1174,6 +1174,15 @@ body.has-sidebar-page {
   }
 }
 
+body.sidebar-minimized {
+  --d-sidebar-width: 60px;
+
+  #main-outlet-wrapper {
+    grid-template-columns: var(--d-sidebar-width) minmax(0, 1fr);
+    gap: 0 var(--d-main-content-gap);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   body.sidebar-animate {
     #main-outlet-wrapper {

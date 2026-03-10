@@ -90,6 +90,16 @@
 
   @include unselectable;
 
+  .d-sidebar-header {
+    padding: var(--space-2) var(--space-4) 0;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      margin-right: 0;
+    }
+  }
+
   #site-logo {
     height: var(--d-logo-height);
     width: auto;

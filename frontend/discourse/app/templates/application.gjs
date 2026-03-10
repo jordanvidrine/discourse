@@ -94,6 +94,7 @@ export default <template>
         <SidebarWrapper
           @showSidebar={{@controller.showSidebar}}
           @toggleSidebar={{@controller.toggleSidebar}}
+          @sidebarEnabled={{@controller.sidebarEnabled}}
         />
       {{/if}}
 

@@ -16,6 +16,8 @@ export default class Sidebar extends Component {
   @service siteSettings;
   @service currentUser;
   @service sidebarState;
+  @service header;
+  @service navigationMenu;
 
   constructor() {
     super(...arguments);
@@ -71,65 +73,84 @@ export default class Sidebar extends Component {
     }
   }
 
+  get sidebarIcon() {
+    if (this.navigationMenu.isDesktopDropdownMode) {
+      return "discourse-sidebar";
+    }
+
+    return "bars";
+  }
+
   get minimized() {
     return applyValueTransformer(
       "home-logo-minimized",
-      this.args.topicInfoVisible,
+      this.header.topicInfoVisible,
       {
-        topicInfo: this.args.topicInfo,
+        topicInfo: this.header.topicInfo,
         sidebarEnabled: this.args.sidebarEnabled,
         showSidebar: this.args.showSidebar,
       }
     );
   }
 
+  get bodyClass() {
+    if (this.args.showSidebar) {
+      return "has-sidebar-page";
+    } else {
+      return "sidebar-minimized";
+    }
+  }
+
   <template>
-    {{bodyClass "has-sidebar-page"}}
+    {{bodyClass this.bodyClass}}
 
     <section id="d-sidebar" class="sidebar-container">
       <div class="d-sidebar-header">
+        {{#if @showSidebar}}
+          <div class="home-logo-wrapper-outlet">
+            <PluginOutlet @name="home-logo-wrapper">
+              <HomeLogo @minimized={{this.minimized}} />
+            </PluginOutlet>
+          </div>
+        {{/if}}
         {{#if this.site.desktopView}}
           {{#if @sidebarEnabled}}
             <SidebarToggle
-              @toggleNavigationMenu={{@toggleNavigationMenu}}
+              @toggleNavigationMenu={{@toggleSidebar}}
               @showSidebar={{@showSidebar}}
               @icon={{this.sidebarIcon}}
             />
           {{/if}}
         {{/if}}
-
-        <div class="home-logo-wrapper-outlet">
-          <PluginOutlet @name="home-logo-wrapper">
-            <HomeLogo @minimized={{this.minimized}} />
-          </PluginOutlet>
-        </div>
       </div>
-      {{#if this.showSwitchPanelButtonsOnTop}}
-        <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
+      {{#if @showSidebar}}
+        {{#if this.showSwitchPanelButtonsOnTop}}
+          <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
+        {{/if}}
+
+        <PluginOutlet @name="before-sidebar-sections" />
+
+        {{#if this.sidebarState.showMainPanel}}
+          <Sections
+            @currentUser={{this.currentUser}}
+            @collapsableSections={{true}}
+            @panel={{this.sidebarState.currentPanel}}
+          />
+        {{else}}
+          <ApiPanels
+            @currentUser={{this.currentUser}}
+            @collapsableSections={{true}}
+          />
+        {{/if}}
+
+        <PluginOutlet @name="after-sidebar-sections" />
+
+        {{#unless this.showSwitchPanelButtonsOnTop}}
+          <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
+        {{/unless}}
+
+        <Footer />
       {{/if}}
-
-      <PluginOutlet @name="before-sidebar-sections" />
-
-      {{#if this.sidebarState.showMainPanel}}
-        <Sections
-          @currentUser={{this.currentUser}}
-          @collapsableSections={{true}}
-          @panel={{this.sidebarState.currentPanel}}
-        />
-      {{else}}
-        <ApiPanels
-          @currentUser={{this.currentUser}}
-          @collapsableSections={{true}}
-        />
-      {{/if}}
-
-      <PluginOutlet @name="after-sidebar-sections" />
-
-      {{#unless this.showSwitchPanelButtonsOnTop}}
-        <SwitchPanelButtons @buttons={{this.switchPanelButtons}} />
-      {{/unless}}
-
-      <Footer />
     </section>
   </template>
 }
