@@ -38,10 +38,7 @@ RSpec.describe DiscourseBoosts::Boost::Create do
     end
 
     context "when user boost limit is reached" do
-      before do
-        SiteSetting.discourse_boosts_max_per_user_per_post = 1
-        Fabricate(:boost, post: post, user: acting_user)
-      end
+      before { Fabricate(:boost, post: post, user: acting_user) }
 
       it { is_expected.to fail_a_policy(:within_user_boost_limit) }
     end

@@ -1,7 +1,6 @@
 en:
   site_settings:
     discourse_boosts_enabled: "Enable the Boosts feature, allowing users to add micro-reactions to posts."
-    discourse_boosts_max_per_user_per_post: "Maximum number of boosts a user can add to a single post."
     discourse_boosts_max_per_post: "Maximum total number of boosts allowed on a single post."
   discourse_boosts:
     boost_too_long: "Boost must be 16 characters or fewer."

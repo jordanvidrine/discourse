@@ -11,12 +11,11 @@ import concatClass from "discourse/helpers/concat-class";
 import icon from "discourse/helpers/d-icon";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { eq, gt } from "discourse/truth-helpers";
+import { eq } from "discourse/truth-helpers";
 import BoostInput from "./boost-input";
 
 export default class BoostsList extends Component {
   @service currentUser;
-  @service siteSettings;
 
   @tracked selectedBoostId = null;
 
@@ -28,16 +27,11 @@ export default class BoostsList extends Component {
     return this.args.post.can_boost;
   }
 
-  get remainingBoosts() {
+  get canAddBoost() {
     if (!this.currentUser) {
-      return 0;
+      return false;
     }
-    const userBoostCount = this.boosts.filter(
-      (b) => b.user.id === this.currentUser.id
-    ).length;
-    return (
-      this.siteSettings.discourse_boosts_max_per_user_per_post - userBoostCount
-    );
+    return !this.boosts.some((b) => b.user.id === this.currentUser.id);
   }
 
   @action
@@ -140,7 +134,7 @@ export default class BoostsList extends Component {
           {{/each}}
 
           {{#if this.canBoost}}
-            {{#if (gt this.remainingBoosts 0)}}
+            {{#if this.canAddBoost}}
               <DMenu
                 @identifier="discourse-boosts"
                 @icon="rocket"

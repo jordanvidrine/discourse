@@ -46,10 +46,7 @@ RSpec.describe DiscourseBoosts::BoostsController do
     end
 
     context "when boost limit is reached" do
-      before do
-        SiteSetting.discourse_boosts_max_per_user_per_post = 1
-        Fabricate(:boost, post: target_post, user: current_user)
-      end
+      before { Fabricate(:boost, post: target_post, user: current_user) }
 
       it "returns a 422" do
         post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }

@@ -34,9 +34,7 @@ module DiscourseBoosts
     end
 
     def within_user_boost_limit(guardian:, post:)
-      existing_count =
-        DiscourseBoosts::Boost.where(post_id: post.id, user_id: guardian.user.id).count
-      existing_count < SiteSetting.discourse_boosts_max_per_user_per_post
+      !DiscourseBoosts::Boost.exists?(post_id: post.id, user_id: guardian.user.id)
     end
 
     def within_post_boost_limit(post:)
