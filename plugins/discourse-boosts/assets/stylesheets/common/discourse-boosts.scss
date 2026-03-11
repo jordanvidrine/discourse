@@ -92,17 +92,35 @@
   border-radius: 50px;
 }
 
-input.discourse-boosts__input,
-input.discourse-boosts__input:focus {
+.discourse-boosts__input-container .ProseMirror-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.ProseMirror.discourse-boosts__input {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
   width: 150px;
   font-size: var(--font-down-1);
   padding: var(--space-1);
   border: none;
-  border-radius: 0;
   background: transparent;
   margin: 0;
-  box-shadow: none;
   outline: none;
+  overflow: hidden;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img.emoji {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .discourse-boosts__emoji-btn,

@@ -1,22 +1,23 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { next } from "@ember/runloop";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
-import { replacements } from "pretty-text/emoji/data";
+import { buildEmojiUrl, emojiExists, isCustomEmoji } from "pretty-text/emoji";
 import DButton from "discourse/components/d-button";
 import EmojiPicker from "discourse/components/emoji-picker";
 import boundAvatarTemplate from "discourse/helpers/bound-avatar-template";
 import KeyValueStore from "discourse/lib/key-value-store";
-import autoFocus from "discourse/modifiers/auto-focus";
+import loadRichEditor from "discourse/lib/load-rich-editor";
+import { emojiOptions } from "discourse/lib/text";
 import { not } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
 
 const STORE_NAMESPACE = "discourse_boosts_";
 const TIP_SEEN_KEY = "tip_seen";
+const MAX_LENGTH = 16;
 
 const BoostTip = <template>
   <div class="discourse-boosts__tip">
@@ -28,23 +29,101 @@ const BoostTip = <template>
   </div>
 </template>;
 
-let _nameToUnicode;
-function emojiToUnicode(name) {
-  if (!_nameToUnicode) {
-    _nameToUnicode = {};
-    for (const [unicode, emojiName] of Object.entries(replacements)) {
-      _nameToUnicode[emojiName] ??= unicode;
-    }
-  }
-  return _nameToUnicode[name] ?? `:${name}:`;
-}
+const BOOST_EMOJI_EXTENSION = {
+  nodeSpec: {
+    emoji: {
+      attrs: { code: {} },
+      inline: true,
+      group: "inline",
+      draggable: true,
+      selectable: false,
+      parseDOM: [
+        {
+          tag: "img.emoji",
+          getAttrs: (dom) => ({
+            code: dom.getAttribute("alt").replace(/:/g, ""),
+          }),
+          priority: 60,
+        },
+      ],
+      toDOM: (node) => {
+        const opts = emojiOptions();
+        const code = node.attrs.code.toLowerCase();
+        const title = `:${code}:`;
+        const src = buildEmojiUrl(code, opts);
+
+        return [
+          "img",
+          {
+            class: isCustomEmoji(code, opts) ? "emoji emoji-custom" : "emoji",
+            alt: title,
+            title,
+            src,
+          },
+        ];
+      },
+    },
+  },
+
+  inputRules: [
+    {
+      match: /(^|\W):([^:]+):$/,
+      handler: (state, match, start, end) => {
+        if (emojiExists(match[2])) {
+          const emojiStart = start + match[1].length;
+          const emojiNode = state.schema.nodes.emoji.create({
+            code: match[2],
+          });
+          return state.tr.replaceWith(emojiStart, end, emojiNode);
+        }
+      },
+      options: { undoable: false },
+    },
+  ],
+
+  parse: {
+    emoji: {
+      node: "emoji",
+      getAttrs: (token) => ({
+        code: token.attrGet("alt").slice(1, -1),
+      }),
+    },
+  },
+
+  serializeNode: {
+    emoji(state, node) {
+      state.write(`:${node.attrs.code}:`);
+    },
+  },
+};
+
+const EXTENSIONS = [
+  {
+    nodeSpec: {
+      doc: { content: "inline*" },
+      text: { group: "inline" },
+    },
+    serializeNode: {
+      text(state, node) {
+        state.text(node.text);
+      },
+    },
+  },
+  BOOST_EMOJI_EXTENSION,
+];
 
 export default class BoostInput extends Component {
   @service tooltip;
 
   @tracked value = "";
+  @tracked editorComponent = null;
 
   store = new KeyValueStore(STORE_NAMESPACE);
+
+  constructor() {
+    super(...arguments);
+    loadRichEditor().then((component) => (this.editorComponent = component));
+  }
 
   @action
   maybeShowTip(element) {
@@ -67,8 +146,21 @@ export default class BoostInput extends Component {
     });
   }
 
+  get editorKeymap() {
+    return {
+      Enter: () => {
+        this.submit();
+        return true;
+      },
+      Escape: () => {
+        this.args.onClose();
+        return true;
+      },
+    };
+  }
+
   get canSubmit() {
-    return this.value.trim().length > 0 && this.value.length <= 16;
+    return this.value.trim().length > 0 && this.value.length <= MAX_LENGTH;
   }
 
   get placeholder() {
@@ -78,21 +170,18 @@ export default class BoostInput extends Component {
   }
 
   @action
-  updateValue(event) {
-    const val = event.target.value;
-    if (val.length <= 16) {
-      this.value = val;
-    }
+  onEditorSetup(textManipulation) {
+    this.textManipulation = textManipulation;
+    textManipulation.focus();
   }
 
   @action
-  handleKeydown(event) {
-    if (event.key === "Enter" && this.canSubmit) {
-      event.preventDefault();
-      this.args.onSubmit(this.value.trim());
-    } else if (event.key === "Escape") {
-      event.preventDefault();
-      this.args.onClose();
+  onChange(event) {
+    const val = event.target.value;
+    if (val.length <= MAX_LENGTH) {
+      this.value = val;
+    } else {
+      this.textManipulation?.putCursorAtEnd();
     }
   }
 
@@ -105,11 +194,19 @@ export default class BoostInput extends Component {
 
   @action
   didSelectEmoji(emoji) {
-    const unicode = emojiToUnicode(emoji);
-    const newValue = this.value + unicode;
-    if (newValue.length <= 16) {
-      this.value = newValue;
+    const view = this.textManipulation?.view;
+    if (!view) {
+      return;
     }
+
+    const emojiNode = view.state.schema.nodes.emoji.create({ code: emoji });
+    const { from, to } = view.state.selection;
+    view.dispatch(view.state.tr.replaceWith(from, to, emojiNode));
+  }
+
+  @action
+  focusEditor() {
+    next(() => this.textManipulation?.focus());
   }
 
   <template>
@@ -118,18 +215,20 @@ export default class BoostInput extends Component {
       {{didInsert this.maybeShowTip}}
     >
       {{boundAvatarTemplate @post.avatar_template "small"}}
-      <input
-        type="text"
-        class="discourse-boosts__input"
-        maxlength="16"
-        placeholder={{this.placeholder}}
-        value={{this.value}}
-        {{on "input" this.updateValue}}
-        {{on "keydown" this.handleKeydown}}
-        {{autoFocus}}
-      />
+      {{#if this.editorComponent}}
+        <this.editorComponent
+          @class="discourse-boosts__input"
+          @includeDefault={{false}}
+          @extensions={{EXTENSIONS}}
+          @placeholder={{this.placeholder}}
+          @change={{this.onChange}}
+          @onSetup={{this.onEditorSetup}}
+          @keymap={{this.editorKeymap}}
+        />
+      {{/if}}
       <EmojiPicker
         @didSelectEmoji={{this.didSelectEmoji}}
+        @onClose={{this.focusEditor}}
         @btnClass="btn-transparent discourse-boosts__emoji-btn"
         @context="boost"
         @modalForMobile={{false}}
