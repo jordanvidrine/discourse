@@ -188,6 +188,11 @@ export default class BoostInput extends Component {
     loadRichEditor().then((component) => (this.editorComponent = component));
   }
 
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.tooltip.close("discourse-boosts-tip");
+  }
+
   @action
   maybeShowTip(element) {
     if (this.store.get(TIP_SEEN_KEY)) {
