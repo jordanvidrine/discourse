@@ -11,7 +11,7 @@ en:
     discourse_boosts:
       action_title: "<b>Boost</b>"
       boost_button_title: "Add a boost"
-      tip: "- Pick an emoji or write a short note of support (16 characters max)."
+      tip: "- Pick an emoji or write a short note (16 char max)."
       boost_input_placeholder: "Boost %{username}..."
       cancel: "Cancel"
       submit: "Boost"
