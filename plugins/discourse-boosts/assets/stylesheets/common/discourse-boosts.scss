@@ -97,6 +97,13 @@
   min-width: 0;
 }
 
+.discourse-boosts__input-placeholder {
+  width: 150px;
+  font-size: var(--font-down-1);
+  padding: var(--space-1);
+  color: var(--primary-medium);
+}
+
 .ProseMirror.discourse-boosts__input {
   white-space: pre-wrap;
   overflow-wrap: break-word;

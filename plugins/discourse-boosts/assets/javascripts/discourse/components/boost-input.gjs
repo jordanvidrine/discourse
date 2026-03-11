@@ -257,6 +257,10 @@ export default class BoostInput extends Component {
           @onSetup={{this.onEditorSetup}}
           @keymap={{this.editorKeymap}}
         />
+      {{else}}
+        <div class="discourse-boosts__input-placeholder">
+          {{this.placeholder}}
+        </div>
       {{/if}}
       <EmojiPicker
         @didSelectEmoji={{this.didSelectEmoji}}
