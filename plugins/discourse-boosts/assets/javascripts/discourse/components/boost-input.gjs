@@ -176,6 +176,7 @@ const EXTENSIONS = [
 ];
 
 export default class BoostInput extends Component {
+  @service currentUser;
   @service tooltip;
 
   @tracked value = "";
@@ -276,7 +277,7 @@ export default class BoostInput extends Component {
       class="discourse-boosts__input-container"
       {{didInsert this.maybeShowTip}}
     >
-      {{boundAvatarTemplate @post.avatar_template "small"}}
+      {{boundAvatarTemplate this.currentUser.avatar_template "small"}}
       {{#if this.editorComponent}}
         <this.editorComponent
           @class="discourse-boosts__input"
