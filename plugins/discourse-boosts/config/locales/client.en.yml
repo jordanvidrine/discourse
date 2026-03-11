@@ -10,6 +10,7 @@ en:
         boost: "Boost"
     discourse_boosts:
       boost_button_title: "Add a boost"
+      tip: "<b>Give %{username} a Boost!</b> Boosts are tiny messages to show your support. Write a short note (16 characters max) or add emoji."
       boost_input_placeholder: "Boost %{username}..."
       cancel: "Cancel"
       submit: "Boost"

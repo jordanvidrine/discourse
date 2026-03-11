@@ -71,6 +71,12 @@
   }
 }
 
+.discourse-boosts__tip {
+  max-width: 300px;
+  padding: var(--space-1);
+  font-size: var(--font-down-1);
+}
+
 .discourse-boosts__input-container {
   display: flex;
   align-items: center;

@@ -2,13 +2,27 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import { next } from "@ember/runloop";
+import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 import { replacements } from "pretty-text/emoji/data";
 import DButton from "discourse/components/d-button";
 import EmojiPicker from "discourse/components/emoji-picker";
 import boundAvatarTemplate from "discourse/helpers/bound-avatar-template";
+import KeyValueStore from "discourse/lib/key-value-store";
 import autoFocus from "discourse/modifiers/auto-focus";
 import { not } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
+
+const STORE_NAMESPACE = "discourse_boosts_";
+const TIP_SEEN_KEY = "tip_seen";
+
+const BoostTip = <template>
+  <div class="discourse-boosts__tip">
+    {{htmlSafe (i18n "discourse_boosts.tip" username=@data.username)}}
+  </div>
+</template>;
 
 let _nameToUnicode;
 function emojiToUnicode(name) {
@@ -22,7 +36,29 @@ function emojiToUnicode(name) {
 }
 
 export default class BoostInput extends Component {
+  @service tooltip;
+
   @tracked value = "";
+
+  store = new KeyValueStore(STORE_NAMESPACE);
+
+  @action
+  maybeShowTip(element) {
+    if (this.store.get(TIP_SEEN_KEY)) {
+      return;
+    }
+
+    this.store.set({ key: TIP_SEEN_KEY, value: true });
+
+    next(() => {
+      this.tooltip.show(element, {
+        identifier: "discourse-boosts-tip",
+        placement: "top",
+        component: BoostTip,
+        data: { username: this.args.post.username },
+      });
+    });
+  }
 
   get canSubmit() {
     return this.value.trim().length > 0 && this.value.length <= 16;
@@ -70,7 +106,10 @@ export default class BoostInput extends Component {
   }
 
   <template>
-    <div class="discourse-boosts__input-container">
+    <div
+      class="discourse-boosts__input-container"
+      {{didInsert this.maybeShowTip}}
+    >
       {{boundAvatarTemplate @post.avatar_template "small"}}
       <input
         type="text"
