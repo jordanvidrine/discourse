@@ -139,7 +139,6 @@ export default class BoostInput extends Component {
         placement: "top",
         component: BoostTip,
         data: {
-          avatarTemplate: this.args.post.avatar_template,
           username: this.args.post.username,
         },
       });
