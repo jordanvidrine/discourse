@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-2);
 }
 
 .discourse-boosts-content .fk-d-menu__inner-content {
@@ -113,6 +113,7 @@ input.discourse-boosts__input:focus {
 }
 
 .btn.discourse-boosts__submit {
+  --d-button-default-bg-color: var(--secondary);
   --d-button-default-border: 1px solid var(--success);
   --d-button-default-icon-color: var(--success);
   --d-button-default-border--hover: 1px solid var(--success-hover);
@@ -121,6 +122,7 @@ input.discourse-boosts__input:focus {
 }
 
 .btn.discourse-boosts__cancel {
+  --d-button-default-bg-color: var(--secondary);
   --d-button-default-border: 1px solid var(--danger);
   --d-button-default-icon-color: var(--danger);
   --d-button-default-border--hover: 1px solid var(--danger-hover);
