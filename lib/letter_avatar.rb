@@ -81,7 +81,7 @@ class LetterAvatar
         -fill
         #FFFFFF
         -font
-        /Library/Fonts/SourceSansPro-Bold.otf
+        NimbusSans-Bold
         -gravity
         Center
         -annotate
