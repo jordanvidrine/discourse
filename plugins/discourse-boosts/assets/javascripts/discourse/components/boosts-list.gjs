@@ -138,7 +138,6 @@ export default class BoostsList extends Component {
               <DMenu
                 @identifier="discourse-boosts"
                 @icon="rocket"
-                @autofocus={{true}}
                 @title="discourse_boosts.boost_button_title"
                 @modalForMobile={{false}}
                 @onRegisterApi={{this.onRegisterApi}}

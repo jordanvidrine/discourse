@@ -6,6 +6,7 @@ import { replacements } from "pretty-text/emoji/data";
 import DButton from "discourse/components/d-button";
 import EmojiPicker from "discourse/components/emoji-picker";
 import boundAvatarTemplate from "discourse/helpers/bound-avatar-template";
+import autoFocus from "discourse/modifiers/auto-focus";
 import { not } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
 
@@ -79,6 +80,7 @@ export default class BoostInput extends Component {
         value={{this.value}}
         {{on "input" this.updateValue}}
         {{on "keydown" this.handleKeydown}}
+        {{autoFocus}}
       />
       <EmojiPicker
         @didSelectEmoji={{this.didSelectEmoji}}
