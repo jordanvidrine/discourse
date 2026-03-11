@@ -81,11 +81,11 @@ class LetterAvatar
         -fill
         #FFFFFF
         -font
-        Inter-Bold
+        /Library/Fonts/SourceSansPro-Bold.otf
         -gravity
         Center
         -annotate
-        -0+34
+        0x0+0+0
         #{letter}
         -depth
         8
