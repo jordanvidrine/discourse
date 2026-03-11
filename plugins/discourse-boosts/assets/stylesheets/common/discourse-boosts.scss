@@ -77,6 +77,10 @@
   font-size: var(--font-down-1);
 }
 
+.discourse-boosts__tip-username {
+  @include mention;
+}
+
 .discourse-boosts__input-container {
   display: flex;
   align-items: center;

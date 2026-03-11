@@ -8,7 +8,7 @@ let allowedSizes = null;
 export function translateSize(size) {
   switch (size) {
     case "tiny":
-      return 24;
+      return 16;
     case "small":
       return 24;
     case "medium":

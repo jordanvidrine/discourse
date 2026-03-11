@@ -20,6 +20,10 @@ const TIP_SEEN_KEY = "tip_seen";
 
 const BoostTip = <template>
   <div class="discourse-boosts__tip">
+    {{htmlSafe (i18n "discourse_boosts.action_title")}}
+    <span class="discourse-boosts__tip-username">
+      @{{htmlSafe @data.username}}
+    </span>
     {{htmlSafe (i18n "discourse_boosts.tip" username=@data.username)}}
   </div>
 </template>;
@@ -55,7 +59,10 @@ export default class BoostInput extends Component {
         identifier: "discourse-boosts-tip",
         placement: "top",
         component: BoostTip,
-        data: { username: this.args.post.username },
+        data: {
+          avatarTemplate: this.args.post.avatar_template,
+          username: this.args.post.username,
+        },
       });
     });
   }
