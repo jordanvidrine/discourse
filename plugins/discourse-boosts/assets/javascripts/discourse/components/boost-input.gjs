@@ -18,6 +18,7 @@ import { i18n } from "discourse-i18n";
 const STORE_NAMESPACE = "discourse_boosts_";
 const TIP_SEEN_KEY = "tip_seen";
 const MAX_LENGTH = 16;
+const MAX_EMOJI = 5;
 
 const BoostTip = <template>
   <div class="discourse-boosts__tip">
@@ -97,12 +98,49 @@ const BOOST_EMOJI_EXTENSION = {
   },
 };
 
+function docStats(doc) {
+  let length = 0;
+  let emojiCount = 0;
+  doc.descendants((node) => {
+    if (node.isText) {
+      length += node.text.length;
+    } else if (node.type.name === "emoji") {
+      length += 1;
+      emojiCount += 1;
+    }
+  });
+  return { length, emojiCount };
+}
+
 const EXTENSIONS = [
   {
     nodeSpec: {
       doc: { content: "inline*" },
       text: { group: "inline" },
+      heading: { attrs: { level: { default: 1 } }, group: "block" },
+      bullet_list: { group: "block" },
+      ordered_list: { group: "block" },
+      code_block: { group: "block", code: true },
+      blockquote: { group: "block" },
+      paragraph: { group: "block" },
     },
+    markSpec: {
+      strong: {},
+      em: {},
+      link: { attrs: { href: { default: "" } } },
+      code: {},
+    },
+    plugins: [
+      {
+        filterTransaction: (tr) => {
+          if (!tr.docChanged) {
+            return true;
+          }
+          const stats = docStats(tr.doc);
+          return stats.length <= MAX_LENGTH && stats.emojiCount <= MAX_EMOJI;
+        },
+      },
+    ],
     serializeNode: {
       text(state, node) {
         state.text(node.text);
@@ -159,7 +197,7 @@ export default class BoostInput extends Component {
   }
 
   get canSubmit() {
-    return this.value.trim().length > 0 && this.value.length <= MAX_LENGTH;
+    return this.value.trim().length > 0;
   }
 
   get placeholder() {
@@ -176,12 +214,7 @@ export default class BoostInput extends Component {
 
   @action
   onChange(event) {
-    const val = event.target.value;
-    if (val.length <= MAX_LENGTH) {
-      this.value = val;
-    } else {
-      this.textManipulation?.putCursorAtEnd();
-    }
+    this.value = event.target.value;
   }
 
   @action
@@ -199,8 +232,8 @@ export default class BoostInput extends Component {
     }
 
     const emojiNode = view.state.schema.nodes.emoji.create({ code: emoji });
-    const { from, to } = view.state.selection;
-    view.dispatch(view.state.tr.replaceWith(from, to, emojiNode));
+    const end = view.state.doc.content.size;
+    view.dispatch(view.state.tr.replaceWith(end, end, emojiNode));
   }
 
   @action

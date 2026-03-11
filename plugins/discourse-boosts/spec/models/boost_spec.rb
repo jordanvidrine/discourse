@@ -14,8 +14,28 @@ describe DiscourseBoosts::Boost do
       expect(boost).not_to be_valid
     end
 
-    it "enforces max length of 16" do
+    it "enforces max visible length of 16" do
       boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "a" * 17)
+      expect(boost).not_to be_valid
+    end
+
+    it "counts emoji as 1 visible character" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":smiling_face_with_heart_eyes:" * 5)
+      expect(boost).to be_valid
+    end
+
+    it "does not count invalid emoji codes as 1 character" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":not_a_real_emoji_code_at_all:")
+      expect(boost).not_to be_valid
+    end
+
+    it "allows up to 5 emoji" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":blush:" * 5)
+      expect(boost).to be_valid
+    end
+
+    it "rejects more than 5 emoji" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":blush:" * 6)
       expect(boost).not_to be_valid
     end
 

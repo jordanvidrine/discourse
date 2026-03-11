@@ -5,7 +5,7 @@ class CreateDiscourseBoosts < ActiveRecord::Migration[7.2]
     create_table :discourse_boosts do |t|
       t.references :post, null: false
       t.references :user, null: false
-      t.string :raw, limit: 16, null: false
+      t.string :raw, limit: 1000, null: false
       t.text :cooked, null: false
       t.timestamps
     end

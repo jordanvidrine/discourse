@@ -11,7 +11,7 @@ module DiscourseBoosts
       before_validation { self.raw = raw.to_s.strip }
 
       validates :post_id, presence: true
-      validates :raw, presence: true, length: { maximum: 16 }
+      validates :raw, presence: true
     end
 
     model :post
