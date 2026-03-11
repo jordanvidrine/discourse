@@ -7,6 +7,10 @@ import BoostActionButton from "../components/boost-action-button";
 import BoostsPostMenu from "../components/boosts-post-menu";
 
 function initializeBoosts(api) {
+  api.addSaveableUserOption("boost_notifications_level", {
+    page: "notifications",
+  });
+
   api.addTrackedPostProperties("boosts", "can_boost");
 
   api.registerValueTransformer(
@@ -32,12 +36,7 @@ function initializeBoosts(api) {
         const uniqueUsernames = data.unique_usernames || [];
         const uniqueCount = uniqueUsernames.length;
 
-        if (
-          !count ||
-          count === 1 ||
-          !data.username2 ||
-          uniqueCount <= 1
-        ) {
+        if (!count || count === 1 || !data.username2 || uniqueCount <= 1) {
           return this.username;
         }
 
