@@ -6,6 +6,7 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { emojiUnescape } from "discourse/lib/text";
 import { escapeExpression } from "discourse/lib/utilities";
+import { i18n } from "discourse-i18n";
 import BoostInput from "./boost-input";
 
 export default class BoostActionButton extends Component {
@@ -57,7 +58,7 @@ export default class BoostActionButton extends Component {
       <DMenu
         @identifier="discourse-boosts"
         @icon="rocket"
-        @title="discourse_boosts.boost_button_title"
+        @title={{i18n "discourse_boosts.boost_button_title"}}
         @modalForMobile={{false}}
         @onRegisterApi={{this.onRegisterApi}}
         @triggerClass="post-action-menu__boost boost btn-flat"
