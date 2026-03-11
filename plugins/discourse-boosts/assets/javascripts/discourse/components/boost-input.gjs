@@ -140,6 +140,31 @@ const EXTENSIONS = [
           return stats.length <= MAX_LENGTH && stats.emojiCount <= MAX_EMOJI;
         },
       },
+      ({
+        pmState: { Plugin, PluginKey },
+        pmView: { Decoration, DecorationSet },
+        getContext,
+      }) =>
+        new Plugin({
+          key: new PluginKey("boost-placeholder"),
+          props: {
+            decorations(state) {
+              if (state.doc.content.size === 0) {
+                const text = getContext().placeholder;
+                if (text) {
+                  const widget = Decoration.widget(0, () => {
+                    const span = document.createElement("span");
+                    span.className = "discourse-boosts__pm-placeholder";
+                    span.textContent = text;
+                    return span;
+                  });
+                  return DecorationSet.create(state.doc, [widget]);
+                }
+              }
+              return DecorationSet.empty;
+            },
+          },
+        }),
     ],
     serializeNode: {
       text(state, node) {

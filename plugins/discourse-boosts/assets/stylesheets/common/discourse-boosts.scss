@@ -97,6 +97,11 @@
   min-width: 0;
 }
 
+.discourse-boosts__pm-placeholder {
+  color: var(--primary-medium);
+  pointer-events: none;
+}
+
 .discourse-boosts__input-placeholder {
   width: 150px;
   font-size: var(--font-down-1);
