@@ -317,11 +317,15 @@ export default class BoostInput extends Component {
         @action={{this.submit}}
         @icon="check"
         @disabled={{not this.canSubmit}}
+        @ariaLabel="discourse_boosts.submit"
+        @title="discourse_boosts.submit"
         class="btn-default --success btn-icon-only discourse-boosts__submit"
       />
       <DButton
         @action={{@onClose}}
         @icon="xmark"
+        @ariaLabel="discourse_boosts.cancel"
+        @title="discourse_boosts.cancel"
         class="btn-default --danger btn-icon-only discourse-boosts__cancel"
       />
     </div>

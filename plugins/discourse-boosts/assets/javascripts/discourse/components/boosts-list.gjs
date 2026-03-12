@@ -94,6 +94,7 @@ export default class BoostsList extends Component {
                 <button
                   type="button"
                   class="discourse-boosts__delete btn-transparent --danger"
+                  aria-label={{i18n "discourse_boosts.delete_boost"}}
                   {{on "click" (fn this.deleteBoost boost.id)}}
                 >{{icon "trash-can"}}</button>
               {{/if}}
