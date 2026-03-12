@@ -304,7 +304,7 @@ export default class BoostInput extends Component {
         @action={{this.submit}}
         @icon="check"
         @disabled={{not this.canSubmit}}
-        class="btn-default --success btn-icon-only btn-default discourse-boosts__submit"
+        class="btn-default --success btn-icon-only discourse-boosts__submit"
       />
       <DButton
         @action={{@onClose}}
