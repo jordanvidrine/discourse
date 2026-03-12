@@ -93,6 +93,25 @@ describe DiscourseBoosts::Boost do
     end
   end
 
+  describe "after_destroy" do
+    it "deletes boost notifications for the post author" do
+      boost = Fabricate(:boost, post: post, user: user)
+      notification =
+        Fabricate(
+          :notification,
+          user: post.user,
+          topic: post.topic,
+          post_number: post.post_number,
+          notification_type: Notification.types[:boost],
+        )
+
+      expect { boost.destroy! }.to change {
+        Notification.where(user: post.user, notification_type: Notification.types[:boost]).count
+      }.by(-1)
+      expect(Notification.exists?(notification.id)).to eq(false)
+    end
+  end
+
   describe "auto-cooking" do
     it "cooks raw on save" do
       boost = DiscourseBoosts::Boost.create!(post: post, user: user, raw: ":tada:")

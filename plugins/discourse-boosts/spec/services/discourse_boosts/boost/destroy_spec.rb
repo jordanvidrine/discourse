@@ -10,7 +10,8 @@ RSpec.describe DiscourseBoosts::Boost::Destroy do
 
     fab!(:acting_user, :user)
     fab!(:post_author, :user)
-    fab!(:topic)
+    fab!(:category)
+    fab!(:topic) { Fabricate(:topic, category: category) }
     fab!(:post) { Fabricate(:post, topic: topic, user: post_author) }
     fab!(:boost) { Fabricate(:boost, post: post, user: acting_user) }
 

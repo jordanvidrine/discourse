@@ -62,6 +62,15 @@ module DiscourseBoosts
 
     private
 
+    def delete_notifications
+      Notification.where(
+        user_id: post.user_id,
+        topic_id: post.topic_id,
+        post_number: post.post_number,
+        notification_type: Notification.types[:boost],
+      ).destroy_all
+    end
+
     def cook_raw
       self.cooked = self.class.cook(self.raw)
     end
