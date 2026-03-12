@@ -105,6 +105,10 @@
       content: attr(data-placeholder);
       color: var(--primary-medium);
       pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
     }
 
     img.emoji {
