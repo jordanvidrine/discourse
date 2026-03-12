@@ -46,12 +46,28 @@ RSpec.describe DiscourseBoosts::BoostsController do
       end
     end
 
-    context "when boost limit is reached" do
+    context "when user has already boosted the post" do
       before { Fabricate(:boost, post: target_post, user: current_user) }
 
       it "returns a 422" do
         post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
         expect(response.status).to eq(422)
+      end
+    end
+
+    context "when the post has reached the max boosts limit" do
+      before { SiteSetting.discourse_boosts_max_per_post = 1 }
+
+      fab!(:other_user, :user)
+      fab!(:existing_boost) { Fabricate(:boost, post: target_post, user: other_user) }
+
+      it "returns a 422" do
+        post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
+
+        expect(response.status).to eq(422)
+        expect(response.parsed_body["errors"].first).to eq(
+          I18n.t("discourse_boosts.post_boost_limit_reached"),
+        )
       end
     end
 
