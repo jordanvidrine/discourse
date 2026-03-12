@@ -37,12 +37,9 @@ after_initialize do
       SiteSetting.discourse_boosts_enabled && object.association(:boosts).loaded?
     end,
   ) do
-    object
-      .boosts
-      .sort_by(&:created_at)
-      .map do |boost|
-        DiscourseBoosts::BoostSerializer.new(boost, scope: scope, root: false).as_json
-      end
+    object.boosts.map do |boost|
+      DiscourseBoosts::BoostSerializer.new(boost, scope: scope, root: false).as_json
+    end
   end
 
   add_to_serializer(

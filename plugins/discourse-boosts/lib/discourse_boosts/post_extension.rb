@@ -3,7 +3,10 @@
 module DiscourseBoosts
   module PostExtension
     def self.prepended(base)
-      base.has_many :boosts, class_name: "DiscourseBoosts::Boost", dependent: :delete_all
+      base.has_many :boosts,
+                    -> { order(:created_at) },
+                    class_name: "DiscourseBoosts::Boost",
+                    dependent: :delete_all
     end
   end
 end
