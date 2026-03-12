@@ -32,14 +32,6 @@ module DiscourseBoosts
       object.user.avatar_template
     end
 
-    def user_id
-      object.user_id
-    end
-
-    def topic_id
-      object.topic_id
-    end
-
     def topic_title
       object.topic.title
     end
