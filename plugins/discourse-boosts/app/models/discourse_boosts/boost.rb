@@ -48,6 +48,7 @@ module DiscourseBoosts
     validates :cooked, presence: true
 
     before_validation :cook_raw, if: :will_save_change_to_raw?
+    after_destroy :delete_notifications
 
     MARKDOWN_FEATURES = %w[emoji]
     MARKDOWN_IT_RULES = []
