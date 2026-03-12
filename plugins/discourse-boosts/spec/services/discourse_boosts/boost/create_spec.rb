@@ -90,10 +90,19 @@ RSpec.describe DiscourseBoosts::Boost::Create do
         expect(DiscourseBoosts::Boost.last.cooked).to be_present
       end
 
-      it "creates a notification for the post author" do
+      it "creates a notification for the post author with expected data" do
         expect { result }.to change {
           Notification.where(user: post_author, notification_type: Notification.types[:boost]).count
         }.by(1)
+
+        notification =
+          Notification.where(user: post_author, notification_type: Notification.types[:boost]).last
+        expect(notification.data_hash).to include(
+          display_username: acting_user.username,
+          display_name: acting_user.name,
+          boost_raw: "🎉",
+          topic_title: topic.title,
+        )
       end
 
       context "when post author has disabled boost notifications" do
