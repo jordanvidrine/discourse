@@ -1,7 +1,4 @@
-/* eslint-disable ember/no-classic-components */
-import Component from "@ember/component";
-import { fn } from "@ember/helper";
-import { tagName } from "@ember-decorators/component";
+import Component from "@glimmer/component";
 import ComboBox from "discourse/select-kit/components/combo-box";
 import { i18n } from "discourse-i18n";
 
@@ -24,11 +21,14 @@ const BOOST_NOTIFICATIONS_LEVELS = [
   },
 ];
 
-@tagName("")
 export default class BoostsNotifications extends Component {
   static shouldRender(_args, { siteSettings }) {
     return siteSettings.discourse_boosts_enabled;
   }
+
+  onChange = (value) => {
+    this.args.outletArgs.model.user_option.boost_notifications_level = value;
+  };
 
   <template>
     <div
@@ -42,10 +42,8 @@ export default class BoostsNotifications extends Component {
         <ComboBox
           @valueProperty="value"
           @content={{BOOST_NOTIFICATIONS_LEVELS}}
-          @value={{this.model.user_option.boost_notifications_level}}
-          @onChange={{fn
-            (mut this.model.user_option.boost_notifications_level)
-          }}
+          @value={{@outletArgs.model.user_option.boost_notifications_level}}
+          @onChange={{this.onChange}}
         />
       </div>
     </div>
