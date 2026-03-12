@@ -1,7 +1,7 @@
-import { htmlSafe } from "@ember/template";
+import { trustHTML } from "@ember/template";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { emojiUnescape } from "discourse/lib/text";
-import { formatUsername } from "discourse/lib/utilities";
+import { escapeExpression, formatUsername } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
 import BoostActionButton from "../components/boost-action-button";
 import BoostsPostMenu from "../components/boosts-post-menu";
@@ -72,7 +72,7 @@ function initializeBoosts(api) {
 
         const raw = data.boost_raw;
         if (raw) {
-          return htmlSafe(emojiUnescape(raw));
+          return trustHTML(emojiUnescape(escapeExpression(raw)));
         }
 
         return super.description;
