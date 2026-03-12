@@ -16,6 +16,15 @@ RSpec.describe DiscourseBoosts::BoostsController do
   end
 
   describe "#create" do
+    context "when plugin is disabled" do
+      before { SiteSetting.discourse_boosts_enabled = false }
+
+      it "returns a 404" do
+        post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
+        expect(response.status).to eq(404)
+      end
+    end
+
     it "works" do
       post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
 
@@ -103,6 +112,15 @@ RSpec.describe DiscourseBoosts::BoostsController do
   describe "#destroy" do
     fab!(:boost) { Fabricate(:boost, post: target_post, user: current_user) }
 
+    context "when plugin is disabled" do
+      before { SiteSetting.discourse_boosts_enabled = false }
+
+      it "returns a 404" do
+        delete "/discourse-boosts/boosts/#{boost.id}.json"
+        expect(response.status).to eq(404)
+      end
+    end
+
     it "works" do
       delete "/discourse-boosts/boosts/#{boost.id}.json"
 
@@ -154,6 +172,15 @@ RSpec.describe DiscourseBoosts::BoostsController do
     fab!(:boost) { Fabricate(:boost, post: target_post, user: current_user) }
 
     before { SiteSetting.hide_new_user_profiles = false }
+
+    context "when plugin is disabled" do
+      before { SiteSetting.discourse_boosts_enabled = false }
+
+      it "returns a 404" do
+        get "/discourse-boosts/users/#{post_author.username}/boosts.json"
+        expect(response.status).to eq(404)
+      end
+    end
 
     it "returns boosts matching the expected schema" do
       get "/discourse-boosts/users/#{post_author.username}/boosts.json"
