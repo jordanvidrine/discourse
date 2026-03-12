@@ -31,5 +31,31 @@ RSpec.describe PostSerializer do
         expect(serialized[:can_boost]).to eq(false)
       end
     end
+
+    context "when viewing own post" do
+      let(:guardian) { Guardian.new(post_author) }
+      let(:topic_view) { TopicView.new(topic, post_author) }
+
+      it "is false" do
+        expect(serialized[:can_boost]).to eq(false)
+      end
+    end
+
+    context "when user has already boosted the post" do
+      before { Fabricate(:boost, post: target_post, user: user) }
+
+      it "is false" do
+        expect(serialized[:can_boost]).to eq(false)
+      end
+    end
+
+    context "when user is anonymous" do
+      let(:guardian) { Guardian.new }
+      let(:topic_view) { TopicView.new(topic) }
+
+      it "is false" do
+        expect(serialized[:can_boost]).to eq(false)
+      end
+    end
   end
 end
