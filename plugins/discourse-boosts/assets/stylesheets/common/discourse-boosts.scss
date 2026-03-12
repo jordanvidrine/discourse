@@ -22,8 +22,8 @@
     cursor: default;
     line-height: 1;
 
-    &--deletable {
-      cursor: default;
+    &.--deletable {
+      cursor: pointer;
     }
 
     .avatar {
@@ -69,105 +69,105 @@
       color: var(--primary);
     }
   }
-}
 
-.discourse-boosts__tip {
-  max-width: 300px;
-  padding: var(--space-1);
-  font-size: var(--font-down-1);
-}
+  &__tip {
+    max-width: 300px;
+    padding: var(--space-1);
+    font-size: var(--font-down-1);
+  }
 
-.discourse-boosts__tip-username {
-  @include mention;
-}
+  &__tip-username {
+    @include mention;
+  }
 
-.discourse-boosts__input-container {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2);
+  &__input-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+
+    .ProseMirror-container {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &__pm-placeholder {
+    color: var(--primary-medium);
+    pointer-events: none;
+  }
+
+  &__input-placeholder {
+    width: 150px;
+    font-size: var(--font-down-1);
+    padding: var(--space-1);
+    color: var(--primary-medium);
+  }
+
+  &__input.ProseMirror {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 150px;
+    font-size: var(--font-down-1);
+    padding: var(--space-1);
+    border: none;
+    background: transparent;
+    margin: 0;
+    outline: none;
+    overflow: hidden;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    img.emoji {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__emoji-btn,
+  &__submit.btn,
+  &__cancel.btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+
+    .d-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__submit.btn {
+    --d-button-default-bg-color: var(--secondary);
+    --d-button-default-border: 1px solid var(--success);
+    --d-button-default-icon-color: var(--success);
+    --d-button-default-border--hover: 1px solid var(--success-hover);
+    --d-button-default-icon-color--hover: var(--success-hover);
+    --d-button-default-bg-color--hover: var(--secondary);
+  }
+
+  &__cancel.btn {
+    --d-button-default-bg-color: var(--secondary);
+    --d-button-default-border: 1px solid var(--danger);
+    --d-button-default-icon-color: var(--danger);
+    --d-button-default-border--hover: 1px solid var(--danger-hover);
+    --d-button-default-icon-color--hover: var(--danger-hover);
+    --d-button-default-bg-color--hover: var(--secondary);
+  }
 }
 
 .discourse-boosts-content .fk-d-menu__inner-content {
   border-radius: 50px;
-}
-
-.discourse-boosts__input-container .ProseMirror-container {
-  flex: 1;
-  min-width: 0;
-}
-
-.discourse-boosts__pm-placeholder {
-  color: var(--primary-medium);
-  pointer-events: none;
-}
-
-.discourse-boosts__input-placeholder {
-  width: 150px;
-  font-size: var(--font-down-1);
-  padding: var(--space-1);
-  color: var(--primary-medium);
-}
-
-.ProseMirror.discourse-boosts__input {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  width: 150px;
-  font-size: var(--font-down-1);
-  padding: var(--space-1);
-  border: none;
-  background: transparent;
-  margin: 0;
-  outline: none;
-  overflow: hidden;
-
-  &:focus {
-    box-shadow: none;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  img.emoji {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.discourse-boosts__emoji-btn,
-.btn.discourse-boosts__submit,
-.btn.discourse-boosts__cancel {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-
-  .d-icon {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.btn.discourse-boosts__submit {
-  --d-button-default-bg-color: var(--secondary);
-  --d-button-default-border: 1px solid var(--success);
-  --d-button-default-icon-color: var(--success);
-  --d-button-default-border--hover: 1px solid var(--success-hover);
-  --d-button-default-icon-color--hover: var(--success-hover);
-  --d-button-default-bg-color--hover: var(--secondary);
-}
-
-.btn.discourse-boosts__cancel {
-  --d-button-default-bg-color: var(--secondary);
-  --d-button-default-border: 1px solid var(--danger);
-  --d-button-default-icon-color: var(--danger);
-  --d-button-default-border--hover: 1px solid var(--danger-hover);
-  --d-button-default-icon-color--hover: var(--danger-hover);
-  --d-button-default-bg-color--hover: var(--secondary);
 }
 
 .discourse-boosts-activity {
