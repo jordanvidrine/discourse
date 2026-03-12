@@ -7,6 +7,15 @@ class AddUniqueIndexToDiscourseBoostsPostUser < ActiveRecord::Migration[7.2]
 
   def up
     execute <<~SQL
+      DELETE FROM discourse_boosts
+      WHERE id NOT IN (
+        SELECT MIN(id)
+        FROM discourse_boosts
+        GROUP BY post_id, user_id
+      )
+    SQL
+
+    execute <<~SQL
       DROP INDEX CONCURRENTLY IF EXISTS "#{INDEX_NAME}"
     SQL
 
