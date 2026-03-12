@@ -36,7 +36,9 @@ after_initialize do
   add_to_serializer(
     :post,
     :boosts,
-    include_condition: -> { SiteSetting.discourse_boosts_enabled },
+    include_condition: -> do
+      SiteSetting.discourse_boosts_enabled && object.association(:boosts).loaded?
+    end,
   ) do
     object
       .boosts
@@ -49,7 +51,9 @@ after_initialize do
   add_to_serializer(
     :post,
     :can_boost,
-    include_condition: -> { SiteSetting.discourse_boosts_enabled },
+    include_condition: -> do
+      SiteSetting.discourse_boosts_enabled && object.association(:boosts).loaded?
+    end,
   ) { scope.user.present? && object.user_id != scope.user&.id }
 
   UserUpdater::OPTION_ATTR.push(:boost_notifications_level)
