@@ -19,7 +19,7 @@ module DiscourseBoosts
       return if raw.blank?
 
       visible =
-        raw.gsub(/:[a-z0-9_+-]+(?::t\d)?:/) do |match|
+        normalized_raw.gsub(/:[a-z0-9_+-]+(?::t\d)?:/) do |match|
           Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) ? "x" : match
         end
 
@@ -32,13 +32,17 @@ module DiscourseBoosts
       return if raw.blank?
 
       count =
-        raw
+        normalized_raw
           .scan(/:[a-z0-9_+-]+(?::t\d)?:/)
           .count { |match| Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) }
 
       if count > MAX_EMOJI
         errors.add(:raw, I18n.t("discourse_boosts.too_many_emoji", count: MAX_EMOJI))
       end
+    end
+
+    def normalized_raw
+      @normalized_raw ||= Emoji.unicode_unescape(raw)
     end
 
     validates :cooked, presence: true

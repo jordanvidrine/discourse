@@ -55,6 +55,26 @@ describe DiscourseBoosts::Boost do
       expect(boost).not_to be_valid
     end
 
+    it "counts native Unicode emoji toward the emoji limit" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "😀😃😄😁😆😅")
+      expect(boost).not_to be_valid
+    end
+
+    it "allows up to 5 native Unicode emoji" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "😀😃😄😁😆")
+      expect(boost).to be_valid
+    end
+
+    it "counts mixed shortcode and Unicode emoji together" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":blush::blush::blush:😀😃😄")
+      expect(boost).not_to be_valid
+    end
+
+    it "counts native Unicode emoji as 1 visible character each" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "👨‍👩‍👧‍👦" * 5)
+      expect(boost).to be_valid
+    end
+
     it "allows valid boost" do
       boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "🎉")
       expect(boost).to be_valid

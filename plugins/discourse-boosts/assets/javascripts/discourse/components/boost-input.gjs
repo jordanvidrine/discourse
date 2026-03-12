@@ -5,7 +5,12 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { next } from "@ember/runloop";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
-import { buildEmojiUrl, emojiExists, isCustomEmoji } from "pretty-text/emoji";
+import {
+  buildEmojiUrl,
+  emojiExists,
+  emojiReplacementRegex,
+  isCustomEmoji,
+} from "pretty-text/emoji";
 import DButton from "discourse/components/d-button";
 import EmojiPicker from "discourse/components/emoji-picker";
 import boundAvatarTemplate from "discourse/helpers/bound-avatar-template";
@@ -98,12 +103,20 @@ const BOOST_EMOJI_EXTENSION = {
   },
 };
 
+const UNICODE_EMOJI_REGEX = new RegExp(emojiReplacementRegex, "g");
+
 function docStats(doc) {
   let length = 0;
   let emojiCount = 0;
   doc.descendants((node) => {
     if (node.isText) {
-      length += node.text.length;
+      const unicodeMatches = node.text.match(UNICODE_EMOJI_REGEX);
+      if (unicodeMatches) {
+        emojiCount += unicodeMatches.length;
+        length += node.text.replace(UNICODE_EMOJI_REGEX, "x").length;
+      } else {
+        length += node.text.length;
+      }
     } else if (node.type.name === "emoji") {
       length += 1;
       emojiCount += 1;
