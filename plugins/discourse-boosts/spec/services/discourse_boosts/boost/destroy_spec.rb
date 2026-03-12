@@ -37,6 +37,16 @@ RSpec.describe DiscourseBoosts::Boost::Destroy do
       it { is_expected.to fail_a_policy(:can_destroy_boost) }
     end
 
+    context "when post is in a restricted category" do
+      fab!(:group)
+      fab!(:private_category) { Fabricate(:private_category, group: group) }
+      fab!(:private_topic) { Fabricate(:topic, category: private_category) }
+      fab!(:private_post) { Fabricate(:post, topic: private_topic, user: post_author) }
+      fab!(:boost) { Fabricate(:boost, post: private_post, user: acting_user) }
+
+      it { is_expected.to fail_a_policy(:can_destroy_boost) }
+    end
+
     context "when acting user is a moderator" do
       fab!(:acting_user, :moderator)
       fab!(:boost) { Fabricate(:boost, post: post, user: post_author) }
