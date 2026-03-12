@@ -2,13 +2,15 @@
 
 require "rails_helper"
 
-describe DiscourseBoosts::Boost do
+describe DiscourseBoosts::Boost, type: :model do
   fab!(:post)
   fab!(:user)
 
   before { SiteSetting.discourse_boosts_enabled = true }
 
   describe "validations" do
+    it { is_expected.to validate_length_of(:raw).is_at_most(1000) }
+
     it "requires raw" do
       boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "", cooked: "")
       expect(boost).not_to be_valid
