@@ -10,7 +10,8 @@ RSpec.describe DiscourseBoosts::Boost::List do
 
     fab!(:acting_user, :user)
     fab!(:post_author, :user)
-    fab!(:topic)
+    fab!(:category)
+    fab!(:topic) { Fabricate(:topic, category: category) }
     fab!(:post) { Fabricate(:post, topic: topic, user: post_author) }
     fab!(:boost) { Fabricate(:boost, post: post, user: acting_user) }
 
@@ -48,7 +49,8 @@ RSpec.describe DiscourseBoosts::Boost::List do
       end
 
       context "with pagination" do
-        fab!(:newer_boost) { Fabricate(:boost, post: post, user: acting_user) }
+        fab!(:other_post) { Fabricate(:post, topic: topic, user: post_author) }
+        fab!(:newer_boost) { Fabricate(:boost, post: other_post, user: acting_user) }
 
         it "returns only boosts with an ID lower than before_boost_id" do
           result_with_cursor =
@@ -60,6 +62,48 @@ RSpec.describe DiscourseBoosts::Boost::List do
               **dependencies,
             )
           expect(result_with_cursor[:boosts]).to contain_exactly(boost)
+        end
+      end
+
+      context "when post is in a private message" do
+        fab!(:pm_topic, :private_message_topic)
+        fab!(:pm_post) { Fabricate(:post, topic: pm_topic, user: post_author) }
+        fab!(:pm_boost) { Fabricate(:boost, post: pm_post, user: acting_user) }
+
+        it "does not include boosts on private messages" do
+          expect(result[:boosts]).to contain_exactly(boost)
+        end
+      end
+
+      context "when post is in an unlisted topic" do
+        fab!(:unlisted_topic) { Fabricate(:topic, category: category, visible: false) }
+        fab!(:unlisted_post) { Fabricate(:post, topic: unlisted_topic, user: post_author) }
+        fab!(:unlisted_boost) { Fabricate(:boost, post: unlisted_post, user: acting_user) }
+
+        it "does not include boosts on unlisted topics" do
+          expect(result[:boosts]).to contain_exactly(boost)
+        end
+      end
+
+      context "when post is a whisper" do
+        fab!(:whisper_post) do
+          Fabricate(:post, topic: topic, user: post_author, post_type: Post.types[:whisper])
+        end
+        fab!(:whisper_boost) { Fabricate(:boost, post: whisper_post, user: acting_user) }
+
+        it "does not include boosts on whispers" do
+          expect(result[:boosts]).to contain_exactly(boost)
+        end
+      end
+
+      context "when post is in a restricted category" do
+        fab!(:restricted_category) { Fabricate(:private_category, group: Fabricate(:group)) }
+        fab!(:restricted_topic) { Fabricate(:topic, category: restricted_category) }
+        fab!(:restricted_post) { Fabricate(:post, topic: restricted_topic, user: post_author) }
+        fab!(:restricted_boost) { Fabricate(:boost, post: restricted_post, user: acting_user) }
+
+        it "does not include boosts on topics in restricted categories" do
+          expect(result[:boosts]).to contain_exactly(boost)
         end
       end
 

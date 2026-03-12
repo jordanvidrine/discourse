@@ -42,12 +42,9 @@ module DiscourseBoosts
           .where(posts: { user_id: target_user.id })
           .where("posts.deleted_at IS NULL")
           .where("topics.deleted_at IS NULL")
+          .merge(Post.secured(guardian))
+          .merge(Topic.listable_topics.visible.secured(guardian))
           .includes(:user, post: %i[topic user])
-
-      boosts =
-        guardian.filter_allowed_categories(
-          boosts.joins("LEFT JOIN categories ON categories.id = topics.category_id"),
-        )
 
       boosts =
         boosts.where("discourse_boosts.id < ?", params.before_boost_id) if params.before_boost_id
