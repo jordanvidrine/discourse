@@ -28,6 +28,16 @@ module PageObjects
         end
       end
 
+      def click_boost_cooked(post)
+        find("#post_#{post.post_number} .discourse-boosts button.discourse-boosts__cooked").click
+        self
+      end
+
+      def click_delete_boost(post)
+        find("#post_#{post.post_number} .discourse-boosts__delete").click
+        self
+      end
+
       def has_no_boosts?(post)
         has_no_css?("#post_#{post.post_number} .discourse-boosts")
       end

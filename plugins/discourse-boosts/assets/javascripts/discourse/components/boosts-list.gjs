@@ -46,13 +46,20 @@ export default class BoostsList extends Component {
   @action
   async deleteBoost(boostId) {
     const previousBoosts = this.boosts;
+    const previousCanBoost = this.args.post.can_boost;
+    const boost = this.boosts.find((b) => b.id === boostId);
     this.args.post.boosts = this.boosts.filter((b) => b.id !== boostId);
     this.selectedBoostId = null;
+
+    if (boost?.user?.id === this.currentUser?.id) {
+      this.args.post.can_boost = true;
+    }
 
     try {
       await ajax(`/discourse-boosts/boosts/${boostId}`, { type: "DELETE" });
     } catch (e) {
       this.args.post.boosts = previousBoosts;
+      this.args.post.can_boost = previousCanBoost;
       popupAjaxError(e);
     }
   }
