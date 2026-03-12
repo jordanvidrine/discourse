@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "../support/api_schema_matcher"
 
 RSpec.describe DiscourseBoosts::BoostsController do
   fab!(:current_user, :user)
@@ -154,11 +155,27 @@ RSpec.describe DiscourseBoosts::BoostsController do
 
     before { SiteSetting.hide_new_user_profiles = false }
 
-    it "works" do
+    it "returns boosts matching the expected schema" do
       get "/discourse-boosts/users/#{post_author.username}/boosts.json"
 
       expect(response.status).to eq(200)
+      expect(response.parsed_body).to match_response_schema("boost_list")
       expect(response.parsed_body["boosts"].length).to eq(1)
+    end
+
+    context "with before_boost_id pagination" do
+      fab!(:other_user, :user)
+      fab!(:newer_boost) { Fabricate(:boost, post: target_post, user: other_user) }
+
+      it "returns only boosts before the given id" do
+        get "/discourse-boosts/users/#{post_author.username}/boosts.json",
+            params: {
+              before_boost_id: newer_boost.id,
+            }
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body["boosts"].map { |b| b["id"] }).to eq([boost.id])
+      end
     end
 
     context "when user doesn't exist" do
