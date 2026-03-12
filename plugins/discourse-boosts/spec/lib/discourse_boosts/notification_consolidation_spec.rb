@@ -49,6 +49,27 @@ RSpec.describe DiscourseBoosts::NotificationConsolidation do
 
       expect(plan.consolidate_or_save!(build_boost_notification(from_user: user_1))).to be_nil
     end
+
+    it "accumulates unique usernames for 3+ users" do
+      user_3 = Fabricate(:user)
+      plan = described_class.boosted_by_multiple_users_plan
+
+      build_boost_notification(from_user: user_1).save!
+      plan.consolidate_or_save!(build_boost_notification(from_user: user_2))
+      plan.consolidate_or_save!(build_boost_notification(from_user: user_3))
+
+      notifications =
+        Notification.where(user: post_author, notification_type: Notification.types[:boost])
+      expect(notifications.count).to eq(1)
+
+      data = JSON.parse(notifications.first.read_attribute(:data))
+      expect(data["count"]).to eq(3)
+      expect(data["unique_usernames"]).to contain_exactly(
+        user_1.username,
+        user_2.username,
+        user_3.username,
+      )
+    end
   end
 
   describe ".consolidated_boosts_plan" do
