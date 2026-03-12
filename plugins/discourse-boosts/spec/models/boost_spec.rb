@@ -77,6 +77,16 @@ describe DiscourseBoosts::Boost, type: :model do
       expect(boost).to be_valid
     end
 
+    it "counts skin-toned emoji shortcodes as 1 visible character" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":thumbsup:t2:" * 5)
+      expect(boost).to be_valid
+    end
+
+    it "counts skin-toned emoji shortcodes toward the emoji limit" do
+      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":thumbsup:t2:" * 6)
+      expect(boost).not_to be_valid
+    end
+
     it "allows valid boost" do
       boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "🎉")
       expect(boost).to be_valid
