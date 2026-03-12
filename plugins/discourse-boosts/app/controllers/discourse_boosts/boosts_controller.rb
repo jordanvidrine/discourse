@@ -6,7 +6,7 @@ module DiscourseBoosts
     before_action :ensure_logged_in, except: [:index]
 
     def create
-      Boost::Create.call(service_params) do
+      Boost::Create.call(service_params) do |result|
         on_success do |boost:|
           render json: BoostSerializer.new(boost, scope: guardian, root: false)
         end
@@ -22,7 +22,13 @@ module DiscourseBoosts
         on_failed_policy(:within_post_boost_limit) do
           render_json_error(I18n.t("discourse_boosts.post_boost_limit_reached"), status: 422)
         end
-        on_failure { render(json: failed_json, status: :unprocessable_entity) }
+        on_failure do
+          if result["result.model.boost"]&.exception.is_a?(ActiveRecord::RecordNotUnique)
+            render_json_error(I18n.t("discourse_boosts.boost_limit_reached"), status: 422)
+          else
+            render(json: failed_json, status: :unprocessable_entity)
+          end
+        end
       end
     end
 

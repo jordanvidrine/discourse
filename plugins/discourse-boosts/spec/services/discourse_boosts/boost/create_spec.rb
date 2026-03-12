@@ -11,7 +11,8 @@ RSpec.describe DiscourseBoosts::Boost::Create do
 
     fab!(:acting_user, :user)
     fab!(:post_author, :user)
-    fab!(:topic)
+    fab!(:category)
+    fab!(:topic) { Fabricate(:topic, category: category) }
     fab!(:post) { Fabricate(:post, topic: topic, user: post_author) }
 
     let(:params) { { post_id: post.id, raw: } }
@@ -82,6 +83,19 @@ RSpec.describe DiscourseBoosts::Boost::Create do
         it "does not create a notification" do
           expect { result }.not_to change { Notification.count }
         end
+      end
+    end
+
+    context "when a duplicate key error occurs while creating the boost" do
+      before do
+        allow(DiscourseBoosts::Boost).to receive(:create).and_raise(
+          ActiveRecord::RecordNotUnique.new("duplicate key value violates unique constraint"),
+        )
+      end
+
+      it "fails the boost model with the duplicate key exception" do
+        expect(result).to be_failure
+        expect(result["result.model.boost"].exception).to be_a(ActiveRecord::RecordNotUnique)
       end
     end
   end

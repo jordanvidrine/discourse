@@ -14,18 +14,34 @@ describe DiscourseBoosts::Boost do
       expect(boost).not_to be_valid
     end
 
+    it "does not allow duplicate boosts for the same post and user" do
+      Fabricate(:boost, post: post, user: user)
+
+      duplicate = DiscourseBoosts::Boost.new(post: post, user: user, raw: "🎉")
+
+      duplicate.valid?
+
+      expect(duplicate.errors[:post_id]).to include(I18n.t("errors.messages.taken"))
+    end
+
     it "enforces max visible length of 16" do
       boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: "a" * 17)
       expect(boost).not_to be_valid
     end
 
     it "counts emoji as 1 visible character" do
-      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":smiling_face_with_heart_eyes:" * 5)
+      boost =
+        DiscourseBoosts::Boost.new(
+          post: post,
+          user: user,
+          raw: ":smiling_face_with_heart_eyes:" * 5,
+        )
       expect(boost).to be_valid
     end
 
     it "does not count invalid emoji codes as 1 character" do
-      boost = DiscourseBoosts::Boost.new(post: post, user: user, raw: ":not_a_real_emoji_code_at_all:")
+      boost =
+        DiscourseBoosts::Boost.new(post: post, user: user, raw: ":not_a_real_emoji_code_at_all:")
       expect(boost).not_to be_valid
     end
 

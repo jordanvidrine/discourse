@@ -19,7 +19,7 @@ module DiscourseBoosts
     policy :within_user_boost_limit
     policy :within_post_boost_limit
 
-    transaction { model :boost, :create_boost }
+    model :boost, :create_boost
 
     only_if(:notify_post_author?) { step :create_notification }
 

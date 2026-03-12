@@ -5,7 +5,8 @@ require "rails_helper"
 RSpec.describe DiscourseBoosts::BoostsController do
   fab!(:current_user, :user)
   fab!(:post_author, :user)
-  fab!(:topic)
+  fab!(:category)
+  fab!(:topic) { Fabricate(:topic, category: category) }
   fab!(:target_post, :post) { Fabricate(:post, topic: topic, user: post_author) }
 
   before do
@@ -47,6 +48,19 @@ RSpec.describe DiscourseBoosts::BoostsController do
 
     context "when boost limit is reached" do
       before { Fabricate(:boost, post: target_post, user: current_user) }
+
+      it "returns a 422" do
+        post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
+        expect(response.status).to eq(422)
+      end
+    end
+
+    context "when a duplicate key error occurs while creating the boost" do
+      before do
+        allow(DiscourseBoosts::Boost).to receive(:create).and_raise(
+          ActiveRecord::RecordNotUnique.new("duplicate key value violates unique constraint"),
+        )
+      end
 
       it "returns a 422" do
         post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }

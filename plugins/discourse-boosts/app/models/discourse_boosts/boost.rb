@@ -10,13 +10,19 @@ module DiscourseBoosts
     MAX_VISIBLE_LENGTH = 16
     MAX_EMOJI = 5
 
+    validates :post_id, uniqueness: { scope: :user_id }
     validates :raw, presence: true, length: { maximum: 1000 }
     validate :raw_visible_length
     validate :raw_emoji_count
 
     def raw_visible_length
       return if raw.blank?
-      visible = raw.gsub(/:[a-z0-9_+-]+(?::t\d)?:/) { |match| Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) ? "x" : match }
+
+      visible =
+        raw.gsub(/:[a-z0-9_+-]+(?::t\d)?:/) do |match|
+          Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) ? "x" : match
+        end
+
       if visible.length > MAX_VISIBLE_LENGTH
         errors.add(:raw, I18n.t("discourse_boosts.boost_too_long", count: MAX_VISIBLE_LENGTH))
       end
@@ -24,11 +30,17 @@ module DiscourseBoosts
 
     def raw_emoji_count
       return if raw.blank?
-      count = raw.scan(/:[a-z0-9_+-]+(?::t\d)?:/).count { |match| Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) }
+
+      count =
+        raw
+          .scan(/:[a-z0-9_+-]+(?::t\d)?:/)
+          .count { |match| Emoji.exists?(match[1..-2].sub(/:t\d$/, "")) }
+
       if count > MAX_EMOJI
         errors.add(:raw, I18n.t("discourse_boosts.too_many_emoji", count: MAX_EMOJI))
       end
     end
+
     validates :cooked, presence: true
 
     before_validation :cook_raw, if: :will_save_change_to_raw?
