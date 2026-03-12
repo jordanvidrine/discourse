@@ -17,11 +17,12 @@ describe "Creating a boost", type: :system do
   it "allows creating a boost on another user's post" do
     topic_page.visit_topic(topic)
 
-    boost_page.click_boost_button(post)
+    boost_page.click_post_menu_boost_button(post)
     boost_page.fill_in_boost(":heart:")
     boost_page.submit_boost
 
     expect(boost_page).to have_boost(post, ":heart:")
-    expect(boost_page).to have_no_boost_button(post)
+    expect(boost_page).to have_no_post_menu_boost_button(post)
+    expect(boost_page).to have_no_boosts_list_boost_button(post)
   end
 end

@@ -24,6 +24,6 @@ describe "Deleting a boost", type: :system do
     boost_page.click_delete_boost(post)
 
     expect(boost_page).to have_no_boosts(post)
-    expect(boost_page).to have_boost_button(post)
+    expect(boost_page).to have_post_menu_boost_button(post)
   end
 end

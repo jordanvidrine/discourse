@@ -3,7 +3,7 @@
 module PageObjects
   module Pages
     class Boost < PageObjects::Pages::Base
-      def click_boost_button(post)
+      def click_post_menu_boost_button(post)
         find("#post_#{post.post_number} .post-action-menu__boost").click
         self
       end
@@ -42,12 +42,20 @@ module PageObjects
         has_no_css?("#post_#{post.post_number} .discourse-boosts")
       end
 
-      def has_boost_button?(post)
+      def has_post_menu_boost_button?(post)
         has_css?("#post_#{post.post_number} .post-action-menu__boost")
       end
 
-      def has_no_boost_button?(post)
+      def has_no_post_menu_boost_button?(post)
         has_no_css?("#post_#{post.post_number} .post-action-menu__boost")
+      end
+
+      def has_boosts_list_boost_button?(post)
+        has_css?("#post_#{post.post_number} .discourse-boosts__add-btn")
+      end
+
+      def has_no_boosts_list_boost_button?(post)
+        has_no_css?("#post_#{post.post_number} .discourse-boosts__add-btn")
       end
     end
   end

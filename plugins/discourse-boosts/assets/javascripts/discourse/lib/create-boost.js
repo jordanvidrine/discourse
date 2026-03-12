@@ -17,6 +17,7 @@ export default async function createBoost(post, raw, currentUser) {
     can_delete: true,
   };
   post.boosts = [...previousBoosts, optimisticBoost];
+  post.can_boost = false;
 
   try {
     const result = await ajax(`/discourse-boosts/posts/${post.id}/boosts`, {
@@ -28,6 +29,7 @@ export default async function createBoost(post, raw, currentUser) {
     );
   } catch (e) {
     post.boosts = previousBoosts;
+    post.can_boost = true;
     popupAjaxError(e);
   }
 }
