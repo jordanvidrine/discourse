@@ -46,7 +46,7 @@ RSpec.describe DiscourseBoosts::Boost::Create do
     context "when user boost limit is reached" do
       before { Fabricate(:boost, post: post, user: acting_user) }
 
-      it { is_expected.to fail_a_policy(:within_user_boost_limit) }
+      it { is_expected.to fail_a_policy(:user_has_not_boosted_post) }
     end
 
     context "when post boost limit is reached" do

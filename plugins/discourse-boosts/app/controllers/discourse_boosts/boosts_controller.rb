@@ -18,7 +18,7 @@ module DiscourseBoosts
         end
         on_model_not_found(:post) { raise Discourse::NotFound }
         on_failed_policy(:can_boost_post) { raise Discourse::InvalidAccess }
-        on_failed_policy(:within_user_boost_limit) do
+        on_failed_policy(:user_has_not_boosted_post) do
           render_json_error(I18n.t("discourse_boosts.boost_limit_reached"), status: 422)
         end
         on_failed_policy(:within_post_boost_limit) do

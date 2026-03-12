@@ -16,7 +16,7 @@ module DiscourseBoosts
 
     model :post
     policy :can_boost_post
-    policy :within_user_boost_limit
+    policy :user_has_not_boosted_post
     policy :within_post_boost_limit
 
     model :boost, :create_boost
@@ -33,7 +33,7 @@ module DiscourseBoosts
       guardian.can_see?(post) && post.user_id != guardian.user.id && !guardian.user.silenced?
     end
 
-    def within_user_boost_limit(guardian:, post:)
+    def user_has_not_boosted_post(guardian:, post:)
       !DiscourseBoosts::Boost.exists?(post_id: post.id, user_id: guardian.user.id)
     end
 
