@@ -37,6 +37,15 @@ RSpec.describe DiscourseBoosts::Boost::Create do
       it { is_expected.to fail_a_policy(:can_boost_post) }
     end
 
+    context "when post is in a restricted category" do
+      fab!(:group)
+      fab!(:private_category) { Fabricate(:private_category, group: group) }
+      fab!(:private_topic) { Fabricate(:topic, category: private_category) }
+      fab!(:post) { Fabricate(:post, topic: private_topic, user: post_author) }
+
+      it { is_expected.to fail_a_policy(:can_boost_post) }
+    end
+
     context "when user is silenced" do
       before { acting_user.update!(silenced_till: 1.year.from_now) }
 
