@@ -49,7 +49,7 @@ module DiscourseBoosts
       boosts =
         boosts.where("discourse_boosts.id < ?", params.before_boost_id) if params.before_boost_id
 
-      boosts.order(created_at: :desc).limit(PAGE_SIZE)
+      boosts.order(id: :desc).limit(PAGE_SIZE)
     end
   end
 end
