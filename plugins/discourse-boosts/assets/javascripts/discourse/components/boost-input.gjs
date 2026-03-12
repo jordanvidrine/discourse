@@ -24,9 +24,9 @@ const BoostTip = <template>
   <div class="discourse-boosts__tip">
     {{htmlSafe (i18n "discourse_boosts.action_title")}}
     <span class="discourse-boosts__tip-username">
-      @{{htmlSafe @data.username}}
+      @{{@data.username}}
     </span>
-    {{htmlSafe (i18n "discourse_boosts.tip" username=@data.username)}}
+    {{i18n "discourse_boosts.tip"}}
   </div>
 </template>;
 
