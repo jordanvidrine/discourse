@@ -55,6 +55,20 @@ RSpec.describe DiscourseBoosts::BoostsController do
       end
     end
 
+    context "when rate limit is exceeded" do
+      fab!(:other_posts) { Array.new(6) { Fabricate(:post, topic: topic, user: post_author) } }
+
+      before { RateLimiter.enable }
+
+      it "returns a 429" do
+        other_posts.each do |other_post|
+          post "/discourse-boosts/posts/#{other_post.id}/boosts.json", params: { raw: "🎉" }
+        end
+
+        expect(response.status).to eq(429)
+      end
+    end
+
     context "when a duplicate key error occurs while creating the boost" do
       before do
         allow(DiscourseBoosts::Boost).to receive(:create).and_raise(

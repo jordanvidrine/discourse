@@ -6,6 +6,8 @@ module DiscourseBoosts
     before_action :ensure_logged_in, except: [:index]
 
     def create
+      RateLimiter.new(current_user, "create_boost", 5, 1.minute).performed!
+
       Boost::Create.call(service_params) do |result|
         on_success do |boost:|
           render json: BoostSerializer.new(boost, scope: guardian, root: false)
