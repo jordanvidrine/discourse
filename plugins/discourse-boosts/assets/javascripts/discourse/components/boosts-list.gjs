@@ -71,11 +71,8 @@ export default class BoostsList extends Component {
             <span
               class={{concatClass
                 "discourse-boosts__bubble"
-                (if boost.can_delete "discourse-boosts__bubble--deletable")
-                (if
-                  (eq this.selectedBoostId boost.id)
-                  "discourse-boosts__bubble--selected"
-                )
+                (if boost.can_delete "--deletable")
+                (if (eq this.selectedBoostId boost.id) "--selected")
               }}
             >
               <a data-user-card={{boost.user.username}}>{{boundAvatarTemplate
@@ -104,22 +101,22 @@ export default class BoostsList extends Component {
           {{/each}}
 
           {{#if this.canBoost}}
-              <DMenu
-                @identifier="discourse-boosts"
-                @icon="rocket"
-                @title={{i18n "discourse_boosts.boost_button_title"}}
-                @modalForMobile={{false}}
-                @onRegisterApi={{this.onRegisterApi}}
-                @triggerClass="discourse-boosts__add-btn btn-flat"
-              >
-                <:content>
-                  <BoostInput
-                    @post={{@post}}
-                    @onSubmit={{this.addBoostWithRaw}}
-                    @onClose={{this.dMenu.close}}
-                  />
-                </:content>
-              </DMenu>
+            <DMenu
+              @identifier="discourse-boosts"
+              @icon="rocket"
+              @title={{i18n "discourse_boosts.boost_button_title"}}
+              @modalForMobile={{false}}
+              @onRegisterApi={{this.onRegisterApi}}
+              @triggerClass="discourse-boosts__add-btn btn-flat"
+            >
+              <:content>
+                <BoostInput
+                  @post={{@post}}
+                  @onSubmit={{this.addBoostWithRaw}}
+                  @onClose={{this.dMenu.close}}
+                />
+              </:content>
+            </DMenu>
           {{/if}}
         </div>
       </div>
