@@ -48,6 +48,17 @@ RSpec.describe DiscourseBoosts::Boost::List do
         expect(result[:boosts]).to contain_exactly(boost)
       end
 
+      it "returns boosts in descending ID order" do
+        other_post = Fabricate(:post, topic: topic, user: post_author)
+        newer_boost = Fabricate(:boost, post: other_post, user: acting_user)
+
+        expect(result[:boosts].map(&:id)).to eq([newer_boost.id, boost.id])
+      end
+
+      it "limits results to PAGE_SIZE" do
+        stub_const(described_class, "PAGE_SIZE", 1) { expect(result[:boosts].length).to eq(1) }
+      end
+
       context "with pagination" do
         fab!(:other_post) { Fabricate(:post, topic: topic, user: post_author) }
         fab!(:newer_boost) { Fabricate(:boost, post: other_post, user: acting_user) }
