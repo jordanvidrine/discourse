@@ -2,7 +2,7 @@
 
 module DiscourseBoosts
   class BoostSerializer < ::ApplicationSerializer
-    attributes :id, :post_id, :raw, :cooked, :created_at, :can_delete
+    attributes :id, :cooked, :can_delete
 
     has_one :user, serializer: ::BasicUserSerializer, embed: :objects
 

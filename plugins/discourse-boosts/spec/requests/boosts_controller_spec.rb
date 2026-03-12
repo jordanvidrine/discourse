@@ -19,7 +19,7 @@ RSpec.describe DiscourseBoosts::BoostsController do
       post "/discourse-boosts/posts/#{target_post.id}/boosts.json", params: { raw: "🎉" }
 
       expect(response.status).to eq(200)
-      expect(response.parsed_body["raw"]).to eq("🎉")
+      expect(response.parsed_body["cooked"]).to include("tada")
       expect(response.parsed_body["user"]["id"]).to eq(current_user.id)
     end
 
