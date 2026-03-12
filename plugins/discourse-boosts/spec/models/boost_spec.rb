@@ -94,7 +94,9 @@ describe DiscourseBoosts::Boost do
   end
 
   describe "after_destroy" do
-    it "deletes boost notifications for the post author" do
+    fab!(:other_user, :user)
+
+    it "deletes the boost notification for the destroying user" do
       boost = Fabricate(:boost, post: post, user: user)
       notification =
         Fabricate(
@@ -103,12 +105,68 @@ describe DiscourseBoosts::Boost do
           topic: post.topic,
           post_number: post.post_number,
           notification_type: Notification.types[:boost],
+          data: { display_username: user.username }.to_json,
         )
 
       expect { boost.destroy! }.to change {
         Notification.where(user: post.user, notification_type: Notification.types[:boost]).count
       }.by(-1)
       expect(Notification.exists?(notification.id)).to eq(false)
+    end
+
+    it "does not delete notifications from other boost users" do
+      boost = Fabricate(:boost, post: post, user: user)
+      other_notification =
+        Fabricate(
+          :notification,
+          user: post.user,
+          topic: post.topic,
+          post_number: post.post_number,
+          notification_type: Notification.types[:boost],
+          data: { display_username: other_user.username }.to_json,
+        )
+
+      boost.destroy!
+
+      expect(Notification.exists?(other_notification.id)).to eq(true)
+    end
+
+    it "does not delete consolidated multi-user notifications" do
+      boost = Fabricate(:boost, post: post, user: user)
+      consolidated_notification =
+        Fabricate(
+          :notification,
+          user: post.user,
+          topic: post.topic,
+          post_number: post.post_number,
+          notification_type: Notification.types[:boost],
+          data: {
+            display_username: user.username,
+            username2: other_user.username,
+            count: 2,
+          }.to_json,
+        )
+
+      boost.destroy!
+
+      expect(Notification.exists?(consolidated_notification.id)).to eq(true)
+    end
+
+    it "does not delete consolidated same-user notifications" do
+      boost = Fabricate(:boost, post: post, user: user)
+      consolidated_notification =
+        Fabricate(
+          :notification,
+          user: post.user,
+          topic: post.topic,
+          post_number: post.post_number,
+          notification_type: Notification.types[:boost],
+          data: { display_username: user.username, consolidated: true, count: 3 }.to_json,
+        )
+
+      boost.destroy!
+
+      expect(Notification.exists?(consolidated_notification.id)).to eq(true)
     end
   end
 
