@@ -35,6 +35,8 @@ module DiscourseBoosts
     end
 
     def destroy
+      RateLimiter.new(current_user, "destroy_boost", 5, 1.minute).performed!
+
       Boost::Destroy.call(service_params.deep_merge(params: { boost_id: params[:id] })) do
         on_success { head :no_content }
         on_failed_contract do |contract|

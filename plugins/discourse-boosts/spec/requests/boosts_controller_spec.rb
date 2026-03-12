@@ -118,6 +118,19 @@ RSpec.describe DiscourseBoosts::BoostsController do
         expect(response.status).to eq(204)
       end
     end
+
+    context "when rate limit is exceeded" do
+      fab!(:other_posts) { Array.new(6) { Fabricate(:post, topic: topic, user: post_author) } }
+      fab!(:boosts) { other_posts.map { |p| Fabricate(:boost, post: p, user: current_user) } }
+
+      before { RateLimiter.enable }
+
+      it "returns a 429" do
+        boosts.each { |b| delete "/discourse-boosts/boosts/#{b.id}.json" }
+
+        expect(response.status).to eq(429)
+      end
+    end
   end
 
   describe "#index" do
