@@ -96,6 +96,29 @@ RSpec.describe DiscourseBoosts::Boost::List do
         end
       end
 
+      context "when post is deleted" do
+        fab!(:deleted_post) do
+          Fabricate(:post, topic: topic, user: post_author, deleted_at: Time.zone.now)
+        end
+        fab!(:deleted_post_boost) { Fabricate(:boost, post: deleted_post, user: acting_user) }
+
+        it "does not include boosts on deleted posts" do
+          expect(result[:boosts]).to contain_exactly(boost)
+        end
+      end
+
+      context "when topic is deleted" do
+        fab!(:deleted_topic) { Fabricate(:topic, category: category, deleted_at: Time.zone.now) }
+        fab!(:deleted_topic_post) { Fabricate(:post, topic: deleted_topic, user: post_author) }
+        fab!(:deleted_topic_boost) do
+          Fabricate(:boost, post: deleted_topic_post, user: acting_user)
+        end
+
+        it "does not include boosts on deleted topics" do
+          expect(result[:boosts]).to contain_exactly(boost)
+        end
+      end
+
       context "when post is in a restricted category" do
         fab!(:restricted_category) { Fabricate(:private_category, group: Fabricate(:group)) }
         fab!(:restricted_topic) { Fabricate(:topic, category: restricted_category) }
