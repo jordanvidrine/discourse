@@ -37,6 +37,12 @@ RSpec.describe DiscourseBoosts::Boost::Create do
       it { is_expected.to fail_a_policy(:can_boost_post) }
     end
 
+    context "when user is silenced" do
+      before { acting_user.update!(silenced_till: 1.year.from_now) }
+
+      it { is_expected.to fail_a_policy(:can_boost_post) }
+    end
+
     context "when user boost limit is reached" do
       before { Fabricate(:boost, post: post, user: acting_user) }
 

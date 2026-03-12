@@ -30,7 +30,7 @@ module DiscourseBoosts
     end
 
     def can_boost_post(guardian:, post:)
-      guardian.can_see?(post) && post.user_id != guardian.user.id
+      guardian.can_see?(post) && post.user_id != guardian.user.id && !guardian.user.silenced?
     end
 
     def within_user_boost_limit(guardian:, post:)
