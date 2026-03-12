@@ -54,7 +54,10 @@ after_initialize do
     include_condition: -> do
       SiteSetting.discourse_boosts_enabled && object.association(:boosts).loaded?
     end,
-  ) { scope.user.present? && object.user_id != scope.user&.id }
+  ) do
+    scope.user.present? && object.user_id != scope.user&.id &&
+      object.boosts.none? { |b| b.user_id == scope.user.id }
+  end
 
   UserUpdater::OPTION_ATTR.push(:boost_notifications_level)
 

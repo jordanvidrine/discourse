@@ -11,10 +11,9 @@ import concatClass from "discourse/helpers/concat-class";
 import icon from "discourse/helpers/d-icon";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { emojiUnescape } from "discourse/lib/text";
-import { escapeExpression } from "discourse/lib/utilities";
 import { eq } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
+import createBoost from "../lib/create-boost";
 import BoostInput from "./boost-input";
 
 export default class BoostsList extends Component {
@@ -28,13 +27,6 @@ export default class BoostsList extends Component {
 
   get canBoost() {
     return this.args.post.can_boost;
-  }
-
-  get canAddBoost() {
-    if (!this.currentUser) {
-      return false;
-    }
-    return !this.boosts.some((b) => b.user.id === this.currentUser.id);
   }
 
   @action
@@ -67,33 +59,8 @@ export default class BoostsList extends Component {
 
   @action
   async addBoostWithRaw(raw) {
-    const previousBoosts = this.boosts;
-    const optimisticBoost = {
-      id: `pending-${Date.now()}`,
-      raw,
-      cooked: `<p>${emojiUnescape(escapeExpression(raw))}</p>`,
-      user: {
-        id: this.currentUser.id,
-        username: this.currentUser.username,
-        avatar_template: this.currentUser.avatar_template,
-      },
-      can_delete: true,
-    };
-    this.args.post.boosts = [...previousBoosts, optimisticBoost];
     this.dMenu?.close();
-
-    try {
-      const result = await ajax(
-        `/discourse-boosts/posts/${this.args.post.id}/boosts`,
-        { type: "POST", data: { raw } }
-      );
-      this.args.post.boosts = this.args.post.boosts.map((b) =>
-        b.id === optimisticBoost.id ? result : b
-      );
-    } catch (e) {
-      this.args.post.boosts = previousBoosts;
-      popupAjaxError(e);
-    }
+    await createBoost(this.args.post, raw, this.currentUser);
   }
 
   <template>
@@ -137,7 +104,6 @@ export default class BoostsList extends Component {
           {{/each}}
 
           {{#if this.canBoost}}
-            {{#if this.canAddBoost}}
               <DMenu
                 @identifier="discourse-boosts"
                 @icon="rocket"
@@ -154,7 +120,6 @@ export default class BoostsList extends Component {
                   />
                 </:content>
               </DMenu>
-            {{/if}}
           {{/if}}
         </div>
       </div>

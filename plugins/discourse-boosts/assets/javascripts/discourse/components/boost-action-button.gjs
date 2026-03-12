@@ -2,11 +2,8 @@ import Component from "@glimmer/component";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import DMenu from "discourse/float-kit/components/d-menu";
-import { ajax } from "discourse/lib/ajax";
-import { popupAjaxError } from "discourse/lib/ajax-error";
-import { emojiUnescape } from "discourse/lib/text";
-import { escapeExpression } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
+import createBoost from "../lib/create-boost";
 import BoostInput from "./boost-input";
 
 export default class BoostActionButton extends Component {
@@ -24,33 +21,8 @@ export default class BoostActionButton extends Component {
 
   @action
   async onSubmit(raw) {
-    const previousBoosts = this.args.post.boosts || [];
-    const optimisticBoost = {
-      id: `pending-${Date.now()}`,
-      raw,
-      cooked: `<p>${emojiUnescape(escapeExpression(raw))}</p>`,
-      user: {
-        id: this.currentUser.id,
-        username: this.currentUser.username,
-        avatar_template: this.currentUser.avatar_template,
-      },
-      can_delete: true,
-    };
-    this.args.post.boosts = [...previousBoosts, optimisticBoost];
     this.dMenu?.close();
-
-    try {
-      const result = await ajax(
-        `/discourse-boosts/posts/${this.args.post.id}/boosts`,
-        { type: "POST", data: { raw } }
-      );
-      this.args.post.boosts = this.args.post.boosts.map((b) =>
-        b.id === optimisticBoost.id ? result : b
-      );
-    } catch (e) {
-      this.args.post.boosts = previousBoosts;
-      popupAjaxError(e);
-    }
+    await createBoost(this.args.post, raw, this.currentUser);
   }
 
   <template>
