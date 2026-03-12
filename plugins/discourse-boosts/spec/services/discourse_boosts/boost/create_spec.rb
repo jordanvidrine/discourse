@@ -25,6 +25,12 @@ RSpec.describe DiscourseBoosts::Boost::Create do
       it { is_expected.to fail_a_contract }
     end
 
+    context "when raw is whitespace only" do
+      let(:raw) { "   " }
+
+      it { is_expected.to fail_a_contract }
+    end
+
     context "when post is not found" do
       let(:params) { { post_id: 0, raw: } }
 
