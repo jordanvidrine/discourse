@@ -6,7 +6,8 @@ module DiscourseBoosts
       base.has_many :boosts,
                     -> { order(:created_at) },
                     class_name: "DiscourseBoosts::Boost",
-                    dependent: :delete_all
+                    dependent: :delete_all,
+                    inverse_of: :post
     end
   end
 end
