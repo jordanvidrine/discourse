@@ -20,7 +20,10 @@ end
 require_relative "lib/discourse_boosts/engine"
 
 after_initialize do
-  reloadable_patch { |plugin| Post.prepend DiscourseBoosts::PostExtension }
+  reloadable_patch do |plugin|
+    Post.prepend DiscourseBoosts::PostExtension
+    UserOption.prepend DiscourseBoosts::UserOptionExtension
+  end
 
   Discourse::Application.routes.append { mount DiscourseBoosts::Engine, at: "/" }
 
