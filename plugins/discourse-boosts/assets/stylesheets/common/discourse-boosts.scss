@@ -85,26 +85,11 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-2);
-
-    .ProseMirror-container {
-      flex: 1;
-      min-width: 0;
-    }
   }
 
-  &__pm-placeholder {
-    color: var(--primary-medium);
-    pointer-events: none;
-  }
-
-  &__input-placeholder {
-    width: 150px;
-    font-size: var(--font-down-1);
-    padding: var(--space-1);
-    color: var(--primary-medium);
-  }
-
-  &__input.ProseMirror {
+  &__input {
+    flex: 1;
+    min-width: 0;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     width: 150px;
@@ -116,12 +101,10 @@
     outline: none;
     overflow: hidden;
 
-    &:focus {
-      box-shadow: none;
-    }
-
-    p {
-      margin: 0;
+    &:empty::before {
+      content: attr(data-placeholder);
+      color: var(--primary-medium);
+      pointer-events: none;
     }
 
     img.emoji {

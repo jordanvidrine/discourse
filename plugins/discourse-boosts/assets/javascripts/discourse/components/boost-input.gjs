@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { next } from "@ember/runloop";
@@ -15,7 +16,6 @@ import DButton from "discourse/components/d-button";
 import EmojiPicker from "discourse/components/emoji-picker";
 import boundAvatarTemplate from "discourse/helpers/bound-avatar-template";
 import KeyValueStore from "discourse/lib/key-value-store";
-import loadRichEditor from "discourse/lib/load-rich-editor";
 import { emojiOptions } from "discourse/lib/text";
 import { not } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
@@ -35,172 +35,76 @@ const BoostTip = <template>
   </div>
 </template>;
 
-const BOOST_EMOJI_EXTENSION = {
-  nodeSpec: {
-    emoji: {
-      attrs: { code: {} },
-      inline: true,
-      group: "inline",
-      draggable: true,
-      selectable: false,
-      parseDOM: [
-        {
-          tag: "img.emoji",
-          getAttrs: (dom) => ({
-            code: dom.getAttribute("alt").replace(/:/g, ""),
-          }),
-          priority: 60,
-        },
-      ],
-      toDOM: (node) => {
-        const opts = emojiOptions();
-        const code = node.attrs.code.toLowerCase();
-        const title = `:${code}:`;
-        const src = buildEmojiUrl(code, opts);
-
-        return [
-          "img",
-          {
-            class: isCustomEmoji(code, opts) ? "emoji emoji-custom" : "emoji",
-            alt: title,
-            title,
-            src,
-          },
-        ];
-      },
-    },
-  },
-
-  inputRules: [
-    {
-      match: /(^|\W):([^:]+):$/,
-      handler: (state, match, start, end) => {
-        if (emojiExists(match[2])) {
-          const emojiStart = start + match[1].length;
-          const emojiNode = state.schema.nodes.emoji.create({
-            code: match[2],
-          });
-          return state.tr.replaceWith(emojiStart, end, emojiNode);
-        }
-      },
-      options: { undoable: false },
-    },
-  ],
-
-  parse: {
-    emoji: {
-      node: "emoji",
-      getAttrs: (token) => ({
-        code: token.attrGet("alt").slice(1, -1),
-      }),
-    },
-  },
-
-  serializeNode: {
-    emoji(state, node) {
-      state.write(`:${node.attrs.code}:`);
-    },
-  },
-};
-
 const UNICODE_EMOJI_REGEX = new RegExp(emojiReplacementRegex, "g");
+const EMOJI_SHORTCODE_REGEX = /(^|\W):([^:]+):/;
 
-function docStats(doc) {
+function getStats(element) {
   let length = 0;
   let emojiCount = 0;
-  doc.descendants((node) => {
-    if (node.isText) {
-      const unicodeMatches = node.text.match(UNICODE_EMOJI_REGEX);
+
+  for (const node of element.childNodes) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      const unicodeMatches = text.match(UNICODE_EMOJI_REGEX);
       if (unicodeMatches) {
         emojiCount += unicodeMatches.length;
-        length += node.text.replace(UNICODE_EMOJI_REGEX, "x").length;
+        length += text.replace(UNICODE_EMOJI_REGEX, "x").length;
       } else {
-        length += node.text.length;
+        length += text.length;
       }
-    } else if (node.type.name === "emoji") {
+    } else if (node.nodeName === "IMG" && node.classList.contains("emoji")) {
       length += 1;
       emojiCount += 1;
     }
-  });
+  }
+
   return { length, emojiCount };
 }
 
-const EXTENSIONS = [
-  {
-    nodeSpec: {
-      doc: { content: "inline*" },
-      text: { group: "inline" },
-      heading: { attrs: { level: { default: 1 } }, group: "block" },
-      bullet_list: { group: "block" },
-      ordered_list: { group: "block" },
-      code_block: { group: "block", code: true },
-      blockquote: { group: "block" },
-      paragraph: { group: "block" },
-    },
-    markSpec: {
-      strong: {},
-      em: {},
-      link: { attrs: { href: { default: "" } } },
-      code: {},
-    },
-    plugins: [
-      {
-        filterTransaction: (tr) => {
-          if (!tr.docChanged) {
-            return true;
-          }
-          const stats = docStats(tr.doc);
-          return stats.length <= MAX_LENGTH && stats.emojiCount <= MAX_EMOJI;
-        },
-      },
-      ({
-        pmState: { Plugin, PluginKey },
-        pmView: { Decoration, DecorationSet },
-        getContext,
-      }) =>
-        new Plugin({
-          key: new PluginKey("boost-placeholder"),
-          props: {
-            decorations(state) {
-              if (state.doc.content.size === 0) {
-                const text = getContext().placeholder;
-                if (text) {
-                  const widget = Decoration.widget(0, () => {
-                    const span = document.createElement("span");
-                    span.className = "discourse-boosts__pm-placeholder";
-                    span.textContent = text;
-                    return span;
-                  });
-                  return DecorationSet.create(state.doc, [widget]);
-                }
-              }
-              return DecorationSet.empty;
-            },
-          },
-        }),
-    ],
-    serializeNode: {
-      text(state, node) {
-        state.text(node.text);
-      },
-    },
-  },
-  BOOST_EMOJI_EXTENSION,
-];
+function serialize(element) {
+  let result = "";
+
+  for (const node of element.childNodes) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      result += node.textContent;
+    } else if (node.nodeName === "IMG" && node.classList.contains("emoji")) {
+      result += node.alt;
+    }
+  }
+
+  return result;
+}
+
+function createEmojiImg(code) {
+  const opts = emojiOptions();
+  const title = `:${code}:`;
+  const src = buildEmojiUrl(code, opts);
+  const img = document.createElement("img");
+  img.className = isCustomEmoji(code, opts) ? "emoji emoji-custom" : "emoji";
+  img.alt = title;
+  img.title = title;
+  img.src = src;
+  return img;
+}
+
+function placeCursorAtEnd(element) {
+  const range = document.createRange();
+  const sel = window.getSelection();
+  range.selectNodeContents(element);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
 
 export default class BoostInput extends Component {
   @service currentUser;
   @service tooltip;
 
   @tracked value = "";
-  @tracked editorComponent = null;
+  @tracked canAddEmoji = true;
 
   store = new KeyValueStore(STORE_NAMESPACE);
-
-  constructor() {
-    super(...arguments);
-    loadRichEditor().then((component) => (this.editorComponent = component));
-  }
+  #previousHTML = "";
 
   willDestroy() {
     super.willDestroy(...arguments);
@@ -227,19 +131,6 @@ export default class BoostInput extends Component {
     });
   }
 
-  get editorKeymap() {
-    return {
-      Enter: () => {
-        this.submit();
-        return true;
-      },
-      Escape: () => {
-        this.args.onClose();
-        return true;
-      },
-    };
-  }
-
   get canSubmit() {
     return this.value.trim().length > 0;
   }
@@ -251,14 +142,43 @@ export default class BoostInput extends Component {
   }
 
   @action
-  onEditorSetup(textManipulation) {
-    this.textManipulation = textManipulation;
-    textManipulation.focus();
+  setupEditor(element) {
+    this.editor = element;
+    next(() => element.focus());
   }
 
   @action
-  onChange(event) {
-    this.value = event.target.value;
+  onInput() {
+    this.#processEmojiShortcodes();
+
+    const stats = getStats(this.editor);
+    if (stats.length > MAX_LENGTH || stats.emojiCount > MAX_EMOJI) {
+      this.editor.innerHTML = this.#previousHTML;
+      placeCursorAtEnd(this.editor);
+      return;
+    }
+
+    this.#previousHTML = this.editor.innerHTML;
+    this.value = serialize(this.editor);
+    this.#updateCanAddEmoji(stats);
+  }
+
+  @action
+  onKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.submit();
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      this.args.onClose();
+    }
+  }
+
+  @action
+  onPaste(event) {
+    event.preventDefault();
+    const text = event.clipboardData.getData("text/plain");
+    document.execCommand("insertText", false, text);
   }
 
   @action
@@ -270,19 +190,79 @@ export default class BoostInput extends Component {
 
   @action
   didSelectEmoji(emoji) {
-    const view = this.textManipulation?.view;
-    if (!view) {
+    const stats = getStats(this.editor);
+    const needsSpace = this.editor.childNodes.length > 0;
+    const extraLength = needsSpace ? 2 : 1;
+
+    if (
+      stats.length + extraLength > MAX_LENGTH ||
+      stats.emojiCount + 1 > MAX_EMOJI
+    ) {
       return;
     }
 
-    const emojiNode = view.state.schema.nodes.emoji.create({ code: emoji });
-    const end = view.state.doc.content.size;
-    view.dispatch(view.state.tr.replaceWith(end, end, emojiNode));
+    if (needsSpace) {
+      this.editor.appendChild(document.createTextNode(" "));
+    }
+
+    this.editor.appendChild(createEmojiImg(emoji));
+    placeCursorAtEnd(this.editor);
+    this.#previousHTML = this.editor.innerHTML;
+    this.value = serialize(this.editor);
+    this.#updateCanAddEmoji(getStats(this.editor));
   }
 
   @action
   focusEditor() {
-    next(() => this.textManipulation?.focus());
+    next(() => this.editor?.focus());
+  }
+
+  #updateCanAddEmoji(stats) {
+    const spaceNeeded = this.editor.childNodes.length > 0 ? 2 : 1;
+    this.canAddEmoji =
+      stats.length + spaceNeeded <= MAX_LENGTH && stats.emojiCount < MAX_EMOJI;
+  }
+
+  #processEmojiShortcodes() {
+    const walker = document.createTreeWalker(this.editor, NodeFilter.SHOW_TEXT);
+
+    let node;
+    while ((node = walker.nextNode())) {
+      const match = node.textContent.match(EMOJI_SHORTCODE_REGEX);
+      if (match && emojiExists(match[2])) {
+        const code = match[2];
+        const emojiStart = match.index + match[1].length;
+        const emojiEnd = emojiStart + code.length + 2;
+        const beforeText = node.textContent.slice(0, emojiStart);
+        const afterText = node.textContent.slice(emojiEnd);
+        const img = createEmojiImg(code);
+        const parent = node.parentNode;
+
+        if (afterText) {
+          parent.insertBefore(
+            document.createTextNode(afterText),
+            node.nextSibling
+          );
+        }
+
+        parent.insertBefore(img, node.nextSibling);
+
+        if (beforeText) {
+          node.textContent = beforeText;
+        } else {
+          parent.removeChild(node);
+        }
+
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.setStartAfter(img);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+        break;
+      }
+    }
   }
 
   <template>
@@ -291,27 +271,23 @@ export default class BoostInput extends Component {
       {{didInsert this.maybeShowTip}}
     >
       {{boundAvatarTemplate this.currentUser.avatar_template "small"}}
-      {{#if this.editorComponent}}
-        <this.editorComponent
-          @class="discourse-boosts__input"
-          @includeDefault={{false}}
-          @extensions={{EXTENSIONS}}
-          @placeholder={{this.placeholder}}
-          @change={{this.onChange}}
-          @onSetup={{this.onEditorSetup}}
-          @keymap={{this.editorKeymap}}
-        />
-      {{else}}
-        <div class="discourse-boosts__input-placeholder">
-          {{this.placeholder}}
-        </div>
-      {{/if}}
+      {{! template-lint-disable no-invalid-interactive }}
+      <div
+        class="discourse-boosts__input"
+        contenteditable="true"
+        data-placeholder={{this.placeholder}}
+        {{didInsert this.setupEditor}}
+        {{on "input" this.onInput}}
+        {{on "keydown" this.onKeyDown}}
+        {{on "paste" this.onPaste}}
+      ></div>
       <EmojiPicker
         @didSelectEmoji={{this.didSelectEmoji}}
         @onClose={{this.focusEditor}}
         @btnClass="btn-transparent discourse-boosts__emoji-btn"
         @context="boost"
         @modalForMobile={{false}}
+        @disabled={{not this.canAddEmoji}}
       />
       <DButton
         @action={{this.submit}}
