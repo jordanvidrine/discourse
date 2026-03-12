@@ -49,7 +49,7 @@ after_initialize do
       SiteSetting.discourse_boosts_enabled && object.association(:boosts).loaded?
     end,
   ) do
-    scope.user.present? && object.user_id != scope.user&.id &&
+    scope.user.present? && !scope.user.silenced? && object.user_id != scope.user&.id &&
       object.boosts.none? { |b| b.user_id == scope.user.id }
   end
 
