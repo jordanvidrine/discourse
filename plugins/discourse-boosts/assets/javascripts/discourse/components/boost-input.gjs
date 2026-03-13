@@ -213,8 +213,13 @@ export default class BoostInput extends Component {
   }
 
   @action
+  closeTip() {
+    this.tooltip.close("discourse-boosts-tip");
+  }
+
+  @action
   focusEditor() {
-    next(() => this.editor?.focus());
+    this.editor?.focus();
   }
 
   #updateCanAddEmoji(stats) {
@@ -283,6 +288,7 @@ export default class BoostInput extends Component {
       ></div>
       <EmojiPicker
         @didSelectEmoji={{this.didSelectEmoji}}
+        @onShow={{this.closeTip}}
         @onClose={{this.focusEditor}}
         @btnClass="btn-transparent discourse-boosts__emoji-btn"
         @context="boost"
