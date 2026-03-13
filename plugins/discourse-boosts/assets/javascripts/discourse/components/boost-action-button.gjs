@@ -1,4 +1,5 @@
 import Component from "@glimmer/component";
+import { array, hash } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import DMenu from "discourse/float-kit/components/d-menu";
@@ -34,6 +35,10 @@ export default class BoostActionButton extends Component {
         @modalForMobile={{false}}
         @onRegisterApi={{this.onRegisterApi}}
         @triggerClass="post-action-menu__boost boost btn-flat"
+        @triggers={{hash
+          mobile=(array "click")
+          desktop=(array "delayed-hover" "click")
+        }}
         ...attributes
       >
         <:content>

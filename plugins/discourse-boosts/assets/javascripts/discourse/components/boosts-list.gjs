@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { fn } from "@ember/helper";
+import { array, fn, hash } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
@@ -116,6 +116,10 @@ export default class BoostsList extends Component {
               @modalForMobile={{false}}
               @onRegisterApi={{this.onRegisterApi}}
               @triggerClass="discourse-boosts__add-btn btn-flat"
+              @triggers={{hash
+                mobile=(array "click")
+                desktop=(array "delayed-hover" "click")
+              }}
             >
               <:content>
                 <BoostInput
