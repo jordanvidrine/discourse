@@ -68,6 +68,14 @@ RSpec.describe DiscourseBoosts::Boost::Destroy do
         expect { result }.to change { DiscourseBoosts::Boost.count }.by(-1)
         expect(DiscourseBoosts::Boost.exists?(boost.id)).to eq(false)
       end
+
+      it "publishes a boost_removed message to the topic channel" do
+        messages = MessageBus.track_publish("/topic/#{topic.id}") { result }
+        boost_message = messages.find { |m| m.data[:type] == :boost_removed }
+        expect(boost_message).to be_present
+        expect(boost_message.data[:id]).to eq(post.id)
+        expect(boost_message.data[:boost_id]).to eq(boost.id)
+      end
     end
   end
 end

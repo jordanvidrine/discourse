@@ -14,6 +14,7 @@ module DiscourseBoosts
     policy :can_destroy_boost
 
     step :destroy_boost
+    step :publish_change
 
     private
 
@@ -28,6 +29,10 @@ module DiscourseBoosts
 
     def destroy_boost(boost:)
       boost.destroy!
+    end
+
+    def publish_change(boost:)
+      DiscourseBoosts::Boost.publish_remove(boost.post, boost.id)
     end
   end
 end

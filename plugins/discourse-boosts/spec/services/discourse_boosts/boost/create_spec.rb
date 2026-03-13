@@ -90,6 +90,15 @@ RSpec.describe DiscourseBoosts::Boost::Create do
         expect(DiscourseBoosts::Boost.last.cooked).to be_present
       end
 
+      it "publishes a boost_added message to the topic channel" do
+        messages = MessageBus.track_publish("/topic/#{topic.id}") { result }
+        boost_message = messages.find { |m| m.data[:type] == :boost_added }
+        expect(boost_message).to be_present
+        expect(boost_message.data[:id]).to eq(post.id)
+        expect(boost_message.data[:boost][:id]).to eq(DiscourseBoosts::Boost.last.id)
+        expect(boost_message.data[:boost][:cooked]).to be_present
+      end
+
       it "creates a notification for the post author with expected data" do
         expect { result }.to change {
           Notification.where(user: post_author, notification_type: Notification.types[:boost]).count

@@ -21,6 +21,7 @@ module DiscourseBoosts
 
     model :boost, :create_boost
 
+    step :publish_change
     only_if(:notify_post_author?) { step :create_notification }
 
     private
@@ -44,6 +45,10 @@ module DiscourseBoosts
 
     def create_boost(params:, guardian:, post:)
       DiscourseBoosts::Boost.create(post:, user: guardian.user, raw: params.raw)
+    end
+
+    def publish_change(post:, boost:)
+      DiscourseBoosts::Boost.publish_add(post, boost)
     end
 
     def notify_post_author?(post:)

@@ -53,6 +53,20 @@ module DiscourseBoosts
     MARKDOWN_FEATURES = %w[emoji]
     MARKDOWN_IT_RULES = []
 
+    def self.publish_add(post, boost)
+      message = {
+        id: post.id,
+        type: :boost_added,
+        boost: BoostSerializer.new(boost, scope: Guardian.new, root: false).as_json,
+      }
+      post.publish_message!("/topic/#{post.topic_id}", message)
+    end
+
+    def self.publish_remove(post, boost_id)
+      message = { id: post.id, type: :boost_removed, boost_id: boost_id }
+      post.publish_message!("/topic/#{post.topic_id}", message)
+    end
+
     def self.cook(raw)
       PrettyText.cook(
         raw.to_s.strip,

@@ -24,6 +24,56 @@ function initializeBoosts(api) {
 
   api.renderInOutlet("post-menu__after", BoostsPostMenu);
 
+  api.registerCustomPostMessageCallback(
+    "boost_added",
+    (topicController, data) => {
+      const postStream = topicController.get("model.postStream");
+      const post = postStream.findLoadedPost(data.id);
+      if (post) {
+        const currentBoosts = post.boosts || [];
+        const userId = data.boost.user?.id;
+        const currentUser = topicController.currentUser;
+        data.boost.can_delete =
+          userId === currentUser?.id || currentUser?.staff;
+        const existing = currentBoosts.some(
+          (b) => b.id === data.boost.id || b.user?.id === userId
+        );
+        if (existing) {
+          post.set(
+            "boosts",
+            currentBoosts.map((b) => (b.user?.id === userId ? data.boost : b))
+          );
+        } else {
+          post.set("boosts", [...currentBoosts, data.boost]);
+        }
+        if (userId === currentUser?.id) {
+          post.set("can_boost", false);
+        }
+      }
+    }
+  );
+
+  api.registerCustomPostMessageCallback(
+    "boost_removed",
+    (topicController, data) => {
+      const postStream = topicController.get("model.postStream");
+      const post = postStream.findLoadedPost(data.id);
+      if (post) {
+        const removedBoost = (post.boosts || []).find(
+          (b) => b.id === data.boost_id
+        );
+        post.set(
+          "boosts",
+          (post.boosts || []).filter((b) => b.id !== data.boost_id)
+        );
+        const currentUser = topicController.currentUser;
+        if (removedBoost?.user?.id === currentUser?.id) {
+          post.set("can_boost", true);
+        }
+      }
+    }
+  );
+
   api.registerNotificationTypeRenderer("boost", (NotificationTypeBase) => {
     return class extends NotificationTypeBase {
       get icon() {
