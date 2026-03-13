@@ -18,7 +18,8 @@ module DiscourseBoosts
     policy :can_boost_post
     policy :user_has_not_boosted_post
     policy :within_post_boost_limit
-
+    policy :not_blocked_by_watched_words
+    model :processed_raw
     model :boost, :create_boost
 
     step :publish_change
@@ -31,7 +32,8 @@ module DiscourseBoosts
     end
 
     def can_boost_post(guardian:, post:)
-      guardian.can_see?(post) && post.user_id != guardian.user.id && !guardian.user.silenced?
+      guardian.can_see?(post) && post.deleted_at.nil? && post.user_id != guardian.user.id &&
+        !guardian.user.silenced?
     end
 
     def user_has_not_boosted_post(guardian:, post:)
@@ -43,8 +45,16 @@ module DiscourseBoosts
         SiteSetting.discourse_boosts_max_per_post
     end
 
-    def create_boost(params:, guardian:, post:)
-      DiscourseBoosts::Boost.create(post:, user: guardian.user, raw: params.raw)
+    def not_blocked_by_watched_words(params:)
+      !WordWatcher.new(params.raw).should_block?
+    end
+
+    def fetch_processed_raw(params:)
+      WordWatcher.apply_to_text(params.raw)
+    end
+
+    def create_boost(processed_raw:, guardian:, post:)
+      DiscourseBoosts::Boost.create(post:, user: guardian.user, raw: processed_raw)
     end
 
     def publish_change(post:, boost:)

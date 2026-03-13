@@ -58,6 +58,12 @@ RSpec.describe DiscourseBoosts::Boost::Create do
       it { is_expected.to fail_a_policy(:can_boost_post) }
     end
 
+    context "when post is deleted" do
+      before { post.trash! }
+
+      it { is_expected.to fail_to_find_a_model(:post) }
+    end
+
     context "when user boost limit is reached" do
       before { Fabricate(:boost, post: post, user: acting_user) }
 
@@ -71,6 +77,25 @@ RSpec.describe DiscourseBoosts::Boost::Create do
       end
 
       it { is_expected.to fail_a_policy(:within_post_boost_limit) }
+    end
+
+    context "when raw contains a blocked watched word" do
+      before { Fabricate(:watched_word, word: "badword", action: WatchedWord.actions[:block]) }
+
+      let(:raw) { "badword" }
+
+      it { is_expected.to fail_a_policy(:not_blocked_by_watched_words) }
+    end
+
+    context "when raw contains a censored watched word" do
+      before { Fabricate(:watched_word, word: "censorme", action: WatchedWord.actions[:censor]) }
+
+      let(:raw) { "censorme" }
+
+      it "censors the word in the created boost" do
+        expect(result).to be_a_success
+        expect(DiscourseBoosts::Boost.last.raw).not_to include("censorme")
+      end
     end
 
     context "when everything's ok" do
