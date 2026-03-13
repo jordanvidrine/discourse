@@ -9,7 +9,7 @@ module PageObjects
       end
 
       def fill_in_boost(text)
-        editor = find(".discourse-boosts__input-container .ProseMirror")
+        editor = find(".discourse-boosts__input-container .discourse-boosts__input")
         editor.send_keys(text)
         self
       end
