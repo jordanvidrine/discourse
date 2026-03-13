@@ -22,9 +22,6 @@ en:
       notification_multiple_users:
         one: "%{username} and %{count} other"
         other: "%{username} and %{count} others"
-      notification_single_user_description:
-        one: "boosted your post %{count} time"
-        other: "boosted your post %{count} times"
       user_option:
         boost_notifications_level: "Boost notifications"
         boost_notifications_levels:

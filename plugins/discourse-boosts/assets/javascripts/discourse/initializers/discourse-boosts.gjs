@@ -112,12 +112,9 @@ function initializeBoosts(api) {
 
       get description() {
         const data = this.notification.data;
-        const count = data.count;
 
-        if (count > 1) {
-          return i18n("discourse_boosts.notification_single_user_description", {
-            count,
-          });
+        if (data.count > 1) {
+          return i18n("discourse_boosts.notification");
         }
 
         const raw = data.boost_raw;
