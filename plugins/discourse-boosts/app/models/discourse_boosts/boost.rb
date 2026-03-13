@@ -47,6 +47,7 @@ module DiscourseBoosts
 
     validates :cooked, presence: true
 
+    before_validation :clean_raw, if: :will_save_change_to_raw?
     before_validation :cook_raw, if: :will_save_change_to_raw?
     after_destroy :delete_notifications
 
@@ -88,6 +89,10 @@ module DiscourseBoosts
         .where("data::json ->> 'display_username' = ?", user.username)
         .where("data::json ->> 'username2' IS NULL AND data::json ->> 'consolidated' IS NULL")
         .destroy_all
+    end
+
+    def clean_raw
+      self.raw = TextCleaner.clean(raw, strip_whitespaces: true, strip_zero_width_spaces: true)
     end
 
     def cook_raw

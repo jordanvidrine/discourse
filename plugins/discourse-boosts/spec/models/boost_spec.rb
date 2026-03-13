@@ -188,4 +188,21 @@ describe DiscourseBoosts::Boost, type: :model do
       expect(boost.cooked).to include("emoji")
     end
   end
+
+  describe "clean_raw" do
+    it "strips zero-width spaces" do
+      boost = DiscourseBoosts::Boost.create!(post: post, user: user, raw: "nice\u200B!")
+      expect(boost.raw).to eq("nice!")
+    end
+
+    it "normalizes whitespaces" do
+      boost = DiscourseBoosts::Boost.create!(post: post, user: user, raw: "nice\u00A0!")
+      expect(boost.raw).to eq("nice !")
+    end
+
+    it "strips leading and trailing whitespace" do
+      boost = DiscourseBoosts::Boost.create!(post: post, user: user, raw: "  nice!  ")
+      expect(boost.raw).to eq("nice!")
+    end
+  end
 end
