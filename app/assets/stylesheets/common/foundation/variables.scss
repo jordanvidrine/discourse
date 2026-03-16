@@ -10,6 +10,7 @@
 @use "sass:math";
 @use "sass:meta";
 @use "math" as discourse-math;
+@use "sass:map";
 
 $small-width: 800px !default;
 $medium-width: 995px !default;
@@ -212,6 +213,67 @@ $z-layers: (
 
 @function is-dark-color-scheme() {
   @return not is-light-color-scheme();
+}
+
+$_stops: (
+  50: (
+    l: 98.5%,
+    c: 0.05,
+  ),
+  100: (
+    l: 97%,
+    c: 0.13,
+  ),
+  200: (
+    l: 92%,
+    c: 0.25,
+  ),
+  300: (
+    l: 87%,
+    c: 0.47,
+  ),
+  400: (
+    l: 71%,
+    c: 0.78,
+  ),
+  500: (
+    l: 55%,
+    c: 0.97,
+  ),
+  600: (
+    l: 44%,
+    c: 1,
+  ),
+  700: (
+    l: 37%,
+    c: 0.87,
+  ),
+  800: (
+    l: 27%,
+    c: 0.72,
+  ),
+  900: (
+    l: 21%,
+    c: 0.58,
+  ),
+  950: (
+    l: 14%,
+    c: 0.38,
+  ),
+);
+
+@function color-stop($base, $stop) {
+  $oklch: color.to-space($base, oklch);
+  $base-c: color.channel($oklch, "chroma", $space: oklch);
+  $base-h: color.channel($oklch, "hue", $space: oklch);
+  $s: map.get($_stops, $stop);
+
+  @return color.change(
+    $oklch,
+    $lightness: map.get($s, l),
+    $chroma: $base-c * map.get($s, c),
+    $space: oklch
+  );
 }
 
 @import "color_transformations";

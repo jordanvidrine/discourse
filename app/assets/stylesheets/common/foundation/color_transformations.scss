@@ -12,6 +12,19 @@ $primary-medium: dark-light-diff($primary, $secondary, 50%, -35%) !default;
 $primary-high: dark-light-diff($primary, $secondary, 30%, -25%) !default;
 $primary-very-high: dark-light-diff($primary, $secondary, 15%, -10%) !default;
 
+// primary-oklch-numbers
+$primary-oklch-50: color-stop($primary, 50) !default;
+$primary-oklch-100: color-stop($primary, 100) !default;
+$primary-oklch-200: color-stop($primary, 200) !default;
+$primary-oklch-300: color-stop($primary, 300) !default;
+$primary-oklch-400: color-stop($primary, 400) !default;
+$primary-oklch-500: color-stop($primary, 500) !default;
+$primary-oklch-600: color-stop($primary, 600) !default;
+$primary-oklch-700: color-stop($primary, 700) !default;
+$primary-oklch-800: color-stop($primary, 800) !default;
+$primary-oklch-900: color-stop($primary, 900) !default;
+$primary-oklch-950: color-stop($primary, 950) !default;
+
 // primary-numbers
 $primary-50: dark-light-diff($primary, $secondary, 97%, -82%) !default;
 $primary-100: dark-light-diff($primary, $secondary, 94%, -80%) !default;
