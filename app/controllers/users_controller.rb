@@ -324,8 +324,8 @@ class UsersController < ApplicationController
   def check_sso_email
     user = fetch_user_from_params(include_inactive: true)
 
-    unless user == current_user
-      guardian.ensure_can_check_sso_details!(user)
+    guardian.ensure_can_check_sso_email!(user)
+    if user != current_user
       StaffActionLogger.new(current_user).log_check_email(user, context: params[:context])
     end
 
@@ -340,7 +340,7 @@ class UsersController < ApplicationController
   def check_sso_payload
     user = fetch_user_from_params(include_inactive: true)
 
-    guardian.ensure_can_check_sso_details!(user)
+    guardian.ensure_can_check_sso_payload!(user)
     unless user == current_user
       StaffActionLogger.new(current_user).log_check_email(user, context: params[:context])
     end
@@ -1901,7 +1901,8 @@ class UsersController < ApplicationController
 
   def feature_topic
     user = fetch_user_from_params
-    topic = Topic.find(params[:topic_id].to_i)
+    topic = Topic.find_by(id: params[:topic_id].to_i)
+    raise Discourse::NotFound unless guardian.can_see?(topic)
 
     if !guardian.can_feature_topic?(user, topic)
       return(

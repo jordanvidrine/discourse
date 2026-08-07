@@ -27,7 +27,6 @@ class UserUpdater
     external_links_in_new_tab
     enable_quoting
     enable_smart_lists
-    enable_defer
     enable_markdown_monospace_font
     color_scheme_id
     dark_scheme_id
@@ -189,13 +188,6 @@ class UserUpdater
     if attributes.key?(:text_size)
       user.user_option.text_size_seq += 1 if user.user_option.text_size.to_s !=
         attributes[:text_size]
-    end
-
-    if attributes.key?(:locale) || attributes.key?(:understood_languages)
-      understood_languages =
-        attributes.fetch(:understood_languages) { user.user_option.understood_languages }
-      interface_locale = user.effective_locale
-      attributes[:understood_languages] = [interface_locale, *understood_languages].compact.uniq
     end
 
     OPTION_ATTR.each do |attribute|
