@@ -1,0 +1,1961 @@
+[
+  {
+    "label": "Edit category name",
+    "id": "edit-category-name",
+    "before": {
+      "cooked": "<p><strong>Edit category</strong><br>\nEditing <code>name</code> for <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Changing <code>name</code> from <code>Cool stuff</code> → <code>Neat stuff</code></p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing category: #cool-stuff::category",
+          "cooked_title": "<p>Editing category: <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing name:",
+              "before": "Cool stuff",
+              "after": "Neat stuff"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit category description",
+    "id": "edit-category-description",
+    "before": {
+      "cooked": "<p><strong>Edit category</strong><br>\nEditing <code>description</code> for <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Changing <code>description</code> from <code>Ideas and projects to share.</code> → <code>Projects and inspiration for the community.</code></p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing category: #cool-stuff::category",
+          "cooked_title": "<p>Editing category: <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing description:",
+              "before": "Ideas and projects to share.",
+              "after": "Projects and inspiration for the community."
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit category color",
+    "id": "edit-category-color",
+    "before": {
+      "cooked": "<p><strong>Edit category</strong><br>\nEditing <code>color</code> for <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Changing <code>color</code> from <code>4CBB17</code> → <code>25AAE2</code></p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing category: #cool-stuff::category",
+          "cooked_title": "<p>Editing category: <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing color:",
+              "before": "4CBB17",
+              "after": "25AAE2",
+              "before_color": "4CBB17",
+              "after_color": "25AAE2"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit category text color",
+    "id": "edit-category-text-color",
+    "before": {
+      "cooked": "<p><strong>Edit category</strong><br>\nEditing <code>text_color</code> for <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Changing <code>text_color</code> from <code>FFFFFF</code> → <code>111111</code></p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing category: #cool-stuff::category",
+          "cooked_title": "<p>Editing category: <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing text color:",
+              "before": "FFFFFF",
+              "after": "111111",
+              "before_color": "FFFFFF",
+              "after_color": "111111"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Change site setting",
+    "id": "change-site-setting",
+    "before": {
+      "cooked": "<p><strong>Change site setting</strong><br>\nChanging site setting interface_color_selector to 'header'</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Changing site setting interface_color_selector to 'header'</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Changing site setting: ` interface_color_selector `",
+          "cooked_title": "<p>Changing site setting: <code>interface_color_selector</code></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing value:",
+              "before": "disabled",
+              "after": "header"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Create category",
+    "id": "create-category",
+    "before": {
+      "cooked": "<p><strong>Create category</strong><br>\nCreating category 'New ideas'</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Creating category 'New ideas'</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Create category: ` New ideas `",
+          "cooked_title": "<p>Create category: <code>New ideas</code></p>",
+          "cooked_question": "<p>Do you want to create this category?</p>",
+          "parameters": [
+            {
+              "label": "color",
+              "value": "4CBB17",
+              "color": "4CBB17"
+            }
+          ],
+          "changes": [],
+          "cooked_error": "",
+          "show_description": false,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Create tag",
+    "id": "create-tag",
+    "before": {
+      "cooked": "<p><strong>Create tag</strong><br>\nCreating tag 'dingle-dots'</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Creating tag 'dingle-dots'</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Create tag: ` dingle-dots `",
+          "cooked_title": "<p>Create tag: <code>dingle-dots</code></p>",
+          "cooked_question": "<p>Do you want to create this tag?</p>",
+          "parameters": [],
+          "changes": [],
+          "cooked_error": "",
+          "show_description": false,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit tag name",
+    "id": "edit-tag-name",
+    "before": {
+      "cooked": "<p><strong>Edit tag</strong><br>\nEditing tag 'single-dot' (name → dingle-dots)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Editing tag 'single-dot' (name → dingle-dots)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing tag: #single-dot::tag",
+          "cooked_title": "<p>Editing tag: <a class=\"hashtag-cooked\" href=\"/tag/single-dot/358\" data-type=\"tag\" data-slug=\"single-dot\" data-id=\"358\" data-style-type=\"icon\" data-icon=\"tag\" data-ref=\"single-dot::tag\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>single-dot</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing name:",
+              "before": "single-dot",
+              "after": "dingle-dots"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit tag description",
+    "id": "edit-tag-description",
+    "before": {
+      "cooked": "<p><strong>Edit tag</strong><br>\nEditing tag 'single-dot' (description)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Editing tag 'single-dot' (description)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing tag: #single-dot::tag",
+          "cooked_title": "<p>Editing tag: <a class=\"hashtag-cooked\" href=\"/tag/single-dot/358\" data-type=\"tag\" data-slug=\"single-dot\" data-id=\"358\" data-style-type=\"icon\" data-icon=\"tag\" data-ref=\"single-dot::tag\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>single-dot</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing description:",
+              "before": "Ideas worth discussing",
+              "after": "Community suggestions and plans"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Change topic category",
+    "id": "change-topic-category",
+    "before": {
+      "cooked": "<p><strong>Change topic category</strong><br>\nMoving topic 1143 to category 398</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Moving topic 1143 to category 398</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing category:",
+              "before": "Cool stuff",
+              "after": "Site feedback",
+              "after_color": "0088CC",
+              "before_color": "4CBB17"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Change topic tags",
+    "id": "change-topic-tags",
+    "before": {
+      "cooked": "<p><strong>Edit topic tags</strong><br>\nEditing tags on topic 1143: single-dot</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Editing tags on topic 1143: single-dot</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing tags:",
+              "before": "No tags",
+              "after": "single-dot"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Close topic",
+    "id": "close-topic",
+    "before": {
+      "cooked": "<p><strong>Close topic</strong><br>\nClosing topic 1143 (closed: true)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Closing topic 1143 (closed: true)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Open",
+              "after": "Closed"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Reopen topic",
+    "id": "reopen-topic",
+    "before": {
+      "cooked": "<p><strong>Close topic</strong><br>\nClosing topic 1143 (closed: false)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Closing topic 1143 (closed: false)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Closed",
+              "after": "Open"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Delete topic",
+    "id": "delete-topic",
+    "before": {
+      "cooked": "<p><strong>Delete topic</strong><br>\nDeleting topic 1143 (deleted: true)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Deleting topic 1143 (deleted: true)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Active",
+              "after": "Deleted"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Restore topic",
+    "id": "restore-topic",
+    "before": {
+      "cooked": "<p><strong>Delete topic</strong><br>\nDeleting topic 1143 (deleted: false)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Deleting topic 1143 (deleted: false)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Deleted",
+              "after": "Active"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Unlist topic",
+    "id": "unlist-topic",
+    "before": {
+      "cooked": "<p><strong>Unlist topic</strong><br>\nUnlisting topic 1143 (unlisted: true)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Unlisting topic 1143 (unlisted: true)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing visibility:",
+              "before": "Listed",
+              "after": "Unlisted"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Relist topic",
+    "id": "relist-topic",
+    "before": {
+      "cooked": "<p><strong>Unlist topic</strong><br>\nUnlisting topic 1143 (unlisted: false)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Unlisting topic 1143 (unlisted: false)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing visibility:",
+              "before": "Unlisted",
+              "after": "Listed"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Mark solution",
+    "id": "mark-solution",
+    "before": {
+      "cooked": "<p><strong>Mark as solved</strong><br>\nMarking post 818 as solved (solved: true)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Marking post 818 as solved (solved: true)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to mark <a href=\"/t/ideas-for-our-community/1143/2\">Post #2</a> as a solution?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing solution:",
+              "before": "No solution",
+              "after": "Post #2"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Unmark solution",
+    "id": "unmark-solution",
+    "before": {
+      "cooked": "<p><strong>Mark as solved</strong><br>\nMarking post 818 as solved (solved: false)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Marking post 818 as solved (solved: false)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to remove <a href=\"/t/ideas-for-our-community/1143/2\">Post #2</a> as a solution?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing solution:",
+              "before": "Post #2",
+              "after": "No solution"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Edit post",
+    "id": "edit-post",
+    "before": {
+      "cooked": "<p><strong>Edit post</strong><br>\nEditing post 818</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Editing post 818</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing post: [Ideas for our community · post #2](/t/ideas-for-our-community/1143/2)",
+          "cooked_title": "<p>Editing post: <a href=\"/t/ideas-for-our-community/1143/2\">Ideas for our community · post #2</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing content:",
+              "before": "We could start a weekly ideas discussion.",
+              "after": "Let's start a weekly community discussion."
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Lock post",
+    "id": "lock-post",
+    "before": {
+      "cooked": "<p><strong>Lock post</strong><br>\nLocking post 818 (locked: true)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Locking post 818 (locked: true)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing post: [Ideas for our community · post #2](/t/ideas-for-our-community/1143/2)",
+          "cooked_title": "<p>Editing post: <a href=\"/t/ideas-for-our-community/1143/2\">Ideas for our community · post #2</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Unlocked",
+              "after": "Locked"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Unlock post",
+    "id": "unlock-post",
+    "before": {
+      "cooked": "<p><strong>Lock post</strong><br>\nLocking post 818 (locked: false)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Locking post 818 (locked: false)</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing post: [Ideas for our community · post #2](/t/ideas-for-our-community/1143/2)",
+          "cooked_title": "<p>Editing post: <a href=\"/t/ideas-for-our-community/1143/2\">Ideas for our community · post #2</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing status:",
+              "before": "Locked",
+              "after": "Unlocked"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Move posts to existing topic",
+    "id": "move-posts-to-existing-topic",
+    "before": {
+      "cooked": "<p><strong>Move posts</strong><br>\nMoving posts 818 from topic 1143</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Moving posts 818 from topic 1143</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [
+            {
+              "label": "Posts",
+              "value": "Post #2"
+            }
+          ],
+          "changes": [
+            {
+              "label": "Changing destination:",
+              "before": "Ideas for our community",
+              "after": "Weekly community discussions"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Move posts to new topic",
+    "id": "move-posts-to-new-topic",
+    "before": {
+      "cooked": "<p><strong>Move posts</strong><br>\nMoving posts 818 from topic 1143</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>Moving posts 818 from topic 1143</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Editing topic: [Ideas for our community](http://test.localhost/t/ideas-for-our-community/1143)",
+          "cooked_title": "<p>Editing topic: <a href=\"http://test.localhost/t/ideas-for-our-community/1143\">Ideas for our community</a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [
+            {
+              "label": "Posts",
+              "value": "Post #2"
+            },
+            {
+              "label": "Category",
+              "value": "Site feedback",
+              "color": "0088CC"
+            }
+          ],
+          "changes": [
+            {
+              "label": "Changing destination:",
+              "before": "Ideas for our community",
+              "after": "Weekly ideas discussion"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null
+        }
+      ]
+    }
+  },
+  {
+    "label": "Suspend user",
+    "id": "suspend-user",
+    "before": {
+      "cooked": "<p><strong>Suspend user</strong><br>\nSuspending hannah for 5 day(s)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>5 days</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Suspend user: @hannah",
+          "cooked_title": "<p>Suspend user: <a class=\"mention\" href=\"/u/hannah\">@hannah</a></p>",
+          "cooked_question": "<p>Do you want to suspend this user?</p>",
+          "parameters": [],
+          "changes": [],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": "Duration:"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Silence user",
+    "id": "silence-user",
+    "before": {
+      "cooked": "<p><strong>Silence user</strong><br>\nSilencing hannah for 7 day(s)</p>\n<p><em>This action requires approval:</em></p>",
+      "blocks": [
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "action_id": "approve",
+              "style": "primary",
+              "text": {
+                "text": "Approve"
+              }
+            },
+            {
+              "type": "button",
+              "action_id": "reject",
+              "style": "danger",
+              "text": {
+                "text": "Reject"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "cooked": "<p>7 days</p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [
+            {
+              "action_id": "ai_tool_approval::approve::1",
+              "type": "button",
+              "text": {
+                "text": "Yes",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            },
+            {
+              "action_id": "ai_tool_approval::reject::1",
+              "type": "button",
+              "text": {
+                "text": "No",
+                "type": "plain_text"
+              },
+              "style": "default",
+              "icon": null
+            }
+          ],
+          "title": "Silence user: @hannah",
+          "cooked_title": "<p>Silence user: <a class=\"mention\" href=\"/u/hannah\">@hannah</a></p>",
+          "cooked_question": "<p>Do you want to silence this user?</p>",
+          "parameters": [],
+          "changes": [],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": "Duration:"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Approved action",
+    "id": "approved-action",
+    "before": {
+      "cooked": "<p><strong>Edit category</strong><br>\nEditing category <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a> (<code>name</code>)</p>\n<p>Approved by <a class=\"mention\" href=\"/u/jordan\">@jordan</a>.</p>",
+      "blocks": []
+    },
+    "after": {
+      "cooked": "<p>Changing <code>name</code> from <code>Cool stuff</code> → <code>Neat stuff</code></p>",
+      "blocks": [
+        {
+          "type": "confirmation",
+          "elements": [],
+          "title": "Editing category: #cool-stuff::category",
+          "cooked_title": "<p>Editing category: <a class=\"hashtag-cooked\" href=\"/c/cool-stuff/397\" data-type=\"category\" data-slug=\"cool-stuff\" data-id=\"397\" data-style-type=\"square\" data-ref=\"cool-stuff::category\"><span class=\"hashtag-icon-placeholder\"><svg class=\"fa d-icon d-icon-square-full svg-icon svg-node\"><use href=\"#square-full\"></use></svg></span><span>Cool stuff</span></a></p>",
+          "cooked_question": "<p>Do you want to make this change?</p>",
+          "parameters": [],
+          "changes": [
+            {
+              "label": "Changing name:",
+              "before": "Cool stuff",
+              "after": "Neat stuff"
+            }
+          ],
+          "cooked_error": "",
+          "show_description": true,
+          "description_label": null,
+          "cooked_status": "<p>Approved by <a class=\"mention\" href=\"/u/jordan\">@jordan</a>.</p>"
+        }
+      ]
+    }
+  }
+]
